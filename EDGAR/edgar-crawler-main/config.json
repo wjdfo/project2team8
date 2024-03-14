@@ -1,0 +1,25 @@
+{
+	"edgar_crawler": {
+		"start_year": 2021,
+		"end_year": 2024,
+		"quarters": [1, 2, 3, 4],
+		"filing_types": ["10-K"],
+		"cik_tickers": ["AAPL"],
+		"user_agent": "minkuk0118@gmail.com",
+		"raw_filings_folder": "RAW_FILINGS",
+		"indices_folder": "INDICES",
+		"filings_metadata_file": "FILINGS_METADATA.csv",
+		"skip_present_indices": true
+	},
+	"extract_items": {
+		"raw_filings_folder": "RAW_FILINGS",
+		"extracted_filings_folder": "EXTRACTED_FILINGS",
+		"filings_metadata_file": "FILINGS_METADATA.csv",
+		"items_to_extract": [
+			"7","8"
+		],
+
+		"remove_tables": true,
+		"skip_extracted_filings": true
+	}
+}
