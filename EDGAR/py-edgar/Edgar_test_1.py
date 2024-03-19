@@ -11,3 +11,10 @@ docs = company.get_10K()
 for doc in docs:
     text = TXTML.parse_full_10K(doc)
     print(text)
+
+file_path = '/Users/crossrunway/vsCODE/project2team8/EDGAR/py-edgar/test_output/example.txt' 
+# 파일 경로 및 이름
+with open(file_path, 'w') as file:
+    for doc in docs:
+        text = TXTML.parse_full_10K(doc)
+        file.write(text)
