@@ -50,7 +50,8 @@ def main():
 	"""
 
 	# Load the configuration file
-	with open('config.json') as fin:
+	# with open('config.json') as fin:
+	with open('/Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/config.json') as fin:
 		config = json.load(fin)['edgar_crawler']
 
 	# Define the directories and filepaths
