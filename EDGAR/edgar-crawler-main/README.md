@@ -1,14 +1,23 @@
 https://github.com/nlpaueb/edgar-crawler
-https://github.com/nlpaueb/edgar-crawler
+
 https://github.com/nlpaueb/edgar-crawler
 
-## Install
+https://github.com/nlpaueb/edgar-crawler
+
+
+
+## 설치 방법
 - `pip install -r requirements.txt`
 
-## Usage
--  `config.json` 수정해서 설정
+## 사용법
+- `edgar_crawler.py` 실행 후 ( -> datasets 폴더 내 RAW_FILINGS 생성됨 확인 ) `extract_items.py` 실행 -> datasets 폴더 내 **EXTRACTED_FILINGS 폴더에 json 파일 생성됨**
 
+- `edgar_crawler.py`와 `extract_items.py`의 인자는 `config.json` 수정해서 설정
+- 수정해야할 중대인자는  `edgar_crawler.py`에서 : `start_year`, `end_year`, `filing_types`, `cik_tickers` , ( + `user_agent`는 적당히 자기 이메일 쓰면 됨 SEC에 로그 남기는 용인듯 ) `extract_items.py`에서 : `items_to_extract` 인 것으로 보임
+- `items_to_extract` 옵션에 들어갈 수 있는 녀석들은  "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15" 로, `can-be-extracted items.txt`에도 써 놓았음
+- **extract_items.py는 현재 10-K 파일들(annual reports)만 지원함**
 
+- 아래는 원문 옵션들 설명
   - Arguments for `edgar_crawler.py`, the module to download financial reports:
       - `start_year XXXX`: the year range to start from (default is 2021).
       - `end_year YYYY`: the year range to end to (default is 2021).
@@ -33,6 +42,3 @@ https://github.com/nlpaueb/edgar-crawler
     - `remove_tables`: Whether to remove tables containing mostly numerical (financial) data. This work is mostly to facilitate NLP research where, often, numerical tables are not useful.
     - `skip_extracted_filings`: Whether to skip already extracted filings or extract them nonetheless.<br> Default value is `True`.
 
-- To download financial reports from EDGAR, run `python edgar_crawler.py`.
-- To clean and extract specific item sections from already-downloaded 10-K documents, run `python extract_items.py`.
-  - Reminder: We currently support the extraction of 10-K documents. 
