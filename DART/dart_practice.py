@@ -5,13 +5,29 @@
 ########################
 import dart_fss as dart
 from bs4 import BeautifulSoup
-
+import pandas as pd
 
 apiKey = '45e284591cad627ed6b7b278608bbe5b81f6893d'
 dart.set_api_key(api_key=apiKey)
 
 # dart에 상장된 기업 중 삼성전자 검색
 corps = dart.get_corp_list()
+
+'''
+for corp in corps.corps : # 회사 리스트 출력
+    print(corp)
+'''
+
+all = dart.api.filings.get_corp_code()
+df = pd.DataFrame(all)
+stock_list = df[df['stock_code'].notnull()]  #상장 종목
+non_stock_list = df[df['stock_code'].isnull()]  #비상장 종목
+print(stock_list.head())
+
+#csv 파일로 저장
+# stock_list.to_csv('상장종목.csv')
+# non_stock_list.to_csv('비상장종목.csv')
+
 samsung = corps.find_by_corp_name('삼성전자', exactly=True)[0]
 
 # 20100101 부터 지금까지 연간 사업보고서 가져오기 // a001 == 사업보고서
