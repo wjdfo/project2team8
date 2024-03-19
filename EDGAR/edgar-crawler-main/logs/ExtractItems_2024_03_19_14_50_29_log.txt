@@ -1,0 +1,6 @@
+03-19-2024 23:50 - ExtractItems - INFO - Starting extraction...
+
+03-19-2024 23:50 - ExtractItems - INFO - 
+Item extraction is completed successfully.
+03-19-2024 23:50 - ExtractItems - INFO - 3 files were processed.
+03-19-2024 23:50 - ExtractItems - INFO - Extracted filings are saved to: /Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/datasets/EXTRACTED_FILINGS

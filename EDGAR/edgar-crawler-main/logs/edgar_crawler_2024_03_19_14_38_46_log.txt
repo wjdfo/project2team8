@@ -1,0 +1,21 @@
+03-19-2024 23:38 - edgar_crawler - INFO - Saving log to /Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/logs
+
+03-19-2024 23:38 - edgar_crawler - INFO - Downloading EDGAR Index files
+03-19-2024 23:38 - edgar_crawler - INFO - 2021_QTR1.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2021_QTR2.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2021_QTR3.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2021_QTR4.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2022_QTR1.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2022_QTR2.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2022_QTR3.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2022_QTR4.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2023_QTR1.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2023_QTR2.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2023_QTR3.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2023_QTR4.tsv downloaded
+03-19-2024 23:38 - edgar_crawler - INFO - 2024_QTR1.tsv downloaded
+03-19-2024 23:39 - edgar_crawler - INFO - 
+Downloading 3 filings...
+
+03-19-2024 23:39 - edgar_crawler - INFO - 
+Filings metadata exported to /Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/datasets/FILINGS_METADATA.csv
