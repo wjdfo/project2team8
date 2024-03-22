@@ -71,3 +71,30 @@ for corp in non_corp_name_list:
       
         print(recentReport[i].title + ": \n")
         print(content)
+
+# 기업 코드를 통한 검색
+corp_code_list = df['corp_code'].tolist()
+non_corp_code_list = ndf['corp_code'].tolist()
+
+time = '20100101'
+for corp in corp_code_list:
+    corperation = corps.find_by_corp_code(str(corp))
+    print(corperation)
+    try:
+        filings = corperation.search_filings(bgn_de=time, pblntf_detail_ty='a001')
+        recentReport = filings[0]
+
+    except Exception as e:
+        continue
+
+    for i in range(len(recentReport)):
+        soup = BeautifulSoup(recentReport[i].html, features="lxml")
+        scriptTag = soup.find_all(['script', 'style', 'header', 'footer', 'form'])
+
+        for script in scriptTag:
+            script.extract()
+        
+        content = soup.get_text(' ', strip=True)
+      
+        print(recentReport[i].title + ": \n")
+        print(content)
