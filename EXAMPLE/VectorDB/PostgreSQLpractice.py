@@ -2,7 +2,6 @@ import pg8000
 from google.cloud.sql.connector import Connector, IPTypes
 import sqlalchemy
 from transformers import AutoModel, AutoTokenizer
-import json
 
 def get_KoSimCSE(): #문장 임베딩 모듈 가져오는 함수
     model = AutoModel.from_pretrained('BM-K/KoSimCSE-roberta-multitask')
