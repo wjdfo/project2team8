@@ -11,10 +11,10 @@ def get_KoSimCSE(): #문장 임베딩 모듈 가져오는 함수
 
 model, tokenizer = get_KoSimCSE()
 
-instance_connection_name = "your sql connection name" # @param {type:"string"}
+instance_connection_name = "civil-song-418211:asia-northeast3:minguk" # @param {type:"string"}
 db_user = "postgres" # @param {type:"string"}
-db_pass = "your db password" # @param {type:"string"}
-db_name = "your db name" # @param {type:"string"}
+db_pass = "bruce89p13" # @param {type:"string"}
+db_name = "minguk" # @param {type:"string"}
 
 # initialize Cloud SQL Python Connector object
 connector = Connector()

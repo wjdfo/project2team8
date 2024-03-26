@@ -50,8 +50,7 @@ def main():
 	"""
 
 	# Load the configuration file
-	# with open('config.json') as fin:
-	with open('/Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/config.json') as fin:
+	with open('config.json') as fin:
 		config = json.load(fin)['edgar_crawler']
 
 	# Define the directories and filepaths
@@ -129,7 +128,7 @@ def main():
 		# If there are no new filings to download, exit
 		if len(series_to_download) == 0:
 			LOGGER.info('\nThere are no more filings to download for the given years, quarters and companies')
-			exit()
+			return
 
 		# Concatenate the series to be downloaded
 		df = pd.concat(series_to_download) if (len(series_to_download) > 1) else series_to_download[0]
