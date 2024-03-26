@@ -10,6 +10,8 @@ https://github.com/nlpaueb/edgar-crawler
 - `pip install -r requirements.txt`
 
 ## 사용법
+- **이제는 `config.json` 수정 후 `aggregate.py` 실행하면 됨**
+
 - `edgar_crawler.py` 실행 후 ( -> datasets 폴더 내 RAW_FILINGS 생성됨 확인 ) `extract_items.py` 실행 -> datasets 폴더 내 **EXTRACTED_FILINGS 폴더에 json 파일 생성됨**
 
 - `edgar_crawler.py`와 `extract_items.py`의 인자는 `config.json` 수정해서 설정
