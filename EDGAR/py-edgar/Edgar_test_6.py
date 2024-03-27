@@ -21,13 +21,13 @@ companyTickers = requests.get(
     )
 
 # review response / keys
-print(companyTickers.json().keys())
+# print(companyTickers.json().keys())
 
 # format response to dictionary and get first key/value
-firstEntry = companyTickers.json()['0']
+firstEntry = companyTickers.json()['1']
 
 # parse CIK // without leading zeros
-directCik = companyTickers.json()['0']['cik_str']
+directCik = companyTickers.json()['1']['cik_str']
 
 # dictionary to dataframe
 companyData = pd.DataFrame.from_dict(companyTickers.json(),orient='index')
@@ -36,6 +36,7 @@ companyData = pd.DataFrame.from_dict(companyTickers.json(),orient='index')
 companyData['cik_str'] = companyData['cik_str'].astype(str).str.zfill(10)
 
 # review data
+print('companyData[:1]:')
 print(companyData[:1])
 
 cik = companyData[0:1].cik_str[0]
@@ -46,7 +47,8 @@ filingMetadata = requests.get(
     headers=headers
     )
 
-# review json 
+# review json
+print('filingMetadata.json().keys():')
 print(filingMetadata.json().keys())
 filingMetadata.json()['filings']
 filingMetadata.json()['filings'].keys()
