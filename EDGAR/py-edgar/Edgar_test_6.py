@@ -1,10 +1,5 @@
-
-# -*- coding: utf-8 -*-
 """
-
 SEC Filing Scraper
-@author: AdamGetbags
-
 """
 
 # import modules
@@ -24,28 +19,44 @@ companyTickers = requests.get(
 # print(companyTickers.json().keys())
 
 # format response to dictionary and get first key/value
-firstEntry = companyTickers.json()['1']
+firstEntry = companyTickers.json()['0']
+print('firstEntry:')
+print(firstEntry)
+print()
 
 # parse CIK // without leading zeros
-directCik = companyTickers.json()['1']['cik_str']
+directCik = companyTickers.json()['0']['cik_str']
+print('directCik:',directCik)
+print()
 
 # dictionary to dataframe
 companyData = pd.DataFrame.from_dict(companyTickers.json(),orient='index')
+print('companyData:')
+print(companyData)
+print()
 
 # add leading zeros to CIK
 companyData['cik_str'] = companyData['cik_str'].astype(str).str.zfill(10)
+print(companyData)
+print()
 
 # review data
 print('companyData[:1]:')
 print(companyData[:1])
+print()
 
 cik = companyData[0:1].cik_str[0]
+print('cik:', cik)
+print()
 
 # get company specific filing metadata
 filingMetadata = requests.get(
     f'https://data.sec.gov/submissions/CIK{cik}.json',
     headers=headers
     )
+print('filingMetadata:')
+print(filingMetadata)
+print()
 
 # review json
 print('filingMetadata.json().keys():')
@@ -54,29 +65,40 @@ filingMetadata.json()['filings']
 filingMetadata.json()['filings'].keys()
 filingMetadata.json()['filings']['recent']
 filingMetadata.json()['filings']['recent'].keys()
+print()
 
 # dictionary to dataframe
 allForms = pd.DataFrame.from_dict(
              filingMetadata.json()['filings']['recent']
              )
+print('allForms:')
+print(allForms)
+print()
 
 # review columns
-allForms.columns
-allForms[['accessionNumber', 'reportDate', 'form']].head(50)
+print(allForms.columns)
+print()
+print(allForms[['accessionNumber', 'reportDate', 'form']].head(50))
+print()
 
 # 10-Q metadata
-allForms.iloc[11]
+print(allForms.iloc[11]) # allForms의 12번째 행 선택
+print()
 
 # get company facts data
 companyFacts = requests.get(
     f'https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json',
     headers=headers
     )
+print('companyFacts:')
+print(companyFacts)
+print()
 
 #review data
-companyFacts.json().keys()
+print(companyFacts.json().keys())
 companyFacts.json()['facts']
-companyFacts.json()['facts'].keys()
+print(companyFacts.json()['facts'].keys())
+print()
 
 # filing metadata
 companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']
@@ -87,10 +109,11 @@ companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units
 
 # concept data // financial statement line items
 companyFacts.json()['facts']['us-gaap']
-companyFacts.json()['facts']['us-gaap'].keys()
+print(list(companyFacts.json()['facts']['us-gaap'].keys())[:50]) # 50개의 키만 출력
+print()
 
 # different amounts of data available per concept
-companyFacts.json()['facts']['us-gaap']['AccountsPayable']
+companyFacts.json()['facts']['us-gaap']['AccountsPayableCurrent']
 companyFacts.json()['facts']['us-gaap']['Revenues']
 companyFacts.json()['facts']['us-gaap']['Assets']
 
@@ -114,8 +137,9 @@ companyConcept.json()['units']['USD'][0]
 companyConcept.json()['units']['USD'][0]['val']
 
 # get all filings data 
-assetsData = pd.DataFrame.from_dict((
-               companyConcept.json()['units']['USD']))
+assetsData = pd.DataFrame.from_dict((companyConcept.json()['units']['USD']))
+print(assetsData)
+print()
 
 # review data
 assetsData.columns
@@ -126,4 +150,4 @@ assets10Q = assetsData[assetsData.form == '10-Q']
 assets10Q = assets10Q.reset_index(drop=True)
 
 # plot 
-assets10Q.plot(x='end', y='val')
+print(assets10Q.plot(x='end', y='val'))
