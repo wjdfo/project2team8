@@ -12,7 +12,7 @@ import requests
 import pandas as pd
 
 # create request header
-headers = {'User-Agent': "email@address.com"}
+headers = {'User-Agent': "crossrunway01@gmail.com"}
 
 # get all companies data
 companyTickers = requests.get(
@@ -30,12 +30,10 @@ firstEntry = companyTickers.json()['0']
 directCik = companyTickers.json()['0']['cik_str']
 
 # dictionary to dataframe
-companyData = pd.DataFrame.from_dict(companyTickers.json(),
-                                     orient='index')
+companyData = pd.DataFrame.from_dict(companyTickers.json(),orient='index')
 
 # add leading zeros to CIK
-companyData['cik_str'] = companyData['cik_str'].astype(
-                           str).str.zfill(10)
+companyData['cik_str'] = companyData['cik_str'].astype(str).str.zfill(10)
 
 # review data
 print(companyData[:1])
@@ -79,16 +77,11 @@ companyFacts.json()['facts']
 companyFacts.json()['facts'].keys()
 
 # filing metadata
-companyFacts.json()['facts']['dei'][
-    'EntityCommonStockSharesOutstanding']
-companyFacts.json()['facts']['dei'][
-    'EntityCommonStockSharesOutstanding'].keys()
-companyFacts.json()['facts']['dei'][
-    'EntityCommonStockSharesOutstanding']['units']
-companyFacts.json()['facts']['dei'][
-    'EntityCommonStockSharesOutstanding']['units']['shares']
-companyFacts.json()['facts']['dei'][
-    'EntityCommonStockSharesOutstanding']['units']['shares'][0]
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding'].keys()
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units']
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares']
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares'][0]
 
 # concept data // financial statement line items
 companyFacts.json()['facts']['us-gaap']

@@ -4,3 +4,5 @@ EDGAR/edgar-crawler-main/datasets/FILINGS_METADATA.csv
 EDGAR/edgar-crawler-main/datasets/EXTRACTED_FILINGS/
 EDGAR/edgar-crawler-main/datasets/INDICES/
 EDGAR/edgar-crawler-main/datasets/RAW_FILINGS/
+EDGAR/.DS_Store
+.DS_Store
