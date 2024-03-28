@@ -19,13 +19,13 @@ companyTickers = requests.get(
 # print(companyTickers.json().keys())
 
 # format response to dictionary and get first key/value
-firstEntry = companyTickers.json()['0']
-print('firstEntry:')
+firstEntry = companyTickers.json()['1']
+print('Second Entry:')
 print(firstEntry)
 print()
 
 # parse CIK // without leading zeros
-directCik = companyTickers.json()['0']['cik_str']
+directCik = companyTickers.json()['1']['cik_str']
 print('directCik:',directCik)
 print()
 
@@ -41,11 +41,11 @@ print(companyData)
 print()
 
 # review data
-print('companyData[:1]:')
-print(companyData[:1])
+print('companyData[1]:')
+print(companyData[1:2])
 print()
 
-cik = companyData[0:1].cik_str[0]
+cik = companyData[1:2].cik_str[0]
 print('cik:', cik)
 print()
 
