@@ -1,54 +1,128 @@
+"""
+SEC Filing Scraper
+"""
+
+# import modules
 import requests
-from bs4 import BeautifulSoup
+import pandas as pd
 
-def get_xbrl_from_10k(cik, accession_number):
-    # SEC API 엔드포인트 URL
-    endpoint = f"https://data.sec.gov/submissions/CIK{cik}.json"
+# create request header
+headers = {'User-Agent': "crossrunway01@gmail.com"}
 
-    # 보고서 accession number로 필터링
-    params = {
-        "type": "10-K",
-        "date": "20190101-20211231",  # 보고서 날짜 범위 (예: 2019년부터 2021년까지)
-        "accept": "application/json"
-    }
+# get all companies data
+companyTickers = requests.get(
+    "https://www.sec.gov/files/company_tickers.json",
+    headers=headers
+    )
 
-    try:
-        # SEC API에서 보고서 데이터 가져오기
-        response = requests.get(endpoint, params=params)
-        if response.status_code == 200:
-            # JSON 형식의 응답을 파싱하여 보고서 데이터 추출
-            reports = response.json()
-            for report in reports:
-                if report['accessionNumber'] == accession_number:
-                    # 해당 보고서의 URL 가져오기
-                    report_url = report['url']
-                    # 보고서 내용 다운로드
-                    report_content = requests.get(report_url).content
-                    # BeautifulSoup을 사용하여 HTML 파싱
-                    soup = BeautifulSoup(report_content, 'html.parser')
-                    # XBRL 데이터를 포함하는 태그(예: <xbrl> 또는 <xbrlTable>) 찾기
-                    xbrl_tag = soup.find("xbrl")
-                    if xbrl_tag:
-                        # XBRL 데이터 출력
-                        xbrl_data = xbrl_tag.get_text()
-                        return xbrl_data
-                    else:
-                        print("보고서에 XBRL 데이터가 포함되어 있지 않습니다.")
-                        return None
-            print("해당 accession number의 보고서를 찾을 수 없습니다.")
-        else:
-            print(f"오류: {response.status_code} - {response.text}")
-            return None
-    except Exception as e:
-        print(f"오류 발생: {e}")
-        return None
+# review response / keys
+# print(companyTickers.json().keys())
 
-# CIK와 Accession Number 설정
-cik = "0000320193"  # Apple Inc.의 CIK
-accession_number = "0000320193-21-000056"  # 예시 accession number
+# format response to dictionary and get first key/value
+Entry = companyTickers.json()['1']
+print(Entry)
+print()
 
-# 10-K 보고서에서 XBRL 데이터 가져오기
-xbrl_data = get_xbrl_from_10k(cik, accession_number)
-if xbrl_data:
-    # XBRL 데이터 출력 또는 처리
-    print(xbrl_data)
+# parse CIK // without leading zeros
+directCik = companyTickers.json()['1']['cik_str']
+
+# dictionary to dataframe
+companyData = pd.DataFrame.from_dict(companyTickers.json(),orient='index')
+
+# add leading zeros to CIK
+companyData['cik_str'] = companyData['cik_str'].astype(str).str.zfill(10)
+cik = companyData[1:2].cik_str[0]
+
+# get company specific filing metadata
+filingMetadata = requests.get(
+    f'https://data.sec.gov/submissions/CIK{cik}.json',
+    headers=headers
+    )
+
+# dictionary to dataframe
+allForms = pd.DataFrame.from_dict(
+             filingMetadata.json()['filings']['recent']
+             )
+
+# review columns
+# print(allForms.columns)
+print(allForms[['accessionNumber', 'reportDate', 'form']].head(50))
+print()
+
+# Apple 10-K metadata
+print('Apple 10-K metadata:')
+print(allForms.iloc[38])
+print()
+
+# get company facts data
+companyFacts = requests.get(
+    f'https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json',
+    headers=headers
+    )
+
+# review data
+print('review companyFacts data:')
+print('companyFacts keys:')
+print(companyFacts.json().keys())
+# print(companyFacts.json()['facts'])
+print('companyFacts / facts keys:')
+print(companyFacts.json()['facts'].keys())
+print()
+
+# filing metadata
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']
+print('companyFacts / facts / dei / EntityCommonStockSharesOutstanding keys:')
+print(companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding'].keys())
+print('companyFacts / facts / dei / EntityCommonStockSharesOutstanding / units:')
+# print(companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units'])
+companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares']
+print(companyFacts.json()['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares'][0])
+print()
+
+# concept data // financial statement line items
+companyFacts.json()['facts']['us-gaap']
+print('companyFacts / facts / us-gaap keys: ')
+print(list(companyFacts.json()['facts']['us-gaap'].keys())[:10]) # 50개의 키만 출력
+print()
+
+# different amounts of data available per concept
+companyFacts.json()['facts']['us-gaap']['AccountsPayableCurrent']
+companyFacts.json()['facts']['us-gaap']['Revenues']
+companyFacts.json()['facts']['us-gaap']['Assets']
+
+# get company concept data
+companyConcept = requests.get(
+    (
+    f'https://data.sec.gov/api/xbrl/companyconcept/CIK{cik}/us-gaap/Assets.json'
+    ),
+    headers=headers
+    )
+
+# review data
+companyConcept.json().keys()
+companyConcept.json()['units']
+companyConcept.json()['units'].keys()
+companyConcept.json()['units']['USD']
+companyConcept.json()['units']['USD'][0]
+
+# parse assets from single filing
+print('companyconcept / units / USD / 1st label / val: ')
+print(companyConcept.json()['units']['USD'][0]['val'])
+print()
+
+# get all filings data
+print('assetsData: ')
+assetsData = pd.DataFrame.from_dict((companyConcept.json()['units']['USD']))
+print(assetsData)
+print()
+
+# review data
+assetsData.columns
+assetsData.form
+
+# get assets from 10K forms and reset index
+assets10K = assetsData[assetsData.form == '10-K']
+assets10K = assets10K.reset_index(drop=True)
+
+# plot 
+print(assets10K.plot(x='end', y='val'))
