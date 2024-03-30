@@ -3,6 +3,7 @@ import extract_items
 import json
 import os
 from __init__ import TXTDATA_DIR, DATASET_DIR
+import datetime
 
 def main():
 
@@ -31,7 +32,7 @@ def main():
         json_file = open(file_path,encoding='UTF-8')
         data = json.load(json_file)
         company_name = data['company']
-        filing_date = data['filing_date']
+        filing_date = data['period_of_report']
         filing_type = data['filing_type']
         if os.path.exists(TXTDATA_DIR):
             output_path = os.path.join(TXTDATA_DIR, f'{company_name}_{filing_date}_{filing_type}.txt')
@@ -44,6 +45,8 @@ def main():
         want_to_extract = data_keys[13:]
         print(want_to_extract)
         output_file.write(f'{company_name}_{filing_date}_{filing_type}\n')
+        date = datetime.datetime.strptime(filing_date, '%Y-%m-%d')
+        output_file.write(f'year : {date.year} / month : {date.month} / day : {date.day}\n')
         for item in want_to_extract:
             output_file.write(data[item])
             output_file.write('\n')
