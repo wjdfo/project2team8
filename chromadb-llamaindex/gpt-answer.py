@@ -12,11 +12,19 @@ import os
 import json
 
 ##########################
+# chromadb collection 어디 저장할 것인가
 DB_SAVE_PATH = 'C:\\chroma_temp_store\\'
+
+# collection 이름
 COLLECTION_NAME = 'kkk'
+
+# embedding model
 EMBEDDING_MODLE = 'sentence-transformers/all-mpnet-base-v2'
 
+# 추출된 파일 어느 폴더에 있는가?
 DATA_PATH = 'data'
+
+# 어떤 item들을 저장할 것인가 ? default는 전부 다
 EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
 ###########################
