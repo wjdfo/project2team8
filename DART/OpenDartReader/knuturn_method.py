@@ -7,6 +7,9 @@ from selenium.webdriver.common.by import By
 import time
 
 class knuturn :
+    # 크롬 드라이버와 크롬 버전 충돌 발생 시, 동일 버전의 크롬 드라이버 경로 입력
+    # CHROME_DRIVER_PATH = 'YOUR_PATH'
+
     def __init__(self, file: str) : #api key text파일 경로
         with open('./dart_api_key.txt', 'r') as f :
             api_key = f.readline()
@@ -46,6 +49,9 @@ class knuturn :
         
         report_data = {}
         driver = webdriver.Chrome()
+        
+        # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
+        # driver = webdriver.Chrome(Service(executable_path=CHROME_DRIVER_PATH))
 
         fp = open('./crawling_output_try_2.txt', 'a', encoding = 'utf-8')
 
