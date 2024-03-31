@@ -48,10 +48,11 @@ class knuturn :
     def getReportData(self, report_url: dict) : #report_url_list 받아서 url에서 text 가져옴
         
         report_data = {}
-        driver = webdriver.Chrome()
-        
-        # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
+
+         # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
         # driver = webdriver.Chrome(Service(executable_path=CHROME_DRIVER_PATH))
+
+        driver = webdriver.Chrome()
 
         fp = open('./crawling_output_try_2.txt', 'a', encoding = 'utf-8')
 
@@ -100,6 +101,9 @@ class knuturn :
             a = line.strip().split()
             mapping[a[0]] = a[1]
         f.close()
+
+        # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
+        # driver = webdriver.Chrome(Service(executable_path=CHROME_DRIVER_PATH))
 
         driver = webdriver.Chrome()
 
