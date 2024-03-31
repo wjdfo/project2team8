@@ -16,7 +16,7 @@ import json
 DB_SAVE_PATH = 'C:\\chroma_temp_store\\'
 
 # collection 이름
-COLLECTION_NAME = 'kkk'
+COLLECTION_NAME = 'whole_240331_0901_json'
 
 # embedding model
 EMBEDDING_MODLE = 'sentence-transformers/all-mpnet-base-v2'
@@ -27,8 +27,12 @@ DATA_PATH = 'data'
 # 어떤 item들을 저장할 것인가 ? default는 전부 다
 EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
+
+# API KEY
+API_KEY = ''
 ###########################
 
+# json 에 해당 키값이 존재하는가
 def is_json_key_present(json, key):
     try:
         buf = json[key]
@@ -41,13 +45,13 @@ def is_json_key_present(json, key):
 
 def main():
     # API_KEY 와 llm 세팅. 터미널에서도 수정 가능
-    os.environ['OPENAI_API_KEY'] = 'API-KEY'
+    os.environ['OPENAI_API_KEY'] = API_KEY
     Settings.llm = OpenAI(model='gpt-4', temperature=0)
 
     # vector embedding 저장 위치
     chroma_client = chromadb.PersistentClient(path=DB_SAVE_PATH)
 
-    # vector embedding 담겨있는 collection 다 지울 것인지 ? // name 필드에 원하는 이름 적을 수 있음
+    # vector embedding 담겨있는 collection 다 지울 것인지 ? - !!지우기 기능 동작을 안 함!! // name 필드에 원하는 이름 적을 수 있음
     print(chroma_client.list_collections())
     i = input('wanna clean collection ( database )? (y/n) : ')
     if i == 'y' or i == 'Y' or i == '1' or i == 'ㅛ':
@@ -80,31 +84,33 @@ def main():
         if i == 1 :
             print('(1) selected')
             
-            v = int(input('store separate by each items - when using json (1), store whole report - when using txt (2) : '))
+            v = int(input('store separate by each items (1), store whole report (2) : '))
+            if v == 1 : print('separate by each items - selected')
+            if v == 2 : print('whole report - selected')
+            else : continue
+
+            documents = []
             
-            # 1 : item 별로 나누어서 저장하기 <- json
-            if v == 1 :
+            # data 가져오기
+            if os.path.exists(DATA_PATH):
+                file_list = os.listdir(DATA_PATH)
+            else :
+                print(f'There is no {DATA_PATH} folder')
+                exit()
 
-                print('separate by each items - selected')
-                documents = []
+            # 각 파일에 대해,
+            for file_name in file_list:
+                file_path = os.path.join(DATA_PATH, file_name)
 
-                # data 가져오기
-                if os.path.exists(DATA_PATH):
-                    file_list = os.listdir(DATA_PATH)
-                else :
-                    print(f'There is no {DATA_PATH} folder')
-                    exit()
-                
-                # 각 파일에 대해,
-                for file_name in file_list:
-                    file_path = os.path.join(DATA_PATH, file_name)
+                # json open
+                with open(file_path) as fin:
+                    file = json.load(fin)
 
-                    # json open
-                    with open(file_path) as fin:
-                        file = json.load(fin)
+                # field 값 설정 후 document 화 하기
+                file_name = file['company']+file['period_of_report']
 
-                    #field 값 설정 후 document 화
-                    file_name = file['company']+file['period_of_report']
+                # v == 1 : item 별로 나누어서 document 화 하기
+                if v == 1 :
                     for items in EXTRACTED_ITEMS:
                         if is_json_key_present(file,f'item_{items}') == False : continue
                         text = file[f'item_{items}']
@@ -114,16 +120,21 @@ def main():
                         doc = Document(text = text,doc_id = doc_id, metadata = {'filename' : file_name, 'items' : included_items, 
                                                             'filing_type' : file['filing_type'], 'htm_filing_link' : file['htm_filing_link'], 'report_date' : file['period_of_report']  })
                         documents.append(doc)
+                # v == 2 : 전체 내용 다 저장하기
+                if v == 2 :
+                    text = ''
+                    included_items =''
+                    for items in EXTRACTED_ITEMS:
+                        if is_json_key_present(file,f'item_{items}') == False : continue
+                        text += file[f'item_{items}']
+                        included_items += f'item_{items}, '
+                    included_items = included_items[0:-2]
+                    doc_id = 'EDGAR_'+file['filing_type']+'_'+file['cik']+'_'+file['period_of_report']+':'+included_items
 
-            # 2 : 전체 내용 다 저장하기 <- txt
-            if v == 2 :
-                print('whole report - selected')
+                    doc = Document(text = text,doc_id = doc_id, metadata = {'filename' : file_name, 'items' : included_items, 
+                                                        'filing_type' : file['filing_type'], 'htm_filing_link' : file['htm_filing_link'], 'report_date' : file['period_of_report']  })
+                    documents.append(doc)
 
-                documents = SimpleDirectoryReader('data',filename_as_id=True).load_data()
-            else :
-                continue
-
-            # llamaindex index 생성 -> 자동 저장 됨
             index = VectorStoreIndex.from_documents(
                 documents, storage_context=storage_context, embed_model=embed_model
             )
@@ -140,8 +151,7 @@ def main():
             break
         else:
             print('do again')
-
-
+    
     # query
     chat_engine = index.as_chat_engine(
         chat_mode='context',
@@ -151,7 +161,7 @@ def main():
             'and give informations as much as you know'
         )
     )
-    response = chat_engine.chat("Categorize [Apple]'s  [2021] year [10-K] report. at least list 5 of them")
+    response = chat_engine.chat("Categorize [Amazon]'s  [2021] year [10-K] report. at least list 5 of them")
 
     print(response)
 
