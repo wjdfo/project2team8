@@ -7,6 +7,6 @@
 * justgotothedesk - 신진철 🧒
 * wjdfo           - 조정래 🤖
 
-### with (주)똑똑한개발자, 뉴턴팀
-![Newturn](/newturn.JPG)<br/>
-[Newturn](https://www.newturn.io/, "go Newturn")
+### with (주)똑똑한개발자, 뉴턴팀 [Newturn](https://www.newturn.io/, "go Newturn")
+![Newturn](/newturn.JPG)
+
