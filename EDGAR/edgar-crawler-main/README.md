@@ -9,6 +9,8 @@ https://github.com/nlpaueb/edgar-crawler
 ## 설치 방법
 - `pip install -r requirements.txt`
 
+( python 3.11.8 환경에서 실행 확인 )
+
 ## 사용법
 - **이제는 `config.json` 수정 후 `aggregate.py` 실행하면 됨**
 
