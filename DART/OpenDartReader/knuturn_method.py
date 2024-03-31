@@ -75,5 +75,65 @@ class knuturn :
                     # print(report_string)
 
         driver.quit()
+        fp.close()
+
+        return report_data
+    
+    def getReportData2(self, report_url: dict) :
+        indices = [] # 보고서에서 뽑아올 목차 담는 list
+        f = open('./index.txt', 'r', encoding = 'utf-8')
+        lines = f.readlines()
+        for line in lines :
+            indices.append(line.strip())
+        f.close()
+
+        f = open('./corp_name_code_mapping.txt', 'r', encoding='utf-8')
+        mapping = dict()
+
+        for line in f.readlines() :
+            a = line.strip().split()
+            mapping[a[0]] = a[1]
+        f.close()
+
+        driver = webdriver.Chrome()
+
+        report_data = {}
+
+        for corp_code in report_url.keys() :
+            corp_name = mapping[corp_code]
+            report_data[corp_name] = {}
+            
+            print(corp_name)
+
+            for report_num in report_url[corp_code] :
+                report_data[corp_name][report_num] = {}
+
+                print(report_num, end = " ")
+
+                for title in report_url[corp_code][report_num] :
+                    extract = False # 뽑아야 할 목차인지 확인하는 conditional variable
+                    
+                    for index in indices :
+                        if index in title :
+                            extract = True
+
+                    if extract :
+                        report_data[corp_name][report_num][title] = []
+                        url = report_url[corp_code][report_num][title]
+
+                        driver.get(url)
+                        time.sleep(2)
+
+                        report_string = driver.find_element(By.TAG_NAME, 'body').text
+
+                        lines = report_string.splitlines()
+
+                        for line in lines :
+                            if len(line) < 1 :
+                                continue
+                            report_data[corp_name][report_num][title].append(line + '\n')
+                print("done.")
+
+        driver.quit()
 
         return report_data

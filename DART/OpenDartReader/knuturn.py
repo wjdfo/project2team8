@@ -41,7 +41,7 @@ with open('./20230101_20240329_report_list.json', 'r', encoding = 'utf-8')  as f
 with open('./20230101_20240329_report_url.json', 'r', encoding = 'utf-8') as f :
     report_url = json.load(f)
 
-report_data = a.getReportData(report_url)
+report_data = a.getReportData2(report_url)
 
 with open('./20230101_20240329_report_data.json', 'w', encoding = 'utf-8') as f :
     json.dump(report_data, f, ensure_ascii = False, indent = '\t')
