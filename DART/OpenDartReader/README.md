@@ -21,7 +21,8 @@ OpenDartReader는 Open DART를 내용을 일반화하고 좀 더 쉽게 Open DAR
 > dart.list(corp, start=None, end=None, kind='', kind_detail='', final=True)
 
 * 날짜 지정하는 방법
-> start와 end에 지정하는 날짜의 형식 '2020-07-01', '2020-7-1', '20200701', '1 july 2020', 'JULY 1 2020' 모두 가능합니다. datetime 객체도 가능.
+> start와 end에 지정하는 날짜의 형식 '2020-07-01', '2020-7-1', '20200701', '1 july 2020', 'JULY 1 2020' 모두 가능합니다. <br/>
+> datetime 객체도 가능.
 
 > start 와 end를 함께 지정하면 start~end 기간을 지정.
 start만 지정하면 start 부터 현재까지,
@@ -43,7 +44,7 @@ end만 지정하면 end 하루를 지정하게 됩니다.
 
 ## 고유 번호 corp_codes
 > find_corp_code()를 이용해 특정 회사의 고유 번호 얻기 가능
->   > <code>dart.find_corp_code(corp_code)</code>
+>   > <code>dart.find_corp_code(corp_code)</code><br/>
 >   > <code>dart.find_corp_code(corp_name)</code>
 
 <hr/>
@@ -52,9 +53,9 @@ end만 지정하면 end 하루를 지정하게 됩니다.
 > 사업보고서의 주요 내용을 조회.
 
 > <code>dart.report(corp, key_word, bsns_year, reprt_code='11011')</code>
->   > key_word는 ODR_type.json에 있음
->   > bsns_year 에 사업 년도를 지정 (문자열 혹은 정수값)
->   > reprt_code 에는 보고서 코드(문자열)을 지정
+>   > key_word는 ODR_type.json에 있음<br/>
+>   > bsns_year 에 사업 년도를 지정 (문자열 혹은 정수값)<br/>
+>   > reprt_code 에는 보고서 코드(문자열)을 지정<br/>
 >   >   >'11013'=1분기보고서, '11012'=반기보고서, '11014'=3분기보고서, '11011'=사업보고서
 
 <hr/>
@@ -65,7 +66,7 @@ end만 지정하면 end 하루를 지정하게 됩니다.
 <hr/>
 
 ## 지분공시 major_shareholders()
->   <code>dart.major_shareholders(corp)</code> - 대량보유 상황보고
+>   <code>dart.major_shareholders(corp)</code> - 대량보유 상황보고 <br/>
 >   <code>dart.major_shareholders_exec(corp)</code> - 임원ㆍ주요주주 소유보고
 
 <hr/>
