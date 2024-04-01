@@ -5,7 +5,7 @@ pip install -r requirements.txt
 
 ( python 3.11.8 환경에서 실행 확인 )
 # 실행
-dustmq.py 실행 
+dustmq.py 실행
 
 -> data 폴더 내에 있는 .txt 파일들 가져와서 chromadb에 저장 -> query 주면 알아서 참조하여 대답해 줌
 
