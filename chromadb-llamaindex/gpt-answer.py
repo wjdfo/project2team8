@@ -86,7 +86,7 @@ def main():
             
             v = int(input('store separate by each items (1), store whole report (2) : '))
             if v == 1 : print('separate by each items - selected')
-            if v == 2 : print('whole report - selected')
+            elif v == 2 : print('whole report - selected')
             else : continue
 
             documents = []
