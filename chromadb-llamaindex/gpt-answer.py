@@ -12,8 +12,8 @@ import os
 import json
 
 ##########################
-# chromadb collection 어디 저장할 것인가
-DB_SAVE_PATH = 'C:\\chroma_temp_store\\'
+# chromadb collection 저장경로
+DB_SAVE_PATH = 'CHROMADB_STORE_PATH'
 
 # collection 이름
 COLLECTION_NAME = 'whole_240331_0901_json'
@@ -21,18 +21,18 @@ COLLECTION_NAME = 'whole_240331_0901_json'
 # embedding model
 EMBEDDING_MODLE = 'sentence-transformers/all-mpnet-base-v2'
 
-# 추출된 파일 어느 폴더에 있는가?
-# DATA_PATH = 'data'
+# 추출된 파일 저장 경로(미리 데이터를 추출한 경우에만 사용
+# DATA_PATH = 'DATA_PATH'
 
-# 어떤 item들을 저장할 것인가 ? default는 전부 다
+# 추출할 item들의 항목(default는 모두 선택)
 EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
 
-# API KEY
+# GPT API KEY
 API_KEY = ''
 ###########################
 
-# json 에 해당 키값이 존재하는가ㅜ
+# json에 해당 키값이 존재하는가
 def is_json_key_present(json, key):
     try:
         buf = json[key]

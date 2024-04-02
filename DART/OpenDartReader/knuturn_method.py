@@ -49,7 +49,7 @@ class knuturn :
         
         report_data = {}
 
-         # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
+        # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
         # driver = webdriver.Chrome(Service(executable_path=CHROME_DRIVER_PATH))
 
         driver = webdriver.Chrome()
