@@ -29,8 +29,14 @@ EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
 
 # GPT API KEY
-API_KEY = ''
-###########################
+try:
+    with open('./GPT_API_KEY.txt', 'r') as f:
+        API_KEY = f.readline()
+except FileNotFoundError:
+    # 파일이 없을 경우 직접 입력
+    API_KEY = input("GPT API KEY를 입력하세요: ")
+
+# API_KEY = ''
 
 # json에 해당 키값이 존재하는가
 def is_json_key_present(json, key):

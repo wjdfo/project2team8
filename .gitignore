@@ -9,3 +9,4 @@ EDGAR/edgar-crawler-main/__pycache__/
 EDGAR/.DS_Store
 .DS_Store
 DART/OpenDartReader/dart_api_key.txt
+chromadb-llamaindex/GPT_API_KEY.txt
