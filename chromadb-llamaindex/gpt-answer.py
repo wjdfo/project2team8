@@ -218,9 +218,9 @@ def main():
         if option == 1 :
             print("-------EDGAR mode-------")
             context = (
-                'You are a assistant to anaylsis EDGAR SEC filings. You have to give client more specific information including exact examples, current situation for client to have information to invest',
-                'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.',
-                'and give informations as much as you know'
+                'You are an assistant tasked with analyzing EDGAR SEC filings. It is important to provide clients with specific information, including precise examples and the current situation, to help them make informed investment decisions.',
+                'You must respond in Korean, and if you cannot find an exact English equivalent, you may provide both the Korean and English terms.',
+                'and provide as much information as you can.'
             )
             break
         elif option == 2 :
