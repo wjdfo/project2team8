@@ -12,8 +12,8 @@ import os
 import json
 
 ##########################
-# chromadb collection 어디 저장할 것인가
-DB_SAVE_PATH = 'C:\\chroma_temp_store\\'
+# chromadb collection 저장경로
+DB_SAVE_PATH = 'CHROMADB_STORE_PATH'
 
 # collection 이름
 COLLECTION_NAME = 'whole_240331_0901_json'
@@ -21,18 +21,24 @@ COLLECTION_NAME = 'whole_240331_0901_json'
 # embedding model
 EMBEDDING_MODLE = 'sentence-transformers/all-mpnet-base-v2'
 
-# 추출된 파일 어느 폴더에 있는가?
-# DATA_PATH = 'data'
+# 추출된 파일 저장 경로(미리 데이터를 추출한 경우에만 사용
+# DATA_PATH = 'DATA_PATH'
 
-# 어떤 item들을 저장할 것인가 ? default는 전부 다
+# 추출할 item들의 항목(default는 모두 선택)
 EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
 
-# API KEY
-API_KEY = ''
-###########################
+# GPT API KEY
+try:
+    with open('./GPT_API_KEY.txt', 'r') as f:
+        API_KEY = f.readline()
+except FileNotFoundError:
+    # 파일이 없을 경우 직접 입력
+    API_KEY = input("GPT API KEY를 입력하세요: ")
 
-# json 에 해당 키값이 존재하는가ㅜ
+# API_KEY = ''
+
+# json에 해당 키값이 존재하는가
 def is_json_key_present(json, key):
     try:
         buf = json[key]
@@ -212,9 +218,9 @@ def main():
         if option == 1 :
             print("-------EDGAR mode-------")
             context = (
-                'You are a assistant to anaylsis EDGAR SEC filings. You have to give client more specific information including exact examples, current situation for client to have information to invest',
-                'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.',
-                'and give informations as much as you know'
+                'You are an assistant tasked with analyzing EDGAR SEC filings. It is important to provide clients with specific information, including precise examples and the current situation, to help them make informed investment decisions.',
+                'You must respond in Korean, and if you cannot find an exact English equivalent, you may provide both the Korean and English terms.',
+                'and provide as much information as you can.'
             )
             break
         elif option == 2 :
