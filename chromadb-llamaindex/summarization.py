@@ -39,7 +39,7 @@ def divide_string(string, parts):
 
    substrings = [string[i:i + part_length] for i in range(0, len(string), part_length)]
 
-   if len(substrings) > parts:
+   if len(substrings) > parts and len(encoder.encode(substrings[-1])) < 2000:
       substrings[-2] += substrings[-1]
       substrings.pop()
 
@@ -54,24 +54,30 @@ def edgar_summ(path: str) :
         print(f'There is no \"{path}\" folder. you should make one')
         exit()
 
+    # GPT on
     client = op(api_key=API_KEY)
 
+    # output folder
+    if not os.path.exists('summarized-data\\edgar'): os.makedirs('summarized-data\\edgar')
+    # group화 한 목차 저장할 파일
+    categorized_file = "summarized-data\\edgar\\edgar-contents-grouping.txt"
+    cff = open(categorized_file,"w+", encoding='UTF-8')
+    
     # 모든 json 파일에 대하여
-    for file_name in file_list :
+    total = len(file_list)
+    for idx, file_name in enumerate(file_list) :
         file_path = os.path.join(path, file_name)
 
         with open(file_path, 'r', encoding = 'utf-8') as f :
             file = json.load(f)
 
         text_aggre=''
-
-        if not os.path.exists('summarized-data\\edgar'): os.makedirs('summarized-data\\edgar')
-        output_path = 'summarized-data\\edgar'
-        output_path = os.path.join(output_path,f"test-{GPT_MODEL_NAME}-{file['company']}.txt")
+        output_path = f"summarized-data\\edgar\\test-{GPT_MODEL_NAME}-{file['company']}.txt"
         # 출력파일
         ff = open(output_path, 'w+' , encoding='UTF-8')
 
-        for items in tqdm(EDGAR_ITEMS, desc=f"{file['company']} {file['period_of_report']}"):
+        # 파일 내 모든 item에 대하여
+        for items in tqdm(EDGAR_ITEMS, desc=f"{idx}/{total} : {file['company']} {file['period_of_report']}"):
             if is_json_key_present(file,f'item_{items}') == False : continue
             text = [file[f'item_{items}']]
 
@@ -81,8 +87,9 @@ def edgar_summ(path: str) :
 
             # token이 10000 보다 많으면 text 쪼개기
             if len(result) > 10000 :
-                text = divide_string(text[0],len(result) // 10000)
+                text = divide_string(text[0],(len(result) // 10000) + 1)
 
+            # 요약해달라는 query
             for query_text in text:
                 response = client.chat.completions.create(
                     model=GPT_MODEL_NAME,
@@ -97,10 +104,27 @@ def edgar_summ(path: str) :
                 )
                 text_aggre += response.choices[0].message.content + '\n'
 
-
+        # 요약 파일에 저장
         ff.write(text_aggre)
         ff.close()
 
+        ##
+        # 목차로 요약할 수 있는 10개의 keywords 반환
+        response = client.chat.completions.create(
+            model=GPT_MODEL_NAME,
+            messages = [
+                {"role": "system", "content":'You are an assistant to summarize EDGAR SEC filings. Your task is to help summarizing and categorizing SEC filings to understand whole data of filings.'},
+                {"role": "system", "content":'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.'},
+                {"role": "system", "content":'You have to use specific words in the text. Write company name in English'},
+                {"role": "system", "content":'do not give additional illustrations.'},
+                {"role": "user", "content": f'Return at least 10 keywords needed to create a table of contents from the following text :\n{text_aggre}'}
+            ],
+            temperature = 0.5 # 0 ~ 1 실수, response의 다양성
+        )
+
+        # 파일에 넣기
+        cff.write(f"test-{GPT_MODEL_NAME}-{file['company']}\n" + response.choices[0].message.content + "\n\n")
+    cff.close()
     return
 
 def main():
