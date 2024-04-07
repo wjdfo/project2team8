@@ -5,3 +5,5 @@ llama-index-embeddings-huggingface
 llama-index-embeddings-langchain
 langchain-community
 sentence-transformers
+tiktoken
+tqdm

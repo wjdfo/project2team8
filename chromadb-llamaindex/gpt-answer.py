@@ -19,13 +19,12 @@ DB_SAVE_PATH = 'CHROMADB_STORE_PATH'
 COLLECTION_NAME = 'whole_240331_0901_json'
 
 # embedding model
-EMBEDDING_MODLE = 'sentence-transformers/all-mpnet-base-v2'
+EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
 
-# 추출된 파일 저장 경로(미리 데이터를 추출한 경우에만 사용
-# DATA_PATH = 'DATA_PATH'
+GPT_MODEL_NAME = 'gpt-3.5-turbo'
 
 # 추출할 item들의 항목(default는 모두 선택)
-EXTRACTED_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
+EDGAR_ITEMS = [ "1", "1A", "1B", "2", "3", "4", "5", "6", "7", "7A",
                  	"8", "9", "9A", "9B", "10", "11", "12", "13", "14", "15"]
 
 # GPT API KEY
@@ -36,7 +35,7 @@ except FileNotFoundError:
     # 파일이 없을 경우 직접 입력
     API_KEY = input("GPT API KEY를 입력하세요: ")
 
-# API_KEY = ''
+##########################
 
 # json에 해당 키값이 존재하는가
 def is_json_key_present(json, key):
@@ -67,7 +66,7 @@ def edgar(path: str, option: int) :
         file_name = file['company']+file['period_of_report']
 
         if option == 1 :
-            for items in EXTRACTED_ITEMS:
+            for items in EDGAR_ITEMS:
                 if is_json_key_present(file,f'item_{items}') == False : continue
                 text = file[f'item_{items}']
                 included_items = f'item_{items}'
@@ -81,7 +80,7 @@ def edgar(path: str, option: int) :
             # v == 2 : 전체 내용 다 저장하기
             text = ''
             included_items =''
-            for items in EXTRACTED_ITEMS:
+            for items in EDGAR_ITEMS:
                 if is_json_key_present(file,f'item_{items}') == False : continue
                 text += file[f'item_{items}']
                 included_items += f'item_{items}, '
@@ -140,7 +139,7 @@ def dart(path: str, option: int) :
 def main():
     # API_KEY 와 llm 세팅. 터미널에서도 수정 가능
     os.environ['OPENAI_API_KEY'] = API_KEY
-    Settings.llm = OpenAI(model='gpt-4', temperature=0)
+    Settings.llm = OpenAI(model=GPT_MODEL_NAME, temperature=0)
 
     # vector embedding 저장 위치
     chroma_client = chromadb.PersistentClient(path=DB_SAVE_PATH)
@@ -162,7 +161,7 @@ def main():
     # cosine 유사도 기반으로 저장. embedding model은 찾아봤던 논문에 있던 거 그냥 썼음..
     collection = chroma_client.get_or_create_collection(name=COLLECTION_NAME,metadata={'hnsw:space' : 'cosine'})
     embed_model = LangchainEmbedding(
-        HuggingFaceEmbeddings(model_name=EMBEDDING_MODLE)
+        HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
     )
 
     # llamaindex에서 chromadb 다루기
