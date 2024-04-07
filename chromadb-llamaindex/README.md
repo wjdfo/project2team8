@@ -5,9 +5,10 @@ pip install -r requirements.txt
 
 ( python 3.11.8 환경에서 실행 확인 )
 # 실행
-dustmq.py 실행
 
--> data 폴더 내에 있는 .txt 파일들 가져와서 chromadb에 저장 -> query 주면 알아서 참조하여 대답해 줌
+db에 적재하고 질의하기 위해서는 `gpt-answer.py` 실행
+data 폴더에 있는 파일 읽어와서 요약하기 `summarization.py`
+
 
 # 주의
 꼭 같은 폴더 내에서 실행시켜야함 ( 상대 경로 있어서 )
