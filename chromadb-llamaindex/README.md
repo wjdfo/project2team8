@@ -7,6 +7,7 @@ pip install -r requirements.txt
 # 실행
 
 db에 적재하고 질의하기 위해서는 `gpt-answer.py` 실행
+
 data 폴더에 있는 파일 읽어와서 요약하기 `summarization.py`
 
 
