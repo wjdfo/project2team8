@@ -72,7 +72,7 @@ def edgar_summ(path: str) :
             file = json.load(f)
 
         text_aggre=''
-        output_path = f"summarized-data\\edgar\\test-{GPT_MODEL_NAME}-{file['company']}.txt"
+        output_path = f"summarized-data\\edgar\\test-{GPT_MODEL_NAME}-{file['company']}-{file['period_of_report']}.txt"
         # 출력파일
         ff = open(output_path, 'w+' , encoding='UTF-8')
 
@@ -123,7 +123,7 @@ def edgar_summ(path: str) :
         )
 
         # 파일에 넣기
-        cff.write(f"test-{GPT_MODEL_NAME}-{file['company']}\n" + response.choices[0].message.content + "\n\n")
+        cff.write(f"test-{GPT_MODEL_NAME}-{file['company']}-{file['period_of_report']}\n" + response.choices[0].message.content + "\n\n")
     cff.close()
     return
 
