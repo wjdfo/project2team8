@@ -147,14 +147,18 @@ def dart_summ(path: str) : # param : dart data report file
     with open(file_path, 'r', encoding = 'utf-8') as f :
         file = json.load(f)
 
-    text_aggre = ""
+    # GPT on
+    client = op(api_key = API_KEY)
+
     for corp_name in file.keys() :
         # for report_num in file[corp_name].keys() :
         for report_num in tqdm(file[corp_name].keys(), desc = f"{corp_name}") :
             output_path = f"summarized-data\\dart\\test-{GPT_MODEL_NAME}-{corp_name}-{report_num}.txt"
-            
+
             with open(output_path, 'w+', encoding = 'utf-8') as ff :
                 # for item in tqdm(file[corp_name][report_num].keys(), desc = f"{corp_name}, {report_num}") :
+                text_aggre = ""
+                
                 for item in file[corp_name][report_num].keys() :
                     text = ""
                     for element in file[corp_name][report_num][item] :
@@ -165,12 +169,11 @@ def dart_summ(path: str) : # param : dart data report file
                     # result = encoder.encode(text)
                     result = encoder.encode(a[0])
 
+                    print(f"기업명 : {corp_name}, rep_no : {report_num}, 목차 : {item}, # of token : {len(result)}")
+
                     # token이 10000 보다 많으면 text 쪼개기
                     if len(result) > 10000 :
                         a = divide_string(a[0], (len(result) // 10000) + 1)
-
-                    # GPT on
-                    client = op(api_key = API_KEY)
 
                     # 요약해달라는 query
                     for query_text in a:
@@ -184,9 +187,11 @@ def dart_summ(path: str) : # param : dart data report file
                                 {"role": "user", "content": f'Summarize the following text in 5 sentences :\n{query_text}'}
                                 # {"role": "user", "content": f'이 글들을 5문장 이내로 요약해줘 :\n{query_text}'}
                             ],
-                        temperature = 0.5 # 0 ~ 1 실수, response의 다양성
+                        temperature = 0, # 0 ~ 1 실수, response의 다양성
+                        top_p = 0.8
                     )
                     text_aggre += response.choices[0].message.content + '\n'
+                    print(response.usage)
 
                 ff.write(text_aggre)
 
@@ -200,7 +205,8 @@ def dart_summ(path: str) : # param : dart data report file
                     {"role": "system", "content":'do not give additional illustrations.'},
                     {"role": "user", "content": f'Return at least 10 keywords needed to create a table of contents from the following text :\n{text_aggre}'}
                 ],
-                temperature = 0.5 # 0 ~ 1 실수, response의 다양성
+                temperature = 0, # 0 ~ 1 실수, response의 다양성
+                top_p = 0.8
             )
         
             # 파일에 넣기
@@ -216,6 +222,7 @@ def main():
         edgar_summ('data-edgar')
     elif i == 2 :
         print('dart')
+        dart_summ('data-dart')
     else:
         return
 
