@@ -33,7 +33,7 @@ def is_json_key_present(json, key):
 
     return True
 
-# string을 parts 수로 나누고 싶다.
+# 문자열을 원하는 개수로 나누는 함수
 def divide_string(string, parts):
    part_length = len(string) // parts
 
@@ -45,7 +45,7 @@ def divide_string(string, parts):
 
    return substrings
 
-
+# Edagr 데이터 요약 함수
 def edgar_summ(path: str) :
     if os.path.exists(path) :
         file_list = os.listdir(path)
@@ -58,7 +58,8 @@ def edgar_summ(path: str) :
     client = op(api_key=API_KEY)
 
     # output folder
-    if not os.path.exists('summarized-data\\edgar'): os.makedirs('summarized-data\\edgar')
+    if not os.path.exists('summarized-data\\edgar'):
+        os.makedirs('summarized-data\\edgar')
     # group화 한 목차 저장할 파일
     categorized_file = "summarized-data\\edgar\\edgar-contents-grouping.txt"
     cff = open(categorized_file,"w+", encoding='UTF-8')
@@ -78,14 +79,14 @@ def edgar_summ(path: str) :
 
         # 파일 내 모든 item에 대하여
         for items in tqdm(EDGAR_ITEMS, desc=f"{idx}/{total} : {file['company']} {file['period_of_report']}"):
-            if is_json_key_present(file,f'item_{items}') == False : continue
+            if is_json_key_present(file,f'item_{items}') == False:
+                continue
             text = [file[f'item_{items}']]
-
 
             # token 수 세기
             result = encoder.encode(text[0])
 
-            # token이 10000 보다 많으면 text 쪼개기
+            # token이 10000 보다 많으면 오류가 발생할 수 있으므로 분할
             if len(result) > 10000 :
                 text = divide_string(text[0],(len(result) // 10000) + 1)
 
@@ -108,7 +109,6 @@ def edgar_summ(path: str) :
         ff.write(text_aggre)
         ff.close()
 
-        ##
         # 목차로 요약할 수 있는 10개의 keywords 반환
         response = client.chat.completions.create(
             model=GPT_MODEL_NAME,
@@ -125,18 +125,20 @@ def edgar_summ(path: str) :
         # 파일에 넣기
         cff.write(f"test-{GPT_MODEL_NAME}-{file['company']}-{file['period_of_report']}\n" + response.choices[0].message.content + "\n\n")
     cff.close()
+
     return
 
+# Dart 데이터 요약 함수
 def dart_summ(path: str) : # param : dart data report file
-    if os.path.exists(path) :
+    if os.path.exists(path):
         file_list = os.listdir(path)
-    
-    else :
+    else:
         print(f'There is no \"{path}\" folder. you should make one')
         exit()
 
     # output folder
-    if not os.path.exists('summarized-data\\dart'): os.makedirs('summarized-data\\dart')
+    if not os.path.exists('summarized-data\\dart'): 
+        os.makedirs('summarized-data\\dart')
     # group화 한 목차 저장할 파일
     categorized_file = "summarized-data\\dart\\dart-contents-grouping.txt"
     cff = open(categorized_file,"w+", encoding='UTF-8')
@@ -171,7 +173,7 @@ def dart_summ(path: str) : # param : dart data report file
 
                     print(f"기업명 : {corp_name}, rep_no : {report_num}, 목차 : {item}, # of token : {len(result)}")
 
-                    # token이 10000 보다 많으면 text 쪼개기
+                    # token이 10000 보다 많으면 오류가 발생할 수 있으므로 분할
                     if len(result) > 10000 :
                         a = divide_string(a[0], (len(result) // 10000) + 1)
 
@@ -212,6 +214,7 @@ def dart_summ(path: str) : # param : dart data report file
             # 파일에 넣기
             cff.write(f"test-{GPT_MODEL_NAME}-{corp_name}-{report_num}\n" + response.choices[0].message.content + "\n\n")
     cff.close()
+
     return
 
 def main():
@@ -225,7 +228,6 @@ def main():
         dart_summ('data-dart')
     else:
         return
-
-
+    
 if __name__ == "__main__":
     main()
