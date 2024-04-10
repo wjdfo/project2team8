@@ -1,2 +1,0 @@
-03-19-2024 23:33 - edgar_crawler - INFO - Saving log to /Users/crossrunway/vsCODE/project2team8/EDGAR/edgar-crawler-main/logs
-
