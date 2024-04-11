@@ -8,11 +8,9 @@ import requests
 import tempfile
 import zipfile
 
-import logging
 
 from bs4 import BeautifulSoup
 from datetime import datetime
-from logger import Logger
 from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout, RetryError
 from tqdm import tqdm
@@ -29,15 +27,6 @@ except ImportError:  # Python 3.5+
 # Import constants from the project's __init__ file
 from __init__ import DATASET_DIR, LOGGING_DIR
 
-# Set urllib3 logging level to critical to reduce noise
-urllib3_log = logging.getLogger("urllib3")
-urllib3_log.setLevel(logging.CRITICAL)
-
-# Instantiate a logger object to use for logging messages throughout this module
-LOGGER = Logger(name=os.path.splitext(os.path.basename(os.path.abspath(__file__)))[0]).get_logger()
-
-# Log where the logs are being saved
-LOGGER.info(f'Saving log to {os.path.join(LOGGING_DIR)}\n')
 
 
 def main():
@@ -60,7 +49,7 @@ def main():
 
 	# Check if at least one filing type is provided
 	if len(config['filing_types']) == 0:
-		LOGGER.info('Please provide at least one filing type')
+		print('Please provide at least one filing type')
 		exit()
 
 	# If the indices and/or download folder doesn't exist, create them
@@ -106,7 +95,7 @@ def main():
 	if os.path.exists(filings_metadata_filepath):
 		# Initialize list for the filings to be downloaded
 		series_to_download = []
-		LOGGER.info('\nReading filings metadata...\n')
+		print('\nReading filings metadata...\n')
 
 		# Read the old filings metadata and filter out the filings that already exist in the download folder
 		for _, series in pd.read_csv(filings_metadata_filepath, dtype=str).iterrows():
@@ -127,7 +116,7 @@ def main():
 
 		# If there are no new filings to download, exit
 		if len(series_to_download) == 0:
-			LOGGER.info('\nThere are no more filings to download for the given years, quarters and companies')
+			print('\nThere are no more filings to download for the given years, quarters and companies')
 			return
 
 		# Concatenate the series to be downloaded
@@ -138,7 +127,7 @@ def main():
 	for i in range(len(df)):
 		list_of_series.append(df.iloc[i])
 
-	LOGGER.info(f'\nDownloading {len(df)} filings...\n')
+	print(f'\nDownloading {len(df)} filings...\n')
 
 	# Initialize list for final series
 	final_series = []
@@ -160,11 +149,11 @@ def main():
 				final_df = pd.concat([old_df, final_df])
 			final_df.to_csv(filings_metadata_filepath, index=False, header=True)
 
-	LOGGER.info(f'\nFilings metadata exported to {filings_metadata_filepath}')
+	print(f'\nFilings metadata exported to {filings_metadata_filepath}')
 
 	# If some filings failed to download, notify to rerun the script
 	if len(final_series) < len(list_of_series):
-		LOGGER.info(
+		print(
 			f'\nDownloaded {len(final_series)} / {len(list_of_series)} filings. '
 			f'Rerun the script to retry downloading the failed filings.'
 		)
@@ -195,7 +184,7 @@ def download_indices(
 
 	base_url = "https://www.sec.gov/Archives/edgar/full-index/"
 
-	LOGGER.info('Downloading EDGAR Index files')
+	print('Downloading EDGAR Index files')
 
 	# Validate quarters
 	for quarter in quarters:
@@ -216,7 +205,7 @@ def download_indices(
 				# Check if the index file is already present
 				if skip_present_indices and os.path.exists(os.path.join(indices_folder, index_filename)):
 					if first_iteration:
-						LOGGER.info(f'Skipping {index_filename}')
+						print(f'Skipping {index_filename}')
 					continue
 
 				# If not, download the index file
@@ -230,7 +219,7 @@ def download_indices(
 							retries=5, backoff_factor=0.2, session=session
 						).get(url=url, headers={'User-agent': user_agent})
 					except requests.exceptions.RetryError as e:
-						LOGGER.info(f'Failed downloading "{index_filename}" - {e}')
+						print(f'Failed downloading "{index_filename}" - {e}')
 						failed_indices.append(index_filename)
 						continue
 					
@@ -244,15 +233,15 @@ def download_indices(
 					# Save the processed index file
 					with open(os.path.join(indices_folder, index_filename), 'w+', encoding='utf-8') as f:
 						f.write(''.join(lines))
-						LOGGER.info(f'{index_filename} downloaded')
+						print(f'{index_filename} downloaded')
 
 		first_iteration = False
 		# Handle failed downloads
 		if len(failed_indices) > 0:
-			LOGGER.info(f'Could not download the following indices:\n{failed_indices}')
+			print(f'Could not download the following indices:\n{failed_indices}')
 			user_input = input('Retry (Y/N): ')
 			if user_input in ['Y', 'y', 'yes']:
-				LOGGER.info('Retry downloading failed indices')
+				print('Retry downloading failed indices')
 			else:
 				break
 		else:
@@ -292,7 +281,7 @@ def get_specific_indices(
 					cik_tickers = [line.strip() for line in f.readlines() if line.strip() != '']
 			else:
 				# If it is not a valid filepath, log the error and exit
-				LOGGER.debug('Please provide a valid cik_ticker file path')
+				print('Please provide a valid cik_ticker file path')
 				exit()
 
 	# Check if cik_tickers is a list and not empty
@@ -310,7 +299,7 @@ def get_specific_indices(
 			).get(url=company_tickers_url, headers={'User-agent': user_agent})
 		except (RequestException, HTTPError, ConnectionError, Timeout, RetryError) as err:
 			# If download fails, log the error and exit
-			LOGGER.info(f'Failed downloading "{company_tickers_url}" - {err}')
+			print(f'Failed downloading "{company_tickers_url}" - {err}')
 			exit()
 
 		# Load the company tickers data
@@ -330,7 +319,7 @@ def get_specific_indices(
 					ciks.append(str(ticker2cik[c_t]))
 				else:
 					# If the ticker does not exist in the mapping, log the error
-					LOGGER.debug(f'Could not find CIK for "{c_t}"')
+					print(f'Could not find CIK for "{c_t}"')
 
 	# Initialize list for dataframes
 	dfs_list = []
@@ -406,11 +395,11 @@ def crawl(
 				break
 
 		if retries_exceeded:
-			LOGGER.debug(f'Retries exceeded, could not download "{html_index}"')
+			print(f'Retries exceeded, could not download "{html_index}"')
 			return None
 
 	except (RequestException, HTTPError, ConnectionError, Timeout, RetryError) as err:
-		LOGGER.debug(f'Request for {html_index} failed due to network-related error: {err}')
+		print(f'Request for {html_index} failed due to network-related error: {err}')
 		return None
 
 	soup = BeautifulSoup(request.content, 'lxml')
@@ -432,7 +421,7 @@ def crawl(
 			series['Period of Report'] = period_of_report
 
 	if period_of_report is None:
-		LOGGER.debug(f'Can not crawl "Period of Report" for {html_index}')
+		print(f'Can not crawl "Period of Report" for {html_index}')
 		return None
 
 	# Extracting the company info
@@ -488,11 +477,11 @@ def crawl(
 					break
 
 			if retries_exceeded:
-				LOGGER.debug(f'Retries exceeded, could not download "{company_url}"')
+				print(f'Retries exceeded, could not download "{company_url}"')
 				return None
 
 		except (RequestException, HTTPError, ConnectionError, Timeout, RetryError) as err:
-			LOGGER.debug(f'Request for {company_url} failed due to network-related error: {err}')
+			print(f'Request for {company_url} failed due to network-related error: {err}')
 			return None
 
 		# Storing the extracted company info into the dictionary
@@ -652,12 +641,12 @@ def download(
 
 		# If retries are exceeded, log a debug message and return False
 		if retries_exceeded:
-			LOGGER.debug(f'Retries exceeded, could not download "{filename}" - "{url}"')
+			print(f'Retries exceeded, could not download "{filename}" - "{url}"')
 			return False
 
 	except (RequestException, HTTPError, ConnectionError, Timeout, RetryError) as err:
 		# If a network-related error occurs, log a debug message and return False
-		LOGGER.debug(f'Request for {url} failed due to network-related error: {err}')
+		print(f'Request for {url} failed due to network-related error: {err}')
 		return False
 
 	# If the download was successful, save the file
@@ -666,7 +655,7 @@ def download(
 
 	# Uncomment the following lines to check the MD5 hash of the downloaded file
 	# if hashlib.md5(open(filepath, 'rb').read()).hexdigest() != headers._headers[1][1].strip('"'):
-	# 	LOGGER.info(f'Wrong MD5 hash for file: {abs_filename} - {url}')
+	# 	print(f'Wrong MD5 hash for file: {abs_filename} - {url}')
 
 	# If the function has not returned False by this point, the download was successful
 	return True

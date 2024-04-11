@@ -8,16 +8,16 @@ import pandas as pd
 import re
 import sys
 
-from bs4 import BeautifulSoup
+import warnings
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from html.parser import HTMLParser
 from pathos.pools import ProcessPool
 from tqdm import tqdm
 from typing import Any, Dict, List, Optional, Tuple
 
-from logger import Logger
-
 from __init__ import DATASET_DIR
 
+warnings.filterwarnings('ignore',category=XMLParsedAsHTMLWarning)
 # Change the default recursion limit of 1000 to 30000
 sys.setrecursionlimit(30000)
 
@@ -27,10 +27,6 @@ cssutils.log.setLevel(logging.CRITICAL)
 cli = click.Group()
 
 regex_flags = re.IGNORECASE | re.DOTALL | re.MULTILINE
-
-# Instantiate a logger object
-LOGGER = Logger(name="ExtractItems").get_logger()
-
 
 class HtmlStripper(HTMLParser):
     """
@@ -157,6 +153,25 @@ class ExtractItems:
         self.raw_files_folder = raw_files_folder
         self.extracted_files_folder = extracted_files_folder
         self.skip_extracted_filings = skip_extracted_filings
+
+        self.json_instance = {}
+
+    # json에 해당 키값이 존재하는가
+    def is_json_key_present(self, json, key):
+        try:
+            buf = json[key]
+        except KeyError:
+            return False
+
+        return True
+
+    def get_extracted_files_folder(self):
+        return self.extracted_files_folder
+
+    def get_skip_extracted_filings(self):
+        return self.skip_extracted_filings
+    def get_json_instance(self):
+        return self.json_instance
 
     @staticmethod
     def strip_html(html_content: str) -> str:
@@ -663,7 +678,7 @@ class ExtractItems:
 
         if not found_10k:
             if documents:
-                LOGGER.info(
+                print(
                     f'\nCould not find document type 10K for {filing_metadata["filename"]}'
                 )
             # If no 10-K document is found, parse the entire content as HTML or plain text
@@ -676,32 +691,23 @@ class ExtractItems:
 
         # Check if the document is plain text without <DOCUMENT> tags (e.g., old TXT format)
         if filing_metadata["filename"].endswith("txt") and not documents:
-            LOGGER.info(f'\nNo <DOCUMENT> tag for {filing_metadata["filename"]}')
+            print(f'\nNo <DOCUMENT> tag for {filing_metadata["filename"]}')
 
         # For non-HTML documents, clean all table items
         if self.remove_tables:
             doc_10k = self.remove_html_tables(doc_10k, is_html=is_html)
 
-        # Prepare the JSON content with filing metadata
-        json_content = {
-            "cik": filing_metadata["CIK"],
-            "company": filing_metadata["Company"],
-            "filing_type": filing_metadata["Type"],
-            "filing_date": filing_metadata["Date"],
-            "period_of_report": filing_metadata["Period of Report"],
-            "sic": filing_metadata["SIC"],
-            "state_of_inc": filing_metadata["State of Inc"],
-            "state_location": filing_metadata["State location"],
-            "fiscal_year_end": filing_metadata["Fiscal Year End"],
-            "filing_html_index": filing_metadata["html_index"],
-            "htm_filing_link": filing_metadata["htm_file_link"],
-            "complete_text_filing_link": filing_metadata["complete_text_file_link"],
-            "filename": filing_metadata["filename"],
-        }
 
-        # Initialize item sections as empty strings in the JSON content
-        for item_index in self.items_to_extract:
-            json_content[f"item_{item_index}"] = ""
+        corp_name = filing_metadata['Company']
+        report_num = filing_metadata['Date']
+
+        if not self.is_json_key_present(self.json_instance,corp_name):
+            self.json_instance[corp_name] = {}
+        
+        if not self.is_json_key_present(self.json_instance[corp_name],report_num):
+            self.json_instance[corp_name][report_num] = {}
+
+
 
         # Extract the text from the document and clean it
         text = ExtractItems.strip_html(str(doc_10k))
@@ -719,50 +725,23 @@ class ExtractItems:
 
             # Remove multiple lines from the item section
             item_section = ExtractItems.remove_multiple_lines(item_section)
+            
+            self.json_instance[corp_name][report_num][f'item_{item_index}'] = []
 
             if item_index in self.items_to_extract:
                 if item_section != "":
                     all_items_null = False
-                json_content[f"item_{item_index}"] = item_section
+                temp = item_section.split('\n')
+                for i in temp:
+                    self.json_instance[corp_name][report_num][f'item_{item_index}'].append(i + '\n')
+
 
         if all_items_null:
-            LOGGER.info(f"\nCould not extract any item for {absolute_10k_filename}")
+            print(f"\nCould not extract any item for {absolute_10k_filename}")
             return None
 
-        return json_content
-
-    def process_filing(self, filing_metadata: Dict[str, Any]) -> int:
-        """
-        Process a filing by extracting items/sections and saving the content to a JSON file.
-
-        Args:
-                filing_metadata (Dict[str, Any]): A dictionary containing the filing metadata.
-
-        Returns:
-                int: 0 if the processing is skipped, 1 if the processing is performed.
-        """
-
-        # Generate the JSON filename based on the original filename
-        json_filename = f'{filing_metadata["filename"].split(".")[0]}.json'
-
-        # Create the absolute path for the JSON file
-        absolute_json_filename = os.path.join(
-            self.extracted_files_folder, json_filename
-        )
-
-        # Skip processing if the extracted JSON file already exists and skip flag is enabled
-        if self.skip_extracted_filings and os.path.exists(absolute_json_filename):
-            return 0
-
-        # Extract items from the filing
-        json_content = self.extract_items(filing_metadata)
-
-        # Write the JSON content to the file if it's not None
-        if json_content is not None:
-            with open(absolute_json_filename, "w") as filepath:
-                json.dump(json_content, filepath, indent=4)
-
         return 1
+
 
 
 def main() -> None:
@@ -782,14 +761,14 @@ def main() -> None:
         filings_metadata_df = pd.read_csv(filings_metadata_filepath, dtype=str)
         filings_metadata_df = filings_metadata_df.replace({np.nan: None})
     else:
-        LOGGER.info(f'No such file "{filings_metadata_filepath}"')
+        print(f'No such file "{filings_metadata_filepath}"')
         return
 
     raw_filings_folder = os.path.join(DATASET_DIR, config["raw_filings_folder"])
 
     # Check if the raw filings folder exists
     if not os.path.isdir(raw_filings_folder):
-        LOGGER.info(f'No such directory: "{raw_filings_folder}')
+        print(f'No such directory: "{raw_filings_folder}')
         return
 
     extracted_filings_folder = os.path.join(
@@ -808,23 +787,63 @@ def main() -> None:
         skip_extracted_filings=config["skip_extracted_filings"],
     )
 
-    LOGGER.info("Starting extraction...\n")
+    print("Starting extraction...\n")
 
+    # get metadata
     list_of_series = list(zip(*filings_metadata_df.iterrows()))[1]
+    json_filename = 'edgar_report.json'
 
-    # Process filings in parallel using a process pool
-    with ProcessPool(processes=1) as pool:
-        processed = list(
-            tqdm(
-                pool.imap(extraction.process_filing, list_of_series),
-                total=len(list_of_series),
-                ncols=100,
-            )
+    # Create the absolute path for the JSON file
+    absolute_json_filename = os.path.join(
+        extraction.get_extracted_files_folder(),json_filename
+    )
+    # Skip processing if the extracted JSON file already exists and skip flag is enabled
+    if extraction.get_skip_extracted_filings() and os.path.exists(absolute_json_filename):
+        print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
+        return 0
+
+    # with ProcessPool(processes=1) as pool:
+    #     processed = list(
+    #         tqdm(
+    #             pool.imap(extraction.extract_items, list_of_series),
+    #             total=len(list_of_series),
+    #             ncols=100,
+    #         )
+    #     )
+    for i in tqdm(list_of_series):
+        _ = extraction.extract_items(i)
+
+    with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
+        json.dump(extraction.get_json_instance(), filepath, ensure_ascii=False,indent='\t')
+
+    redundancy_check = {}
+    for report in list_of_series :
+        report_company = report["Company"]
+        if report_company in redundancy_check : continue
+        else: redundancy_check[report_company] = 1
+
+        json_filename = f'{report["CIK"]}_report.json'
+        
+        temp = os.path.join( extraction.get_extracted_files_folder(), "report_per_corp" )
+        if not os.path.exists(temp): os.mkdir(temp)
+        # Create the absolute path for the JSON file
+        absolute_json_filename = os.path.join(
+            temp ,json_filename
         )
 
-    LOGGER.info("\nItem extraction is completed successfully.")
-    LOGGER.info(f"{sum(processed)} files were processed.")
-    LOGGER.info(f"Extracted filings are saved to: {extracted_filings_folder}")
+        # Skip processing if the extracted JSON file already exists and skip flag is enabled
+        if extraction.get_skip_extracted_filings() and os.path.exists(absolute_json_filename):
+            print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
+            return 0
+
+        
+        with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
+            d = {}
+            d[report_company] = extraction.get_json_instance()[report_company]
+            json.dump(d, filepath, ensure_ascii=False,indent='\t')
+
+    print("\nItem extraction is completed successfully.")
+    print(f"Extracted filings are saved to: {extracted_filings_folder}")
 
 
 if __name__ == "__main__":
