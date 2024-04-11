@@ -1,4 +1,3 @@
-import click
 import cssutils
 import json
 import logging
@@ -6,7 +5,6 @@ import numpy as np
 import os
 import pandas as pd
 import re
-import sys
 
 import warnings
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
@@ -18,13 +16,10 @@ from typing import Any, Dict, List, Optional, Tuple
 from __init__ import DATASET_DIR
 
 warnings.filterwarnings('ignore',category=XMLParsedAsHTMLWarning)
-# Change the default recursion limit of 1000 to 30000
-sys.setrecursionlimit(30000)
 
 # Suppress cssutils stupid warnings
 cssutils.log.setLevel(logging.CRITICAL)
 
-cli = click.Group()
 
 regex_flags = re.IGNORECASE | re.DOTALL | re.MULTILINE
 
