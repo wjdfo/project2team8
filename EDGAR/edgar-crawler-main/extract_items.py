@@ -9,7 +9,6 @@ import re
 import warnings
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from html.parser import HTMLParser
-from pathos.pools import ProcessPool
 from tqdm import tqdm
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -285,42 +284,6 @@ class ExtractItems:
         )
 
         return text
-
-    @staticmethod
-    def calculate_table_character_percentages(table_text: str) -> Tuple[float, float]:
-        """
-        Calculate character type percentages contained in the table text
-
-        Args:
-                table_text (str): The table text
-
-        Returns:
-                Tuple[float, float]: Percentage of non-blank digit characters, Percentage of space characters
-        """
-        digits = sum(
-            c.isdigit() for c in table_text
-        )  # Count the number of digit characters
-        spaces = sum(
-            c.isspace() for c in table_text
-        )  # Count the number of space characters
-
-        if len(table_text) - spaces:
-            # Calculate the percentage of non-blank digit characters by dividing the count of digits
-            # by the total number of non-space characters
-            non_blank_digits_percentage = digits / (len(table_text) - spaces)
-        else:
-            # If there are no non-space characters, set the percentage to 0
-            non_blank_digits_percentage = 0
-
-        if len(table_text):
-            # Calculate the percentage of space characters by dividing the count of spaces
-            # by the total number of characters
-            spaces_percentage = spaces / len(table_text)
-        else:
-            # If the table text is empty, set the percentage to 0
-            spaces_percentage = 0
-
-        return non_blank_digits_percentage, spaces_percentage
 
     def remove_html_tables(self, doc_10k: str, is_html: bool) -> str:
         """
@@ -797,14 +760,7 @@ def main() -> None:
         print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
         return 0
 
-    # with ProcessPool(processes=1) as pool:
-    #     processed = list(
-    #         tqdm(
-    #             pool.imap(extraction.extract_items, list_of_series),
-    #             total=len(list_of_series),
-    #             ncols=100,
-    #         )
-    #     )
+
     for i in tqdm(list_of_series):
         _ = extraction.extract_items(i)
 

@@ -27,7 +27,7 @@ except ImportError:  # Python 3.5+
 		pass
 
 # Import constants from the project's __init__ file
-from __init__ import DATASET_DIR, LOGGING_DIR
+from __init__ import DATASET_DIR
 
 
 

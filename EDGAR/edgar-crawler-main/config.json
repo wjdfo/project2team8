@@ -1,20 +1,18 @@
 {
 	"edgar_crawler": {
-		"start_year": 2021,
+		"start_year": 2022,
 		"end_year": 2023,
 		"quarters": [1, 2, 3, 4],
 		"filing_types": ["10-K"],
-		"cik_tickers": ["MSFT","AAPL","NVDA", "GOOGL", "AMZN", "META", "BRK-A", "LLY", "TSM",
-		"AVGO", "JPM", "V", "NVO", "TSLA", "WMT", "XOM", "UNH", "MA", "ASML",
-		"PG", "JNJ", "HD", "ORCL", "TM", "MRK", "COST", "ABBV", "BAC", "CVX", "CRM"],
+		"cik_tickers": ["AAPL","AMZN","NVDA"],
 		"user_agent": "minkuk0118@gmail.com",
-		"raw_filings_folder": "RAW_FILINGS",
+		"raw_filings_folder": "RAW_HTML_FILINGS",
 		"indices_folder": "INDICES",
 		"filings_metadata_file": "FILINGS_METADATA.csv",
 		"skip_present_indices": true
 	},
 	"extract_items": {
-		"raw_filings_folder": "RAW_FILINGS",
+		"raw_filings_folder": "RAW_HTML_FILINGS",
 		"extracted_filings_folder": "EXTRACTED_FILINGS",
 		"filings_metadata_file": "FILINGS_METADATA.csv",
 		"items_to_extract": [
