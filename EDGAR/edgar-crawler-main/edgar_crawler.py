@@ -17,6 +17,8 @@ from tqdm import tqdm
 from typing import List, Optional
 from urllib3.util import Retry
 
+pd.set_option('mode.chained_assignment',  None)
+
 # Python version compatibility for HTML parser
 try:
 	from html.parser.HTMLParser import HTMLParseError
