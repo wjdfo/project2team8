@@ -45,7 +45,10 @@ class knuturn :
             
         return report_url
     
-    def getReportData(self, report_url: dict) : #report_url_list 받아서 url에서 text 가져옴
+    '''
+    모든 목차 가져오는 함수
+    '''
+    def getEveryReportData(self, report_url: dict) : #report_url_list 받아서 url에서 text 가져옴
         
         report_data = {}
 
@@ -86,7 +89,7 @@ class knuturn :
 
         return report_data
     
-    def getReportData2(self, report_url: dict) :
+    def getSelectiveReportData(self, report_url: dict) : # 목차 골라서 가져오는 함수
         indices = [] # 보고서에서 뽑아올 목차 담는 list
         f = open('./index.txt', 'r', encoding = 'utf-8')
         lines = f.readlines()
