@@ -1,4 +1,5 @@
 import OpenDartReader
+import dart_fss
 import pandas as pd
 import json
 from selenium import webdriver
@@ -14,6 +15,13 @@ class knuturn :
         with open('./dart_api_key.txt', 'r') as f :
             api_key = f.readline()
         self.dart = OpenDartReader(api_key)
+
+    def getCorpList(self) :
+        with open('./dart_api_key.txt', 'r') as f :
+            api_key = f.readline()
+        dart_fss.set_api_key(api_key = api_key)
+
+        return dart_fss.get_corp_list()
 
     def getReportCode(self, comps: list) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
