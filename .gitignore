@@ -7,3 +7,4 @@ EDGAR/.DS_Store
 .DS_Store
 DART/OpenDartReader/dart_api_key.txt
 chromadb-llamaindex/GPT_API_KEY.txt
+BE/api_key
