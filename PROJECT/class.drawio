@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net" modified="2024-04-11T23:58:08.412Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="r40wrMtishv_t4W4aC5p" version="24.2.3" type="device">
+  <diagram name="페이지-1" id="WWmK2mgtXMB2TsY04g74">
+    <mxGraphModel dx="1816" dy="487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-6" value="DATA_PIPELINE" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="220" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-7" value="&lt;div&gt;+ gpt_model_name: String&lt;/div&gt;&lt;div&gt;+ context: String&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-6">
+          <mxGeometry y="26" width="360" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-38" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="lhYpRNcE0l-zWbSrkpPp-6" source="lhYpRNcE0l-zWbSrkpPp-33">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="360" as="sourcePoint" />
+            <mxPoint y="50" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-30" y="305" />
+              <mxPoint x="-30" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-6">
+          <mxGeometry y="70" width="360" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-9" value="&lt;div&gt;+ report_summary(report : dictionary): text(String, LLM 요약 내용)&lt;/div&gt;+ report_embedding(data : String): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-6">
+          <mxGeometry y="78" width="360" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-10" value="DART" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="160" width="550" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-11" value="+ item_list: list(가져올 사업보고서 목차들)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-10">
+          <mxGeometry y="26" width="550" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-10">
+          <mxGeometry y="50" width="550" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-13" value="+ getCorpList(): corp_list(dictionary, dart에 있는 회사 리스트)&lt;div&gt;+ getReportCode(corp_list : list): report_code(dictionary, 공시보고서 코드)&lt;/div&gt;&lt;div&gt;+ getReportURL(report_code : dictionary): report_url(dictionary, 공시보고서 링크)&lt;/div&gt;&lt;div&gt;+ getEveryReportData(report_url : dictionary) : report_data(dictionary, 보고서 내용)&lt;/div&gt;&lt;div&gt;+ getSelectiveReportData(report_url : dictionary, item_list : list) : report_data(dictionary, 보고서 내용)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-10">
+          <mxGeometry y="58" width="550" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-15" value="EDGAR" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="330" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-16" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-15">
+          <mxGeometry y="26" width="220" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-17" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-15">
+          <mxGeometry y="52" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-18" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-15">
+          <mxGeometry y="60" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-19" value="CHAT_BOT" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="520" width="420" height="148" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-20" value="+ gpt_model_name : String&lt;div&gt;+ context : String&lt;/div&gt;&lt;div&gt;+ gpt_parameters : dictionary&amp;nbsp; ← ??&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-19">
+          <mxGeometry y="26" width="420" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-21" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-19">
+          <mxGeometry y="80" width="420" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-22" value="+ chat(input : String): LLM_output(String, 사용자 질문 분석)&lt;div&gt;+ analyzeKeywords(LLM_output : String): keywords(dicitonary, 키워드)&lt;br&gt;&lt;div&gt;+ getOutput(keywords : dictionary): output(String, 예상질문과 RAG 후 답변)&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-19">
+          <mxGeometry y="88" width="420" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-23" value="QnA" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="750" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-24" value="+ expected_quert_list : list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-23">
+          <mxGeometry y="26" width="380" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-25" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-23">
+          <mxGeometry y="52" width="380" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-26" value="&lt;div&gt;+ getAnswer(expected_query : String): answer(String, 예상 답변)&lt;/div&gt;+ query_embedding(answer : String): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-23">
+          <mxGeometry y="60" width="380" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-31" value="&lt;b&gt;KNUTURN&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-360" y="460" width="260" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-32" value="+ db_path: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-31">
+          <mxGeometry y="26" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-33" value="+ collection_name: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-31">
+          <mxGeometry y="52" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-34" value="+ GPT_API_KEY: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-31">
+          <mxGeometry y="78" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-39" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="lhYpRNcE0l-zWbSrkpPp-33" target="lhYpRNcE0l-zWbSrkpPp-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-110" y="535" as="sourcePoint" />
+            <mxPoint x="-30" y="278" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-70" y="525" />
+              <mxPoint x="-70" y="573" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-40" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="lhYpRNcE0l-zWbSrkpPp-33" target="lhYpRNcE0l-zWbSrkpPp-23">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="545" as="sourcePoint" />
+            <mxPoint x="-20" y="288" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-70" y="525" />
+              <mxPoint x="-70" y="775" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-41" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.001;entryY=0.261;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lhYpRNcE0l-zWbSrkpPp-7" target="lhYpRNcE0l-zWbSrkpPp-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-90" y="555" as="sourcePoint" />
+            <mxPoint x="-10" y="298" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="268" />
+              <mxPoint x="370" y="242" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-42" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="lhYpRNcE0l-zWbSrkpPp-7" target="lhYpRNcE0l-zWbSrkpPp-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-80" y="565" as="sourcePoint" />
+            <mxPoint y="308" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="268" />
+              <mxPoint x="370" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
