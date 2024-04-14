@@ -6,16 +6,28 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
+from tqdm import tqdm
 
-class Dart() :
+class Dart :
     def __init__(self) :
         with open('./api_key/dart_api_key.txt', 'r') as api_key_file :
             dart_api_key = api_key_file.readline()
         self.dart = OpenDartReader(dart_api_key)
-        self.dart_fss.set_api_key(api_key = dart_api_key)
+        dart_fss.set_api_key(api_key = dart_api_key)
         
     def getCorpList(self) :
-        return self.dart_fss.get_corp_list()
+        f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
+        corp_name_list = []
+
+        corp_list = dart_fss.api.filings.get_corp_code()
+        for corp in tqdm(corp_list) :
+            f.write(f"{corp['corp_code']} {corp['corp_name']}\n")
+            corp_name_list.append(corp['corp_name'])
+        print("corp_name_code_mapping file created.")
+
+        f.close()
+
+        return corp_name_list
 
     def getReportCode(self, comps: list) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
@@ -92,15 +104,8 @@ class Dart() :
 
         return report_data
     
-    def getSelectiveReportData(self, report_url: dict) : # 목차 골라서 가져오는 함수
-        indices = [] # 보고서에서 뽑아올 목차 담는 list
-        f = open('./index.txt', 'r', encoding = 'utf-8')
-        lines = f.readlines()
-        for line in lines :
-            indices.append(line.strip())
-        f.close()
-
-        f = open('./corp_name_code_mapping.txt', 'r', encoding='utf-8')
+    def getSelectiveReportData(self, report_url: dict, indices: list) : # 목차 골라서 가져오는 함수
+        f = open('./ref/dart_corp_name_code_mapping.txt', 'r', encoding='utf-8')
         mapping = dict()
 
         for line in f.readlines() :
