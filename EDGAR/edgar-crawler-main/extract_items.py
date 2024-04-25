@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import re
 
+
 import warnings
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from html.parser import HTMLParser
@@ -150,7 +151,7 @@ class ExtractItems:
 
         self.json_instance = {}
 
-    # json에 해당 키값이 존재하는가
+    # json has a certain key ?
     def is_json_key_present(self, json, key):
         try:
             buf = json[key]
@@ -702,100 +703,110 @@ class ExtractItems:
 
 
 
-def main() -> None:
-    """
-    Gets the list of 10K files and extracts all textual items/sections by calling the extract_items() function.
-    """
+class Edgar_Extractor:
+    '''
+    This is a class which extarct in-need item from stored HTML filings.
 
-    with open("config.json") as fin:
-        config = json.load(fin)["extract_items"]
+    Method:
+        doExtarctFromRAWs()
 
-    filings_metadata_filepath = os.path.join(
-        DATASET_DIR, config["filings_metadata_file"]
-    )
+    set config.json - 'edgar_cralwer' field, and doExtarctFromRAWs()
+    '''
+    def __init__(self):
+        with open("config.json") as fin:
+            self.config = json.load(fin)["extract_items"]
 
-    # Check if the filings metadata file exists
-    if os.path.exists(filings_metadata_filepath):
-        filings_metadata_df = pd.read_csv(filings_metadata_filepath, dtype=str)
-        filings_metadata_df = filings_metadata_df.replace({np.nan: None})
-    else:
-        print(f'No such file "{filings_metadata_filepath}"')
-        return
-
-    raw_filings_folder = os.path.join(DATASET_DIR, config["raw_filings_folder"])
-
-    # Check if the raw filings folder exists
-    if not os.path.isdir(raw_filings_folder):
-        print(f'No such directory: "{raw_filings_folder}')
-        return
-
-    extracted_filings_folder = os.path.join(
-        DATASET_DIR, config["extracted_filings_folder"]
-    )
-
-    # Create the extracted filings folder if it doesn't exist
-    if not os.path.isdir(extracted_filings_folder):
-        os.mkdir(extracted_filings_folder)
-
-    extraction = ExtractItems(
-        remove_tables=config["remove_tables"],
-        items_to_extract=config["items_to_extract"],
-        raw_files_folder=raw_filings_folder,
-        extracted_files_folder=extracted_filings_folder,
-        skip_extracted_filings=config["skip_extracted_filings"],
-    )
-
-    print("Starting extraction...\n")
-
-    # get metadata
-    list_of_series = list(zip(*filings_metadata_df.iterrows()))[1]
-    json_filename = 'edgar_report.json'
-
-    # Create the absolute path for the JSON file
-    absolute_json_filename = os.path.join(
-        extraction.get_extracted_files_folder(),json_filename
-    )
-    # Skip processing if the extracted JSON file already exists and skip flag is enabled
-    if extraction.get_skip_extracted_filings() and os.path.exists(absolute_json_filename):
-        print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
-        return 0
-
-
-    for i in tqdm(list_of_series):
-        _ = extraction.extract_items(i)
-
-    with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
-        json.dump(extraction.get_json_instance(), filepath, ensure_ascii=False,indent='\t')
-
-    redundancy_check = {}
-    for report in list_of_series :
-        report_company = report["Company"]
-        if report_company in redundancy_check : continue
-        else: redundancy_check[report_company] = 1
-
-        json_filename = f'{report["CIK"]}_report.json'
-        
-        temp = os.path.join( extraction.get_extracted_files_folder(), "report_per_corp" )
-        if not os.path.exists(temp): os.mkdir(temp)
-        # Create the absolute path for the JSON file
-        absolute_json_filename = os.path.join(
-            temp ,json_filename
+        self.filings_metadata_filepath = os.path.join(
+            DATASET_DIR, self.config["filings_metadata_file"]
         )
 
+        # Check if the filings metadata file exists
+        if os.path.exists(self.filings_metadata_filepath):
+            self.filings_metadata_df = pd.read_csv(self.filings_metadata_filepath, dtype=str)
+            self.filings_metadata_df = self.filings_metadata_df.replace({np.nan: None})
+        else:
+            print(f'No such file "{self.filings_metadata_filepath}"')
+            return
+
+        self.raw_filings_folder = os.path.join(DATASET_DIR, self.config["raw_filings_folder"])
+
+        # Check if the raw filings folder exists
+        if not os.path.isdir(self.raw_filings_folder):
+            print(f'No such directory: "{self.raw_filings_folder}')
+            return
+
+        self.extracted_filings_folder = os.path.join(
+            DATASET_DIR, self.config["extracted_filings_folder"]
+        )
+
+        # Create the extracted filings folder if it doesn't exist
+        if not os.path.isdir(self.extracted_filings_folder):
+            os.mkdir(self.extracted_filings_folder)
+            
+    
+    def doExtractFromRAWs(self):
+        '''
+        Orchestrate whole extarct sequence.
+
+        using ExtractItems Class - to Extract Items
+        and store into json files.
+        its path is determined by `config.json`
+
+        '''
+        extraction = ExtractItems(
+            remove_tables=self.config["remove_tables"],
+            items_to_extract=self.config["items_to_extract"],
+            raw_files_folder=self.raw_filings_folder,
+            extracted_files_folder=self.extracted_filings_folder,
+            skip_extracted_filings=self.config["skip_extracted_filings"],
+        )
+
+        print("Starting extraction...\n")
+
+        # get metadata
+        list_of_series = list(zip(*self.filings_metadata_df.iterrows()))[1]
+        json_filename = 'edgar_report.json'
+
+        # Create the absolute path for the JSON file
+        absolute_json_filename = os.path.join(
+            extraction.get_extracted_files_folder(),json_filename
+        )
         # Skip processing if the extracted JSON file already exists and skip flag is enabled
         if extraction.get_skip_extracted_filings() and os.path.exists(absolute_json_filename):
             print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
             return 0
 
-        
+        for i in tqdm(list_of_series):
+            _ = extraction.extract_items(i)
+
         with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
-            d = {}
-            d[report_company] = extraction.get_json_instance()[report_company]
-            json.dump(d, filepath, ensure_ascii=False,indent='\t')
+            json.dump(extraction.get_json_instance(), filepath, ensure_ascii=False,indent='\t')
 
-    print("\nItem extraction is completed successfully.")
-    print(f"Extracted filings are saved to: {extracted_filings_folder}")
+        redundancy_check = {}
+        for report in list_of_series :
+            report_company = report["Company"]
+            if report_company in redundancy_check : continue
+            else: redundancy_check[report_company] = 1
 
+            json_filename = f'{report["CIK"]}_report.json'
+            
+            temp = os.path.join( extraction.get_extracted_files_folder(), "report_per_corp" )
+            if not os.path.exists(temp): os.mkdir(temp)
+            # Create the absolute path for the JSON file
+            absolute_json_filename = os.path.join(
+                temp ,json_filename
+            )
 
-if __name__ == "__main__":
-    main()
+            # Skip processing if the extracted JSON file already exists and skip flag is enabled
+            if extraction.get_skip_extracted_filings() and os.path.exists(absolute_json_filename):
+                print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
+                return 0
+
+            
+            with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
+                d = {}
+                d[report_company] = extraction.get_json_instance()[report_company]
+                json.dump(d, filepath, ensure_ascii=False,indent='\t')
+
+        print("\nItem extraction is completed successfully.")
+        print(f"Extracted filings are saved to: {self.extracted_filings_folder}")

@@ -1,6 +1,6 @@
 {
 	"edgar_crawler": {
-		"start_year": 2022,
+		"start_year": 2023,
 		"end_year": 2023,
 		"quarters": [1, 2, 3, 4],
 		"filing_types": ["10-K"],
