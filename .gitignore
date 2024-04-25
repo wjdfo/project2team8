@@ -1,12 +1,12 @@
 EDGAR/py-edgar/test_output/
 EDGAR/edgar-crawler-main/__pycache__/
-EDGAR/edgar-crawler-main/datasets/FILINGS_METADATA.csv
-EDGAR/edgar-crawler-main/datasets/EXTRACTED_FILINGS/
-EDGAR/edgar-crawler-main/datasets/INDICES/
-EDGAR/edgar-crawler-main/datasets/RAW_FILINGS/
+EDGAR/edgar-crawler-main/edgar-datasets/
 EDGAR/edgar-crawler-main/logs/
 EDGAR/edgar-crawler-main/__pycache__/
 EDGAR/.DS_Store
 .DS_Store
 DART/OpenDartReader/dart_api_key.txt
 chromadb-llamaindex/GPT_API_KEY.txt
+BE/api_key
+BE/__pycache__
+BE/docs_cache
