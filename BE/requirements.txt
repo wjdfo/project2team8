@@ -1,0 +1,3 @@
+pip install OpenDartReader
+pip install selenium
+pip install dart-fss

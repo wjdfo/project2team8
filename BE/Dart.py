@@ -17,17 +17,18 @@ class Dart :
         
     def getCorpList(self) :
         f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
-        corp_name_list = []
 
         corp_list = dart_fss.api.filings.get_corp_code()
-        for corp in tqdm(corp_list) :
+        df = pd.DataFrame(corp_list)
+        stock_list = df[df['stock_code'].notnull()]
+
+        for idx, corp in stock_list.iterrows() :
             f.write(f"{corp['corp_code']} {corp['corp_name']}\n")
-            corp_name_list.append(corp['corp_name'])
         print("corp_name_code_mapping file created.")
 
         f.close()
 
-        return corp_name_list
+        return stock_list['corp_name'].tolist()
 
     def getReportCode(self, comps: list) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
@@ -35,7 +36,7 @@ class Dart :
         for comp in comps :
             print(comp, end = " ")
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
-                report_list = self.dart.list(comp, start = '2023-01-01', end = '2024-03-28', kind = 'A')
+                report_list = self.dart.list(comp, start = '2024-01-01', end = '2024-04-28', kind = 'A')
                 corp_code = report_list['corp_code'][0]
                 d[corp_code] = []
                 for report_code in report_list['rcept_no'] :
@@ -47,6 +48,10 @@ class Dart :
         return d
     
     def getReportURL(self, report_list: dict) : #report_list 받아서 공시보고서 url 생성
+        if len(report_list) == 0 :
+            print("There's no report list.")
+            return None
+        
         report_url = {}
 
         for corp_code in report_list.keys() :
@@ -63,6 +68,9 @@ class Dart :
     모든 목차 가져오는 함수
     '''
     def getEveryReportData(self, report_url: dict) : #report_url_list 받아서 url에서 text 가져옴
+        if len(report_url) == 0 :
+            print("There's no report url.")
+            return None
         
         report_data = {}
 
