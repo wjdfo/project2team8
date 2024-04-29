@@ -28,5 +28,20 @@ def test() :
     print(corp_report_data)
 
 
+import edgar_crawler
+import edgar_extractor
+
+def edgar_test():
+    crawler = edgar_crawler.EDGAR_Crawler()
+    crawler.doCrawl()
+
+    extractor = edgar_extractor.EDGAR_Extractor()
+    extractor.doExtractFromRAWs()
+
+
+
+
 if __name__ == "__main__" :
     test()
+
+    edgar_test()

@@ -1,3 +1,10 @@
-pip install OpenDartReader
-pip install selenium
-pip install dart-fss
+OpenDartReader
+selenium
+dart-fss
+beautifulsoup4
+cssutils
+numpy
+lxml
+pandas
+requests
+tqdm
