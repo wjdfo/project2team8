@@ -1,4 +1,4 @@
-import Knuturn
+from Knuturn import Knuturn
 import tiktoken
 import os
 import json
@@ -15,6 +15,7 @@ from llama_index.core import Settings
 class DataPipeline(Knuturn) :
     def __init__(self) :
         self.gpt_model = 'gpt-3.5-turbo'
+        super().__init__()
 
     def report_summary(self, report_data: dict) : # param : 사업보고서 크롤링 데이터 원본
         # token 수 세기 위한 model encoder

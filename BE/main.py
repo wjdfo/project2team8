@@ -3,8 +3,11 @@ Backend
 '''
 
 import Dart
+from DataPipeline import DataPipeline
+import edgar_crawler
+import edgar_extractor
 
-def test() :
+def dart_test() :
     a = Dart.Dart()
 
     print("회사 리스트")
@@ -13,23 +16,19 @@ def test() :
 
     print("공시보고서 코드")
     corp_report_code = a.getReportCode(corp_list)
-    if  len(corp_report_code) == 0 :
+    if  not corp_report_code :
         return None
     print(corp_report_code)
 
     print("공시보고서 링크")
     corp_report_url = a.getReportURL(corp_report_code)
-    if len(corp_report_url) == 0 :
+    if not corp_report_url:
         return None
     print(corp_report_url)
 
     print("사업보고서 크롤링 데이터")
     corp_report_data = a.getEveryReportData(corp_report_url)
     print(corp_report_data)
-
-
-import edgar_crawler
-import edgar_extractor
 
 def edgar_test():
     crawler = edgar_crawler.EDGAR_Crawler()
@@ -42,6 +41,8 @@ def edgar_test():
 
 
 if __name__ == "__main__" :
-    test()
+    a = DataPipeline()
+
+    dart_test()
 
     edgar_test()
