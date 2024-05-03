@@ -14,39 +14,48 @@ class Dart :
             dart_api_key = api_key_file.readline()
         self.dart = OpenDartReader(dart_api_key)
         dart_fss.set_api_key(api_key = dart_api_key)
+        self.start_date = "20240101"
+        self.end_date = "20240301"
         
     def getCorpList(self) :
         f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
-        corp_name_list = []
 
         corp_list = dart_fss.api.filings.get_corp_code()
-        for corp in tqdm(corp_list) :
+        df = pd.DataFrame(corp_list)
+        stock_list = df[df['stock_code'].notnull()]
+
+        for idx, corp in stock_list.iterrows() :
             f.write(f"{corp['corp_code']} {corp['corp_name']}\n")
-            corp_name_list.append(corp['corp_name'])
         print("corp_name_code_mapping file created.")
 
         f.close()
 
-        return corp_name_list
+        return stock_list['corp_name'].tolist()
 
     def getReportCode(self, comps: list) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
 
         for comp in comps :
             print(comp, end = " ")
+            count = 0
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
-                report_list = self.dart.list(comp, start = '2023-01-01', end = '2024-03-28', kind = 'A')
+                report_list = self.dart.list(comp, start = self.start_date, end = self.end_date, kind = 'A')
                 corp_code = report_list['corp_code'][0]
                 d[corp_code] = []
                 for report_code in report_list['rcept_no'] :
                     d[corp_code].append(report_code)
-                print()
+                    count += 1
+                print(f"has {count} report(s)")
             except :
                 continue
         
         return d
     
     def getReportURL(self, report_list: dict) : #report_list 받아서 공시보고서 url 생성
+        if len(list(report_list.keys())) == 0 :
+            print("There's no report list.")
+            return None
+        
         report_url = {}
 
         for corp_code in report_list.keys() :
@@ -63,6 +72,9 @@ class Dart :
     모든 목차 가져오는 함수
     '''
     def getEveryReportData(self, report_url: dict) : #report_url_list 받아서 url에서 text 가져옴
+        if len(list(report_url.keys ())) == 0 :
+            print("There's no report url.")
+            return None
         
         report_data = {}
 

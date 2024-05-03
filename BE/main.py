@@ -3,20 +3,46 @@ Backend
 '''
 
 import Dart
+from DataPipeline import DataPipeline
+import edgar_crawler
+import edgar_extractor
 
-a = Dart.Dart()
-corp_list = a.getCorpList()
-print("회사 리스트")
-print(corp_list[88270])
+def dart_test() :
+    a = Dart.Dart()
 
-corp_report_code = a.getReportCode(corp_list[88270])
-print("공시보고서 코드")
-print(corp_report_code)
+    print("회사 리스트")
+    corp_list = a.getCorpList()
+    print(len(corp_list))
 
-corp_report_url = a.getReportURL(corp_report_code)
-print("공시보고서 링크")
-print(corp_report_url)
+    print("공시보고서 코드")
+    corp_report_code = a.getReportCode(corp_list)
+    if  not corp_report_code :
+        return None
+    print(corp_report_code)
 
-corp_report_data = a.getEveryReportData(corp_report_url)
-print("사업보고서 크롤링 데이터")
-print(corp_report_data)
+    print("공시보고서 링크")
+    corp_report_url = a.getReportURL(corp_report_code)
+    if not corp_report_url:
+        return None
+    print(corp_report_url)
+
+    print("사업보고서 크롤링 데이터")
+    corp_report_data = a.getEveryReportData(corp_report_url)
+    print(corp_report_data)
+
+def edgar_test():
+    crawler = edgar_crawler.EDGAR_Crawler()
+    crawler.doCrawl()
+
+    extractor = edgar_extractor.EDGAR_Extractor()
+    extractor.doExtractFromRAWs()
+
+
+
+
+if __name__ == "__main__" :
+    a = DataPipeline()
+
+    dart_test()
+
+    edgar_test()

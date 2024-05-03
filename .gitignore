@@ -10,3 +10,4 @@ chromadb-llamaindex/GPT_API_KEY.txt
 BE/api_key
 BE/__pycache__
 BE/docs_cache
+BE/edgar-datasets
