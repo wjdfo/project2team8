@@ -8,4 +8,4 @@
 <code>django-admin startproject "project name"</code></br>
 * test, django 등 django 내 키워드는 프로젝트명으로 사용 :x:
 
-![Successfully Django](/firstDjango.JPG)
+![Successfully Django](/EXAMPLE/project/firstDjango.JPG)
