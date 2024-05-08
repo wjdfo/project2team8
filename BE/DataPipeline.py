@@ -16,8 +16,20 @@ class DataPipeline(Knuturn) :
     def __init__(self) :
         self.gpt_model = 'gpt-3.5-turbo'
         super().__init__()
+        self.dart_context = [
+            {"role": "system", "content":'You are an assistant to summarize Korean business report. Your task is to help summarizing and categorizing business report to understand whole data of filings.'},
+            {"role": "system", "content":'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.'},
+            {"role": "system", "content":'You have to use specific words in the text. Write company name in English or Korean'},
+            {"role": "system", "content":'do not give additional illustrations.'}
+        ]
+        self.edgar_context = [
+            {"role": "system", "content":'You are an assistant to summarize EDGAR SEC filings. Your task is to help summarizing and categorizing SEC filings to understand whole data of filings.'},
+            {"role": "system", "content":'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.'},
+            {"role": "system", "content":'You have to use specific words in the text. Write company name in English'},
+            {"role": "system", "content":'do not give additional illustrations.'}
+        ]
 
-    def report_summary(self, report_data: dict) : # param : 사업보고서 크롤링 데이터 원본
+    def report_summary(self, report_data: dict, option : int) : # param : 사업보고서 크롤링 데이터 원본
         # token 수 세기 위한 model encoder
         encoder = tiktoken.encoding_for_model(self.gpt_model)
 
@@ -50,16 +62,14 @@ class DataPipeline(Knuturn) :
                     if len(tokenizing) > 10000 :
                         buffer = divide_string(buffer[0], (len(tokenizing) // 10000) + 1)
 
+                    #option parameter 이용해서 dart - edgar context 분리
+                    if option == 1 : context = self.dart_context
+                    else : context = self.edgar_context
+
                     for query_text in buffer :
                         response = client.chat.completions.create(
                             model = self.gpt_model,
-                            messages = [
-                                {"role": "system", "content":'You are an assistant to summarize EDGAR SEC filings. Your task is to help summarizing and categorizing SEC filings to understand whole data of filings.'},
-                                {"role": "system", "content":'You have to answer in Korean, and if you find there is no exact correspondance of English word to Korean word, you can write both korean & english terms.'},
-                                {"role": "system", "content":'You have to use specific words in the text. Write company name in English'},
-                                {"role": "system", "content":'do not give additional illustrations.'},
-                                {"role": "user", "content": f'Summarize the following text in 5 sentences :\n{query_text}'}
-                            ],
+                            messages = context + [{"role": "user", "content": f'Summarize the following text in 5 sentences :\n{query_text}'}],
                             temperature = 0, # 0 ~ 1 실수, response의 다양성
                             top_p = 0.7
                         )
@@ -69,8 +79,14 @@ class DataPipeline(Knuturn) :
                     # test
                     with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
                         test_file.write(output)
+                
+                key = f"{corp_name} {report}"
 
-    def embeddingNsummary(self, sum_data: str) : # param : 요약된 데이터
+                self.embeddingNsummary(output, key)
+
+        return output
+
+    def embeddingNsummary(self, sum_data: str, key) : # param : 요약된 데이터
         EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
         
         documents = list()
@@ -78,14 +94,14 @@ class DataPipeline(Knuturn) :
         # vector embedding 저장 위치
         chroma_client = chromadb.PersistentClient(path = self.db_path)
 
-        i = input('wanna clean collection ( database )? (y/n) : ')
-        if i == 'y' or i == 'Y' or i == '1' or i == 'ㅛ':
-            collection = chroma_client.get_collection(name = self.collection_name)
+        # i = input('wanna clean collection ( database )? (y/n) : ')
+        # if i == 'y' or i == 'Y' or i == '1' or i == 'ㅛ':
+        #     collection = chroma_client.get_collection(name = self.collection_name)
 
-            y = input('are you sure? (y/n) : ')
-            if y == 'y' or y == 'Y' or y == '1' or y == 'ㅛ':
-                chroma_client.delete_collection(name = self.collection_name)
-                print('collection has been deleted.')
+        #     y = input('are you sure? (y/n) : ')
+        #     if y == 'y' or y == 'Y' or y == '1' or y == 'ㅛ':
+        #         chroma_client.delete_collection(name = self.collection_name)
+        #         print('collection has been deleted.')
 
         # cosine 유사도 기반으로 저장
         collection = chroma_client.get_or_create_collection(name = self.collection_name, metadata={'hnsw:space': 'cosine'})
@@ -98,21 +114,25 @@ class DataPipeline(Knuturn) :
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
         # 파일을 읽어서 임베딩하고 ChromaDB에 저장
-        for file_name in os.listdir(file_path):
-            # 목차로 요약한 파일인 경우, 생략
-            if file_name.split('-')[0] != 'test':
-                continue
+        # for file_name in os.listdir(file_path):
+        #     # 목차로 요약한 파일인 경우, 생략
+        #     if file_name.split('-')[0] != 'test':
+        #         continue
 
-            if file_name.endswith('.txt'):
-                with open(os.path.join(file_path, file_name), 'r', encoding='utf-8') as file:
-                    content = file.read()
-                    corp_name = file_name.split('-')[1]
-                    report_num = file_name.split('-')[2].split('.')[0]
-                    key = f'{corp_name}/{report_num}'
-                    embedding = embed_model.encode(content)
+        #     if file_name.endswith('.txt'):
+        #         with open(os.path.join(file_path, file_name), 'r', encoding='utf-8') as file:
+        #             content = file.read()
+        #             corp_name = file_name.split('-')[1]
+        #             report_num = file_name.split('-')[2].split('.')[0]
+        #             key = f'{corp_name}/{report_num}'
+        #             embedding = embed_model.encode(content)
 
-                    document = Document(key=key, vector=embedding)
-                documents.append(document)
+        #             document = Document(key=key, vector=embedding)
+        #         documents.append(document)
+
+        embedding = embed_model.encode(sum_data)
+        document = Document(key = key, vector = embedding)
+        documents.append(document)
 
         # 임베딩된 문서를 ChromaDB에 적재
         index = VectorStoreIndex.from_documents(

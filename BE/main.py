@@ -4,8 +4,8 @@ Backend
 
 import Dart
 from DataPipeline import DataPipeline
-import edgar_crawler
-import edgar_extractor
+# import edgar_crawler
+# import edgar_extractor
 
 def dart_test() :
     a = Dart.Dart()
@@ -30,19 +30,23 @@ def dart_test() :
     corp_report_data = a.getEveryReportData(corp_report_url)
     print(corp_report_data)
 
-def edgar_test():
-    crawler = edgar_crawler.EDGAR_Crawler()
-    crawler.doCrawl()
+# def edgar_test():
+#     crawler = edgar_crawler.EDGAR_Crawler()
+#     crawler.doCrawl()
 
-    extractor = edgar_extractor.EDGAR_Extractor()
-    extractor.doExtractFromRAWs()
+#     extractor = edgar_extractor.EDGAR_Extractor()
+#     extractor.doExtractFromRAWs()
 
 
-
+import json
 
 if __name__ == "__main__" :
     a = DataPipeline()
 
-    dart_test()
+    # dart_test()
 
-    edgar_test()
+    # edgar_test()
+    with open("./text.json", "r", encoding = 'utf-8') as f:
+        report_data = json.load(f)
+
+    print(a.report_summary(report_data, 1))
