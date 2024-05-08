@@ -130,8 +130,7 @@ class DataPipeline(Knuturn) :
         #             document = Document(key=key, vector=embedding)
         #         documents.append(document)
 
-        embedding = embed_model.encode(sum_data)
-        document = Document(key = key, vector = embedding)
+        document = Document(key = key, text = sum_data)
         documents.append(document)
 
         # 임베딩된 문서를 ChromaDB에 적재
