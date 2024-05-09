@@ -21,11 +21,11 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/dart/promt', views.DartAPI.chatbot_response, name="dart_chatbot_response"),
+    path('api/dart/prompt', views.DartAPI.chatbot_response, name="dart_chatbot_response"),
     path('api/dart/corporations', views.DartAPI.corporations_list, name="dart_corporations_list"),
     path('api/dart/summary/corporation=<str:corporation>', views.DartAPI.summary, name="dart_corporation_summary"),
 
-    path('api/edgar/promt', views.EdgarAPI.chatbot_response, name="edgar_chatbot_response"),
+    path('api/edgar/prompt', views.EdgarAPI.chatbot_response, name="edgar_chatbot_response"),
     path('api/edgar/corporations', views.EdgarAPI.corporations_list, name="edgar_corporations_list"),
     path('api/edgar/summary/corporation=<str:corporation>', views.EdgarAPI.summary, name="edgar_corporation_summary"),
 ]
