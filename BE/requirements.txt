@@ -8,3 +8,6 @@ lxml
 pandas
 requests
 tqdm
+django
+django-cors-headers
+djangorestframework
