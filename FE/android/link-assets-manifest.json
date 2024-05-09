@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/GmarketSansBold.otf",
+      "sha1": "017d9458fd2a064694e7385b9d5a830856ef256b"
+    },
+    {
+      "path": "assets/fonts/GmarketSansLight.otf",
+      "sha1": "5be4ccef1e1bd975bf3fc9820f798ba0744e2917"
+    },
+    {
+      "path": "assets/fonts/GmarketSansMedium.otf",
+      "sha1": "bbda3c04c05e602cf59609e1e095bb6d769606f8"
+    },
+    {
+      "path": "assets/fonts/KNU TRUTH.otf",
+      "sha1": "d8dff9a6804b5b0a3c8ff7122f7f6f25a257fbb8"
+    }
+  ]
+}
