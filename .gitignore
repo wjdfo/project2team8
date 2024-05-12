@@ -11,4 +11,5 @@ BE/api_key
 BE/__pycache__
 BE/docs_cache
 BE/edgar-datasets
+BE/APP/APP/__pycache__
 .DS_Store
