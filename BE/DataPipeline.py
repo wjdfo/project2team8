@@ -1,5 +1,9 @@
 from Knuturn import Knuturn
 import tiktoken
+from llama_index.core import VectorStoreIndex, get_response_synthesizer
+from llama_index.core.retrievers import VectorIndexRetriever
+from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core.postprocessor import SimilarityPostprocessor
 import os
 import json
 import chromadb
@@ -77,8 +81,8 @@ class DataPipeline(Knuturn) :
                         output += response.choices[0].message.content + '\n'
 
                     # test
-                    with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
-                        test_file.write(output)
+                    # with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
+                    #     test_file.write(output)
                 
                 key = f"{corp_name} {report}"
 
@@ -94,15 +98,6 @@ class DataPipeline(Knuturn) :
         # vector embedding 저장 위치
         chroma_client = chromadb.PersistentClient(path = self.db_path)
 
-        # i = input('wanna clean collection ( database )? (y/n) : ')
-        # if i == 'y' or i == 'Y' or i == '1' or i == 'ㅛ':
-        #     collection = chroma_client.get_collection(name = self.collection_name)
-
-        #     y = input('are you sure? (y/n) : ')
-        #     if y == 'y' or y == 'Y' or y == '1' or y == 'ㅛ':
-        #         chroma_client.delete_collection(name = self.collection_name)
-        #         print('collection has been deleted.')
-
         # cosine 유사도 기반으로 저장
         collection = chroma_client.get_or_create_collection(name = self.collection_name, metadata={'hnsw:space': 'cosine'})
         embed_model = LangchainEmbedding(
@@ -112,23 +107,6 @@ class DataPipeline(Knuturn) :
         # llamaindex에서 chromadb 다루기
         vector_store = ChromaVectorStore(chroma_collection=collection)
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
-
-        # 파일을 읽어서 임베딩하고 ChromaDB에 저장
-        # for file_name in os.listdir(file_path):
-        #     # 목차로 요약한 파일인 경우, 생략
-        #     if file_name.split('-')[0] != 'test':
-        #         continue
-
-        #     if file_name.endswith('.txt'):
-        #         with open(os.path.join(file_path, file_name), 'r', encoding='utf-8') as file:
-        #             content = file.read()
-        #             corp_name = file_name.split('-')[1]
-        #             report_num = file_name.split('-')[2].split('.')[0]
-        #             key = f'{corp_name}/{report_num}'
-        #             embedding = embed_model.encode(content)
-
-        #             document = Document(key=key, vector=embedding)
-        #         documents.append(document)
 
         document = Document(key = key, text = sum_data)
         documents.append(document)
@@ -140,3 +118,36 @@ class DataPipeline(Knuturn) :
             embed_model=embed_model
         )
 
+        query_engine = index.as_query_engine()
+        response = query_engine.query("현대차 임원 누구야")
+        print(response)
+
+        # chat_engine = index.as_chat_engine(
+        # chat_mode='context',
+        # system_prompt = context
+        # )
+
+        
+    def test(self) :
+        # build index
+        index = VectorStoreIndex.from_documents(documents)
+
+        # configure retriever
+        retriever = VectorIndexRetriever(
+            index=index,
+            similarity_top_k=10,
+        )
+
+        # configure response synthesizer
+        response_synthesizer = get_response_synthesizer()
+
+        # assemble query engine
+        query_engine = RetrieverQueryEngine(
+            retriever=retriever,
+            response_synthesizer=response_synthesizer,
+            node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.7)],
+        )
+
+        # query
+        response = query_engine.query("What did the author do growing up?")
+        print(response)
