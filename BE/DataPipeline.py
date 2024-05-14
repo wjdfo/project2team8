@@ -121,33 +121,3 @@ class DataPipeline(Knuturn) :
         query_engine = index.as_query_engine()
         response = query_engine.query("현대차 임원 누구야")
         print(response)
-
-        # chat_engine = index.as_chat_engine(
-        # chat_mode='context',
-        # system_prompt = context
-        # )
-
-        
-    def test(self) :
-        # build index
-        index = VectorStoreIndex.from_documents(documents)
-
-        # configure retriever
-        retriever = VectorIndexRetriever(
-            index=index,
-            similarity_top_k=10,
-        )
-
-        # configure response synthesizer
-        response_synthesizer = get_response_synthesizer()
-
-        # assemble query engine
-        query_engine = RetrieverQueryEngine(
-            retriever=retriever,
-            response_synthesizer=response_synthesizer,
-            node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.7)],
-        )
-
-        # query
-        response = query_engine.query("What did the author do growing up?")
-        print(response)
