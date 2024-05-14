@@ -1,34 +1,20 @@
 import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
 import { Height, Width,Color, FontFamily } from '../GlobalStyles';
-const ChatHeader = ({isDart,setIsDart}) => {
-    const handleHeaderButtonPress  = () =>{
-        setIsDart(!isDart);
-    }
+const ChatHeader = ({navigation,searchedName}) => {
     return (
         <View style={styles.headerPosition}>
             <View style={[styles.headerChild, styles.headerPosition]} />
             
-            {isDart?
-            <TouchableOpacity style={[styles.headerText,{width: 375*Width}]}
-                              onPress = {handleHeaderButtonPress}>
-                <Text style={styles.dartText}>DART</Text>
+            <TouchableOpacity style={styles.corpSearchBox}
+                              onPress={()=>navigation.navigate('searchScreen')}>
+                <Text style={styles.corpName}>{searchedName}</Text>
                 <Image
-                style={[styles.dropDownIcon,{left: 310*Width}]}
-                resizeMode="cover"
-                source={require("../assets/DownArrow.png")}
+                style={styles.searchIcon}
+                resizeMode="contain"
+                source={require("../assets/search.png")}
                 />
+
             </TouchableOpacity>            
-            :
-            <TouchableOpacity style={[styles.headerText,{width: 450*Width}]}
-                              onPress = {handleHeaderButtonPress}>
-                <Text style={styles.edgarText}>EDGAR</Text>
-                <Image
-                style={[styles.dropDownIcon,{left: "90%"}]}
-                resizeMode="cover"
-                source={require("../assets/DownArrow.png")}
-                />
-            </TouchableOpacity>
-            }
 
         </View>
     );
@@ -55,35 +41,36 @@ const styles = StyleSheet.create({
       shadowOpacity: 1,
       backgroundColor: Color.colorBG,
     },
-    headerText: {
-        top: 95*Height,
-        left: 93*Width,
+    corpSearchBox:{
+        backgroundColor:'#4B4B4B',
+        maxWidth: "80%",
+        top : 73 * Height,
+        left : 53* Width,
+        alignSelf: "flex-start",
+        flexDirection: "row",
+        borderTopRightRadius : 90,
+        borderTopLeftRadius : 90,
+        borderBottomLeftRadius : 90,
+        borderBottomRightRadius : 90,
+        
     },
-    dartText: {
-      fontSize: 128*Width,
-      width: 324*Width,
+    corpName: {
+      fontSize: 96*Width,
       fontFamily: FontFamily.kNUTRUTH,
-      textAlign: "left",
       color: Color.colorWhite,
-      left: 0,
-      top: 0,
-    },
-    edgarText: {
-        fontSize: 128*Width,
-        width: 500*Width,
-        fontFamily: FontFamily.kNUTRUTH,
-        textAlign: "left",
-        color: Color.colorWhite,
-        left: 0,
-        top: 0,
+      paddingLeft: 30*Width,
+      marginLeft: 30*Width,
+      paddingTop: 25*Height,
+      paddingBottom : 25*Height,
     },
   
-    dropDownIcon: {
-        height: 35*Height,
-        width: 100*Width,
-        top: 75*Height,
-        position: 'absolute',
-        tintColor : '#D9D9D9'
+    searchIcon: {
+        width : 55 * Width,
+        height : 55 * Height,
+        top : 55 * Height,
+        paddingRight: 40*Width,
+        marginRight : 40*Width,
+        marginLeft : 15*Width,
     },
             
 })

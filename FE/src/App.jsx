@@ -1,46 +1,22 @@
-import * as React from "react";
-import { View, StyleSheet, Text, useWindowDimensions  } from "react-native";
-import {width, height, Color} from '../GlobalStyles'; //width,height 받아오기
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import chat from './chat';
+import initial from './initial';
+import searchWindow from './search-window';
+const Stack = createNativeStackNavigator();
 
-function Frame(){
-  return (
-    <View style={styles.introViewParent}>
-      <View style={styles.introViewPosition}>
-        <Text style={styles.knuturn}>knuturn</Text>
-      </View>
-    </View>
-  );s
-};
+const App = () => {
+    return(
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName = 'initialScreen' screenOptions={{ headerShown: false }}>
+                <Stack.Screen name = 'initialScreen' component={initial}/>
+                <Stack.Screen name = 'chatScreen' component={chat}/>
+                <Stack.Screen name = 'initial-searchScreen' component={searchWindow}/>
+                <Stack.Screen name = 'searchScreen' component={searchWindow}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 
+}
 
-
-const styles = StyleSheet.create({
-  introViewPosition: {
-    width: 1080 * Width,
-    left: 0,
-    top: 0,
-    position: "absolute",
-    height: 2220*Height,
-    backgroundColor: Color.colorBG,
-    justfyContent:"center",
-    alignItems :"center"
-  },
-  knuturn: {
-    top: 682*Height,
-    fontSize: 128*Width,
-    fontWeight: "500",
-    fontFamily: FontFamily.gmarketSans,
-    color: Color.colorNewturn,
-    textAlign: "center",
-    position: "absolute",
-  },
-  introViewParent: {
-    backgroundColor: Color.colorWhite,
-    flex: 1,
-    width: 1080 * Width,
-    overflow: "hidden",
-    height: 2220*Height,
-  },
-});
-
-export default Frame;
+export default App;

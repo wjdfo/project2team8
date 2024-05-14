@@ -1,9 +1,9 @@
 import { View, StyleSheet,Image, 
     TextInput, TouchableOpacity} from "react-native";
 import { Color, FontFamily, Width, Height,} from "../GlobalStyles";
-import handleInput from "./fetchInput";
+import handleInput from "./fetch-input";
 
-const ChatInput = ({inputText, setInputText, messages, setMessages, isDart}) => {
+const ChatInput = ({inputText, setInputText, messages, setMessages,corpName}) => {
     const handleInputText = (text) => {
         setInputText(text);
     };
@@ -11,7 +11,7 @@ const ChatInput = ({inputText, setInputText, messages, setMessages, isDart}) => 
     const handleSubmit = () => {
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1, time:"01:00",content:inputText}])
         setInputText('');
-        const answerText = handleInput(inputText={inputText}, isDart={isDart});
+        const answerText = handleInput(inputText={inputText}, corpName={corpName});
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0, time:"01:00",content:answerText}])
         
     };
@@ -27,13 +27,11 @@ const ChatInput = ({inputText, setInputText, messages, setMessages, isDart}) => 
             </TouchableOpacity>
 
             <TextInput
-            multiline
-            style={styles.inputTextBox}
-            placeholder={`Write your message .  . .`}
-            placeholderTextColor="#797c7b"
-            textStyle={styles.placeholderText}
-            value={inputText}
-            onChangeText={handleInputText}
+                multiline
+                style={styles.inputTextBox}
+                placeholder={`Write your message .  . .`}
+                value={inputText}
+                onChangeText={handleInputText}
             />
 
             {inputText?
@@ -87,10 +85,9 @@ const styles = StyleSheet.create({
       width : 650*Width,
       left: 120*Width,
       position: "absolute",
-    },
-    placeholderText: {
-        fontFamily: FontFamily.kNUTRUTH,
-        color: "#797c7b",
+      fontFamily: FontFamily.kNUTRUTH,
+      color: "#797c7b",
+
     },
     sendButton:{
         height: 90*Height,

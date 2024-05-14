@@ -1,4 +1,4 @@
-import React, { useState,  useRef} from "react";
+import React, { useState,  useRef, useEffect } from "react";
 import { View, StyleSheet, Keyboard,  
   FlatList,KeyboardAvoidingView,
   TouchableWithoutFeedback,Platform} from "react-native";
@@ -9,7 +9,7 @@ import ChatInput from "./chat-input";
 
 
 
-const FrameScreen = () => {
+const FrameScreen = ({navigation,route}) => {
   const [messages,setMessages] = useState([
     {
       id : 0,
@@ -22,9 +22,18 @@ const FrameScreen = () => {
   const [inputText, setInputText] = useState('');
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [isDart, setIsDart] = useState(true);
   const [isScrollable, setIsScrollable] = useState(false);
   const selectFlatList = useRef();
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        e.preventDefault();
+      }),
+    []
+  );
+
+
 
   const dissmissKeyboard = () => {
     Keyboard.dismiss();
@@ -78,19 +87,18 @@ const FrameScreen = () => {
 
           {/*Text Input*/}
             <ChatInput inputText={inputText} setInputText={setInputText} 
-                      messages={messages} setMessages={setMessages} 
-                      isDart={isDart}/>
+                      messages={messages} setMessages={setMessages}
+                      corpName={route.params.searchedName}
+                      />
           </KeyboardAvoidingView>
           {/*Header*/}
-          <ChatHeader isDart={isDart} setIsDart={setIsDart}/>
+          <ChatHeader navigation={navigation} searchedName={route.params.searchedName}/>
         </View>
       </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-
-
   chatViewContainer: {
     width: 1080*Width,
     left: 0,
@@ -99,14 +107,10 @@ const styles = StyleSheet.create({
     height: 2100*Height,
     backgroundColor : Color.colorBG
   },
-
-
-
   chatBody: {
     width: '100%',
     position: "absoulte",
   },
-
   chatViewParent: {
     backgroundColor: Color.colorWhite,
     overflow: "hidden",

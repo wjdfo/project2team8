@@ -1,6 +1,16 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import API from './cookie-handling/axiosAPI';
 
-const handleInput = ({inputText, isDart}) => {
+const handleInput = async ({inputText,corpName}) => {
+    const result = await API.post('/melong',{
+        question : {inputText}
+    })
+    .then((response)=>response.json())
+    .catch((error)=>{
+      console.error('Error:', error);
+    });
+
+    return result['answer'];
+
     // const data = {'isDart' : isDart, 'query' : inputText};
     // const url = '';
     // const rr = fetch(url, {
@@ -20,7 +30,6 @@ const handleInput = ({inputText, isDart}) => {
     // else{
     //   return rr['answer'];
     // }
-    return inputText;
   };
 
 

@@ -1,0 +1,6 @@
+@react-navigation/native
+@react-navigation/native-stack
+@react-native-async-storage/async-storage
+react-native-screens
+react-native-safe-area-context
+axios

@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
 		alignSelf: "flex-start",
 		flexDirection: "row",
 		borderRadius: 15,
-		paddingHorizontal: 10,
-		marginHorizontal: 10,
-		paddingTop: 5,
-		paddingBottom: 10,
-        marginBottom : 10*Width
+		paddingHorizontal: 30*Width,
+		marginHorizontal: 30*Width,
+		paddingTop: 25*Height,
+		paddingBottom: 25*Height,
+        marginBottom : 30*Height,
 	},
 	message: {
 		color: 'white',
