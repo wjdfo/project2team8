@@ -7,7 +7,7 @@ class Chatbot(Knuturn) :
         #self.gpt_model_name = 'gpt-3.5-turbo'
         #self.context = ""
         super().__init__()
-        # self.dart = Dart()
+        self.dart = Dart()
         self.edgar = Edgar()
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
@@ -17,8 +17,7 @@ class Chatbot(Knuturn) :
         
         # case : edgar
         else :
-            print(self.edgar.getCorpList())
-            return
+            return self.edgar.getCorpList()
         
     def getResponse(self, question : str, isDart : bool) :
         # 사용자의 질문을 받아서 qna table에 query
