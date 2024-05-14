@@ -84,7 +84,7 @@ class Dart :
         driver = webdriver.Chrome()
 
         # crawling test
-        fp = open('./crawling_output_try_2.txt', 'a', encoding = 'utf-8')
+        # fp = open('./crawling_output_try_2.txt', 'a', encoding = 'utf-8')
 
         for corp_code in report_url.keys() :
             report_data[corp_code] = {}
@@ -95,7 +95,7 @@ class Dart :
                 for title in report_url[corp_code][report_num] :
                     url = report_url[corp_code][report_num][title]
                     report_data[corp_code][report_num][title] = []
-                    fp.write(title + "\n")
+                    # fp.write(title + "\n")
 
                     driver.get(url)
                     time.sleep(2)
@@ -107,12 +107,12 @@ class Dart :
                         if len(line) < 1 : # 빈 줄 삭제
                             continue
                         report_data[corp_code][report_num][title].append(line + "\n")
-                        fp.write(line + "\n")
-                    fp.write("\n")
+                    #     fp.write(line + "\n")
+                    # fp.write("\n")
                     # print(report_string)
 
         driver.quit()
-        fp.close()
+        # fp.close()
 
         return report_data
     
@@ -149,6 +149,7 @@ class Dart :
                     for index in indices :
                         if index in title :
                             extract = True
+                            break
 
                     if extract :
                         report_data[corp_name][report_num][title] = []

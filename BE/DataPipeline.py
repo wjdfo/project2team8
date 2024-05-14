@@ -1,9 +1,5 @@
 from Knuturn import Knuturn
 import tiktoken
-from llama_index.core import VectorStoreIndex, get_response_synthesizer
-from llama_index.core.retrievers import VectorIndexRetriever
-from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.postprocessor import SimilarityPostprocessor
 import os
 import json
 import chromadb
@@ -15,6 +11,8 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from llama_index.embeddings.langchain import LangchainEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
+from llama_index.core.schema import TextNode
+from llama_index.core.vector_stores import MetadataFilters,ExactMatchFilter
 
 class DataPipeline(Knuturn) :
     def __init__(self) :
@@ -77,20 +75,19 @@ class DataPipeline(Knuturn) :
                             temperature = 0, # 0 ~ 1 실수, response의 다양성
                             top_p = 0.7
                         )
-
                         output += response.choices[0].message.content + '\n'
 
                     # test
-                    # with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
-                    #     test_file.write(output)
+                    with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
+                        test_file.write(output)
                 
                 key = f"{corp_name} {report}"
 
-                self.embeddingNsummary(output, key)
+                self.embeddingNsummary(output, corp_name, report)
 
         return output
 
-    def embeddingNsummary(self, sum_data: str, key) : # param : 요약된 데이터
+    def embeddingNsummary(self, sum_data: str, corp_name, report) : # param : 요약된 데이터
         EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
         
         documents = list()
@@ -108,16 +105,36 @@ class DataPipeline(Knuturn) :
         vector_store = ChromaVectorStore(chroma_collection=collection)
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-        document = Document(key = key, text = sum_data)
+        document = TextNode(text = sum_data , metadata={'corp_name' : f'{corp_name}', 'report' : f'{report}'})
         documents.append(document)
 
         # 임베딩된 문서를 ChromaDB에 적재
-        index = VectorStoreIndex.from_documents(
-            documents,
-            storage_context=storage_context,
-            embed_model=embed_model
+        index = VectorStoreIndex(nodes=documents, storage_context=storage_context, embed_model=embed_model)
+
+    # metadata field 가 report : 20231114002109 인 데이터를 찾아오는 예제
+    def retrieve(self):
+        EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
+
+        chroma_client = chromadb.PersistentClient(path = self.db_path)
+        collection = chroma_client.get_or_create_collection(name = self.collection_name, metadata={'hnsw:space': 'cosine'})
+        vector_store = ChromaVectorStore(chroma_collection=collection)
+        embed_model = LangchainEmbedding(
+            HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+        )
+        filters = MetadataFilters(
+            filters=[ExactMatchFilter(key="report", value="20231114002109")]
         )
 
+<<<<<<< HEAD
         query_engine = index.as_query_engine()
         response = query_engine.query("현대차 임원 누구야")
         print(response)
+=======
+        index = VectorStoreIndex.from_vector_store(vector_store=vector_store, embed_model=embed_model)
+        retriever = index.as_retriever(filters=filters)
+        result = retriever.retrieve('0')
+        print(result)
+        print()
+        print()
+        print(result[0].text)
+>>>>>>> f692b4a3a7f80bf8082010de286c4dc2c7e0bd8c
