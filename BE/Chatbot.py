@@ -17,7 +17,7 @@ class Chatbot(Knuturn) :
             return
         
     def getResponse(self, question : str, isDart : bool) :
-        # 사용자의 질문을 받아서 DB에 query
+        # 사용자의 질문을 받아서 qna table에 query
 
         # # Dart
         # if isDart :
@@ -28,7 +28,7 @@ class Chatbot(Knuturn) :
         return
 
     def getCorpSummary(self, corp_name : str, isDart : bool, report_num : str = None) :
-        # DB에 query
+        # summary table에 query
 
         # # Dart
         # if isDart :
@@ -51,6 +51,7 @@ class Chatbot(Knuturn) :
     
     def Compare2Corps(self, corp_list : tuple, isDart : bool) :
         corp1, corp2 = corp_list[0], corp_list[1]
+        # summary table에 두 회사 query
 
         # Dart
         # if isDart :
