@@ -91,9 +91,10 @@ class EDGAR_Extractor(Edgar):
     This is a class which extarct in-need item from stored HTML filings.
 
     Method:
-        doExtarctFromRAWs()
+        doExtarctFromRAWs() : Extract from RAW filings to .json files
 
-    set config.json - 'edgar_cralwer' field, and doExtarctFromRAWs()
+
+    set config.json
     '''
     def __init__(self):
         super().__init__()

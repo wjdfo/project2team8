@@ -1,13 +1,14 @@
 from Knuturn import Knuturn
 from Dart import Dart
 from openai import OpenAI as op
-
+from Edgar import Edgar
 class Chatbot(Knuturn) :
     def __init__(self) :
         #self.gpt_model_name = 'gpt-3.5-turbo'
         #self.context = ""
         super().__init__()
         self.dart = Dart()
+        self.edgar = Edgar()
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
         # case : dart
@@ -47,8 +48,9 @@ class Chatbot(Knuturn) :
             report = self.dart.getReportURL(report_dict)
 
         # # Edgar
-        # else :
-
+        else :
+            report = self.edgar.getReportUrl(corp_name)
+            
         return report
     
     def Compare2Corps(self, corp_list : tuple, isDart : bool) :

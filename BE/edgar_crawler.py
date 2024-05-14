@@ -35,7 +35,7 @@ class EDGAR_Crawler(Edgar):
 	Method:
 		doCrawl()
 
-	set config.json - 'edgar_cralwer' field, and doCrawl()
+	set config.json
 	'''
 
 	def __init__(self):

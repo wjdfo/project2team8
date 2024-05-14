@@ -1,8 +1,18 @@
 import os
 import json
-
+import numpy as np
+import pandas as pd
 
 class Edgar:
+    '''
+    parent class of edgar_cralwer.py & edgar_extractor.py
+    and
+    class that deal with corperation metadatas
+
+    Method:
+        getCorpsList() : Get dictionary which represents { corp : filings date : filings html link }
+
+    '''
     def __init__(self):
         # Load the configuration file
         with open('config.json') as fin:
@@ -36,3 +46,23 @@ class Edgar:
         if not os.path.isdir(self.extracted_filings_folder):
             os.mkdir(self.extracted_filings_folder)
 
+            
+
+    def getReportUrl(self, company_name : str):
+        # Check if the filings metadata file exists
+        if os.path.exists(self.filings_metadata_filepath):
+            df = pd.read_csv(self.filings_metadata_filepath, dtype=str)
+            df = df.replace({np.nan: None})
+        else:
+            print(f'No such file "{self.filings_metadata_filepath}"')
+            return
+
+        length = len(df['Company'])
+        url_dict = {}
+        for i in range(length):
+            url_dict[company_name] = {}
+        for i in range(length):
+            if df['Company'][i] == company_name:
+                url_dict[company_name][df['Date'][i]] = df['htm_file_link'][i]
+
+        return url_dict
