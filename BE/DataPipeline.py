@@ -16,7 +16,6 @@ from llama_index.core.vector_stores import MetadataFilters,ExactMatchFilter
 
 class DataPipeline(Knuturn) :
     def __init__(self) :
-        self.gpt_model = 'gpt-3.5-turbo'
         super().__init__()
         self.dart_context = [
             {"role": "system", "content":'You are an assistant to summarize Korean business report. Your task is to help summarizing and categorizing business report to understand whole data of filings.'},
@@ -125,11 +124,6 @@ class DataPipeline(Knuturn) :
             filters=[ExactMatchFilter(key="report", value="20231114002109")]
         )
 
-<<<<<<< HEAD
-        query_engine = index.as_query_engine()
-        response = query_engine.query("현대차 임원 누구야")
-        print(response)
-=======
         index = VectorStoreIndex.from_vector_store(vector_store=vector_store, embed_model=embed_model)
         retriever = index.as_retriever(filters=filters)
         result = retriever.retrieve('0')
@@ -137,4 +131,3 @@ class DataPipeline(Knuturn) :
         print()
         print()
         print(result[0].text)
->>>>>>> f692b4a3a7f80bf8082010de286c4dc2c7e0bd8c
