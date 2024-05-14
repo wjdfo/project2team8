@@ -46,7 +46,22 @@ class Edgar:
         if not os.path.isdir(self.extracted_filings_folder):
             os.mkdir(self.extracted_filings_folder)
 
+    def getCorpList(self):
+        result = []
+        companies_info_path = os.path.join(self.DATASET_DIR, 'companies_info.json')
+        
+
+        if os.path.exists(companies_info_path):
+            with open(companies_info_path, 'r') as f:
+                data = json.load(f)
+        else :
+            print(f'No such file "{companies_info_path}"')
+            return
+
+        for i in data.keys():
+            result.append(data[i]["Company Name"])
             
+        return result
 
     def getReportUrl(self, company_name : str):
         # Check if the filings metadata file exists
