@@ -15,9 +15,9 @@ class API(View):
 
         return JsonResponse({"message": "corporations list"}, status=200)
 
-    def summary(self, request):
-
-        return JsonResponse({"message": f"summary for corporation: {request}"}, status=200)
+    def summary(self, corporation, cik):
+        print(corporation, cik)
+        return JsonResponse({"message": f"summary for corporation: {corporation}, cik: {cik}"}, status=200)
     
 class DartAPI(View):
     @classmethod

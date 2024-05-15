@@ -29,5 +29,5 @@ urlpatterns = [
     path('api/edgar/corporations', views.EdgarAPI.corporations_list, name="edgar_corporations_list"),
     path('api/edgar/summary/corporation=<str:corporation>', views.EdgarAPI.summary, name="edgar_corporation_summary"),
     
-    path('api/summary/request=<str:request>', views.API.summary, name="corporation_summary"),
+    path('api/summary/corporation=<str:corporation>,cik=<str:cik>', views.API.summary, name="corporation_summary"),
 ]
