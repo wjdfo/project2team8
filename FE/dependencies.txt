@@ -4,3 +4,5 @@
 react-native-screens
 react-native-safe-area-context
 axios
+@react-native-community/hooks
+react-native-hyperlink

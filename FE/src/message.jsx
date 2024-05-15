@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet} from "react-native";
 import { Color, Border, FontFamily, Width, Height,} from "../GlobalStyles";
+import Hyperlink from 'react-native-hyperlink';
+import { Linking } from 'react-native';
 
 
-export default function IndiviMessage({message, isUser, time}){
+export default function IndiviMessage({content, isUser}){
 	
     const isUserM = (type) => {
 		if (isUser && type === "messageContainer") {
@@ -29,10 +31,15 @@ export default function IndiviMessage({message, isUser, time}){
 
     return (
       <View style={[styles.messageContainer, isUserM("messageContainer")]}>
-        <Text style ={styles.message}>{message}</Text>
+		<Hyperlink
+			linkStyle={{fintSize: 8, color: '#505050'}}
+			onPress={(url) => Linking.openURL(url)}
+		>
+        	<Text style ={styles.message}>{content.message}</Text>
+		</Hyperlink>
       </View>
     );
-}
+};
   
 const styles = StyleSheet.create({
 	messageContainer: {

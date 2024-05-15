@@ -11,7 +11,7 @@ const ChatHeader = ({navigation,searchedName}) => {
                 <Image
                 style={styles.searchIcon}
                 resizeMode="contain"
-                source={require("../assets/search.png")}
+                source={require("../assets/Search.png")}
                 />
 
             </TouchableOpacity>            

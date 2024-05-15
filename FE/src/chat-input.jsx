@@ -1,24 +1,36 @@
 import { View, StyleSheet,Image, 
     TextInput, TouchableOpacity} from "react-native";
+import { useEffect } from "react";
 import { Color, FontFamily, Width, Height,} from "../GlobalStyles";
-import handleInput from "./fetch-input";
+import fetchInput from "./fetch-input";
+import { useLayout } from '@react-native-community/hooks';
 
-const ChatInput = ({inputText, setInputText, messages, setMessages,corpName}) => {
+const ChatInput = ({inputText, setInputText, setMessages,corpName, isKeyboardShown,keyboardHeight,
+                    setIsPlusOn, setTextInputHeight}) => {
+    
+    const { onLayout, ...layout } = useLayout()
+    
+    useEffect(()=>{
+
+        setTextInputHeight(layout.height);   
+    },[layout.height])
+                       
     const handleInputText = (text) => {
         setInputText(text);
     };
     
     const handleSubmit = () => {
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1, time:"01:00",content:inputText}])
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1,content:{message:inputText}}])
         setInputText('');
-        const answerText = handleInput(inputText={inputText}, corpName={corpName});
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0, time:"01:00",content:answerText}])
+        const answerText = fetchInput(inputText={inputText}, corpName={corpName});
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:answerText}}])
         
     };
-
     return (
-        <View style={styles.chatWindow}>
-            <TouchableOpacity style={styles.plusButton}>
+        <View style={[styles.chatWindow,
+                    {bottom:isKeyboardShown?50*Height+keyboardHeight:50*Height}
+        ]}>
+            <TouchableOpacity style={styles.plusButton} onPress={()=>setIsPlusOn(true)}>
             <Image
                 style={styles.plusIcon}
                 resizeMode="cover"
@@ -27,9 +39,10 @@ const ChatInput = ({inputText, setInputText, messages, setMessages,corpName}) =>
             </TouchableOpacity>
 
             <TextInput
+                onLayout={onLayout} 
                 multiline
+                placeholder={`'`+corpName+`'에 대해 물어보세요.`}
                 style={styles.inputTextBox}
-                placeholder={`Write your message .  . .`}
                 value={inputText}
                 onChangeText={handleInputText}
             />
@@ -43,6 +56,7 @@ const ChatInput = ({inputText, setInputText, messages, setMessages,corpName}) =>
                     source={require("../assets/SendButton.png")}
                 />
             </TouchableOpacity>: null}
+
       </View>
 
 
@@ -53,20 +67,21 @@ const ChatInput = ({inputText, setInputText, messages, setMessages,corpName}) =>
 
 const styles = StyleSheet.create({
     chatWindow: {
-        top: 1950*Height,
         left: 53*Width,
         position: 'absolute',
         width: 974*Width,
-        height: 119*Height,
         backgroundColor: '#D9D9D9',
-        borderTopLeftRadius : 50,
-        borderTopRightRadius : 50,
-        borderBottomLeftRadius : 50,
-        borderBottomRightRadius : 50,
+        borderTopLeftRadius : 20,
+        borderTopRightRadius : 20,
+        borderBottomLeftRadius : 20,
+        borderBottomRightRadius : 20,
+        maxHeight: 250*Height,
+        flexDirection:'column-reverse',
+        alignSelf:'flex-start',
     },
     plusButton: {
         height: 90*Height,
-        top: 15*Width,
+        bottom: 15*Height,
         left: 20*Width,
         width: 90*Width,
         position: 'absolute',
@@ -81,17 +96,19 @@ const styles = StyleSheet.create({
         position:'absolute',
     },
     inputTextBox: {
-      top: 0*Height,
       width : 650*Width,
       left: 120*Width,
-      position: "absolute",
       fontFamily: FontFamily.kNUTRUTH,
+      fontSize : 40*Width,
       color: "#797c7b",
-
+      textAlignVertical : "top",
+      marginVertical:10*Height,
+      paddingBottom:0,
+  
     },
     sendButton:{
         height: 90*Height,
-        top: 15*Height,
+        bottom: 15*Height,
         left: 800*Width,
         width: 150*Width,
         position:'absolute',
@@ -100,7 +117,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius : 50,
         borderBottomLeftRadius : 50,
         borderBottomRightRadius : 50,
-        backgroundColor: Color.colorNewturn
+        backgroundColor: Color.colorNewturn,
+        
     },
     sendIcon: {
         width: 80*Width,
@@ -110,6 +128,7 @@ const styles = StyleSheet.create({
         tintColor : Color.colorWhite,
         position:'absolute',
     },
+    
 })
 
 export default ChatInput;

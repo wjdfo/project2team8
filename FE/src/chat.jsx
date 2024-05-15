@@ -1,12 +1,11 @@
-import React, { useState,  useRef, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 import { View, StyleSheet, Keyboard,  
-  FlatList,KeyboardAvoidingView,
-  TouchableWithoutFeedback,Platform} from "react-native";
-import { Color, Width, Height,} from "../GlobalStyles";
-import Message from "./message";
+  TouchableWithoutFeedback, Text, Image, TouchableOpacity} from "react-native";
+import { Color, Width, Height,FontFamily} from "../GlobalStyles";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
-
+import ChatBody from "./chat-body";
+import MenuSelector from "./menu-selector";
 
 
 const FrameScreen = ({navigation,route}) => {
@@ -14,16 +13,26 @@ const FrameScreen = ({navigation,route}) => {
     {
       id : 0,
       user : 0,
-      time : '11:00',
-      content : '안녕하세요?',
+      content : {
+        message : '안녕하세요?',
+      },
     },
+    {
+      id : 1,
+      user : 0,
+      content : {
+        message : '링크 있는 글이에요 ~~ www.youtube.com',
+      }
+    }
+
   ]);
 
   const [inputText, setInputText] = useState('');
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [keyboardHeight, setKeyboardHeight] = useState(route.params.keyboardHeight);
+  const [isPlusOn, setIsPlusOn] = useState(false);
+  const [textInputHeight, setTextInputHeight] = useState(0);
   const [isScrollable, setIsScrollable] = useState(false);
-  const selectFlatList = useRef();
 
   useEffect(
     () =>
@@ -39,9 +48,6 @@ const FrameScreen = ({navigation,route}) => {
     Keyboard.dismiss();
   };
 
-  const renderItem = ({item})=> (
-    <Message message={item.content} isUser={item.user} time={item.time}/>
-  );
 
   const handleShowedKeyboard = Keyboard.addListener('keyboardDidShow', (e) =>{
     setKeyboardHeight(e.endCoordinates.height);
@@ -60,42 +66,57 @@ const FrameScreen = ({navigation,route}) => {
         <View style={styles.chatViewContainer}>
           
 
-          <KeyboardAvoidingView style={{flex:1}}
-                                keyboardVerticalOffset={44*Height}
-                                behavior = {Platform.os === 'ios' ? 'padding' : 'position'}
-                                >
+          {/*Body : MenuSelector or ChatBody*/}
+          {isPlusOn?
+          <MenuSelector setIsPlusOn={setIsPlusOn}
+                        messages={messages}
+                        setMessages={setMessages}
+                        corpName={route.params.searchedName}
+          />
+          
+          : <ChatBody
+                    isScrollable={isScrollable}
+                    setIsScrollable={setIsScrollable}
+                    isKeyboardShown={isKeyboardShown} 
+                    keyboardHeight={keyboardHeight}
+                    textInputHeight ={textInputHeight}
+                    messages ={messages}
+          />}
 
-            {/*Message List*/}
-            <FlatList 
-                      style={[styles.chatBody,
-                        {height:isKeyboardShown? (1550*Height)-(keyboardHeight)+(65*Height): 1550*Height},
-                        {top:isKeyboardShown? (395*Height)+(keyboardHeight)-(65*Height) : 395*Height},
-                      ]
-                      } 
-                      data={isScrollable?[...messages].reverse():[...messages]} 
-                      renderItem={renderItem}
-                      keyExtractor={item => item.id} 
-                      ref = {selectFlatList}
-                      onContentSizeChange={()=> isScrollable? selectFlatList.current.scrollToIndex({index:0}) 
-                                                            : selectFlatList.current.scrollToEnd()} 
-                      onScrollBeginDrag={() => setIsScrollable(true)}
-                      
-                      inverted = {isScrollable?true:false}
+          {/*Bottom : Text View or ChatInput*/}
 
-                      /> 
-            
+          {isPlusOn?
+            <View style={styles.bottomWindow}>
+              <TouchableOpacity style={styles.minusButton} onPress={()=>setIsPlusOn(false)}>
+              <Image
+                  style={styles.minusIcon}
+                  resizeMode="cover"
+                  source={require("../assets/MinusCircle.png")}
+              />
+              </TouchableOpacity>
 
-          {/*Text Input*/}
-            <ChatInput inputText={inputText} setInputText={setInputText} 
-                      messages={messages} setMessages={setMessages}
-                      corpName={route.params.searchedName}
-                      />
-          </KeyboardAvoidingView>
+              <Text style={styles.bottomWindowText}>원하시는 서비스를 선택해보세요.</Text>
+            </View>
+
+            :
+            // Text Input
+            <ChatInput 
+                    inputText={inputText} setInputText={setInputText} 
+                    setMessages={setMessages}
+                    corpName={route.params.searchedName}
+                    isKeyboardShown={isKeyboardShown}
+                    keyboardHeight={keyboardHeight}
+                    setIsPlusOn={setIsPlusOn}
+                    isPlusOn={isPlusOn}
+                    setTextInputHeight={setTextInputHeight}
+
+            />
+          }
           {/*Header*/}
           <ChatHeader navigation={navigation} searchedName={route.params.searchedName}/>
         </View>
       </TouchableWithoutFeedback>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
@@ -107,16 +128,51 @@ const styles = StyleSheet.create({
     height: 2100*Height,
     backgroundColor : Color.colorBG
   },
-  chatBody: {
-    width: '100%',
-    position: "absoulte",
-  },
   chatViewParent: {
     backgroundColor: Color.colorWhite,
     overflow: "hidden",
     height: 2220*Height,
     width: "100%",
   },
+
+  bottomWindow: {
+    left: 53*Width,
+    bottom:50*Height,
+    height : 120*Height,
+    position: 'absolute',
+    width: 974*Width,
+    backgroundColor: "#797c7b",
+    borderTopLeftRadius : 20,
+    borderTopRightRadius : 20,
+    borderBottomLeftRadius : 20,
+    borderBottomRightRadius : 20,
+    justifyContent:'center',
+},
+  bottomWindowText : {
+    width : 650*Width,
+    left: 125*Width,
+    fontFamily: FontFamily.kNUTRUTH,
+    color: '#D9D9D9',
+    fontSize : 48*Width,
+
+  },
+  minusButton: {
+    height: 90*Height,
+    bottom: 15*Height,
+    left: 20*Width,
+    width: 90*Width,
+    position: 'absolute',
+  },
+  minusIcon: {
+    height: 70*Height,
+    top: 10*Width,
+    left: 10*Width,
+    width: 70*Width,
+    right: 0,
+    tintColor : Color.colorNewturn,
+    position:'absolute',
+  },  
+
 });
 
 export default FrameScreen;

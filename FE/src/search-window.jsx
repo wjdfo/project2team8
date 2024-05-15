@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet,  
-    FlatList, TextInput,TouchableOpacity, Image} from "react-native";
+    FlatList, TextInput,TouchableOpacity, Image, Keyboard} from "react-native";
 import React, { useState,  useRef, useEffect } from "react";
 import { Color, Width, Height, FontFamily,} from "../GlobalStyles";
 
 const SearchWindow = ({navigation}) =>{
     const [searchText,setSearchText] = useState('');
     const [corpList, setCorpList] = useState([]);
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+
     const data = [
         {
             corp_name : '삼성전자',
@@ -28,8 +30,9 @@ const SearchWindow = ({navigation}) =>{
         </TouchableOpacity>
     );
     
+
     const handlePressResult = (corp_name) => {
-        navigation.navigate('chatScreen',{searchedName:corp_name});
+        navigation.navigate('chatScreen',{searchedName:corp_name, keyboardHeight:keyboardHeight});
     };
 
     const handleSearchText =(text) =>{
@@ -38,6 +41,10 @@ const SearchWindow = ({navigation}) =>{
         setSearchText(text);
     };
 
+    const handleShowedKeyboard = Keyboard.addListener('keyboardDidShow', (e) =>{
+        setKeyboardHeight(e.endCoordinates.height);
+      });
+    
 
     return (
         <View style={styles.searchWindowContainer}>
@@ -46,7 +53,7 @@ const SearchWindow = ({navigation}) =>{
                     <Image
                     style={styles.goBackIcon}
                     resizeMode="contain"
-                    source={require("../assets/goBack.png")}
+                    source={require("../assets/GoBack.png")}
                     />
                 </TouchableOpacity>
 
@@ -61,7 +68,7 @@ const SearchWindow = ({navigation}) =>{
                     <Image
                     style={styles.cancelIcon}
                     resizeMode="contain"
-                    source={require("../assets/cancel.png")}
+                    source={require("../assets/Cancel.png")}
                     />
                 </TouchableOpacity>
 

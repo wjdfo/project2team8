@@ -1,8 +1,8 @@
 import API from './cookie-handling/axiosAPI';
 
-const fetchInput =  ({inputText,corpName}) => {
+export const fetchList = (corpName) => {
     // var result = await API.post('/melong',{
-    //     question : {inputText}
+    //     corpName : {corpName}
     // })
     // .then((response)=>response.json())
     // .catch((error)=>{
@@ -10,11 +10,11 @@ const fetchInput =  ({inputText,corpName}) => {
     //   result = 'server error';
     // });
 
-    // return result;
+    return corpName;
 
-    return inputText;
-  };
+};
 
+export const fetchURL = (corpName) => {
 
-
-export default fetchInput;
+    return { "삼성전자" : "www.naver.com", "애플" : "www.google.com"};
+}
