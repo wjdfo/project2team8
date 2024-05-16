@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # Dart, Edgar 병합
     path('api/prompt', views.API.chatbot_response, name="chatbot_response"),
     path('api/summary', views.API.summary, name="corporation_summary"),
     path('api/corporations', views.API.corporations_list, name="corporations_list"),
