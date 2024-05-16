@@ -27,4 +27,7 @@ urlpatterns = [
     path('api/corporations', views.API.corporations_list, name="corporations_list"),
     path('api/report_url', views.API.report, name="corporation_report_url"),
     path('api/compare', views.API.compare, name="corporation_compare"),
+
+    # 검색 추천
+    path('api/search_recommendation', views.API.search_recommendation, name="search_recommendation")
 ]

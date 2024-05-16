@@ -1,6 +1,8 @@
 from django.http import *
 from django.views import View
 import json
+from . import recommendation
+from django.core.serializers import serialize
 
 import sys, os
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -102,5 +104,17 @@ class API(View):
                 return JsonResponse({"message": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
 
             return JsonResponse({"report": report}, status=200)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    
+    # 검색 추천
+    @classmethod
+    def search_recommendation(cls, request):
+        try:
+            search = json.loads(request.body)["search"]
+            matching_stocks = recommendation.recommendation(search)[:10]
+            serialized_stocks = serialize('json', matching_stocks)
+            
+            return JsonResponse({"list": serialized_stocks}, json_dumps_params={'ensure_ascii': False}, status=200)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
