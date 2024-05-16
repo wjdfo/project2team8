@@ -66,6 +66,7 @@ class API(View):
             return JsonResponse({"error": str(e)}, status=500)
 
     # 특정 기업 보고서 원문 url 출력
+    @classmethod
     def report(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
@@ -83,6 +84,7 @@ class API(View):
             return JsonResponse({"error": str(e)}, status=500)
     
     # 보고서 비교
+    @classmethod
     def compare(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
