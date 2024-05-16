@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework', # pip install djangorestframework
     'corsheaders', # pip install django-cors-headers
+    'App',
 ]
 
 MIDDLEWARE = [
