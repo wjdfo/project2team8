@@ -1,5 +1,6 @@
 from django.http import *
 from django.views import View
+import Chatbot
 import json
 
 class API(View):
@@ -9,7 +10,7 @@ class API(View):
             isDart = True
             corp_name = json.loads(request.body)["corpName"]
             question = json.loads(request.body)["question"]
-            response = chatbot.getResponse(isDart, question)
+            response = Chatbot.getResponse(isDart, question)
             return JsonResponse({"message": f"Question: {question}, Answer: chatbot response"}, status=200)
         except:
             return HttpResponseBadRequest("Invalid Request")
@@ -18,7 +19,7 @@ class API(View):
         try:
             isDart = True
             corp_name = json.loads(request.body)["corpName"]
-            list = chatbot.getCorpList(isDart)
+            list = Chatbot.getCorpList(isDart)
             return JsonResponse({"message": f"List: {list}"}, status=200)
         except:
             return HttpResponseBadRequest("Invalid Request")
@@ -27,7 +28,7 @@ class API(View):
         try:
             corp_name = json.loads(request.body)["corpName"]
             reportNum = json.loads(request.body)["reportNum"]
-            summary = chatbot.getCorpSummary(corp_namee, reportNum)
+            summary = Chatbot.getCorpSummary(corp_name, reportNum)
             return JsonResponse({"message": f"Summary: {summary}"}, status=200)
         except:
             return HttpResponseBadRequest("Invalid Request")
@@ -39,7 +40,7 @@ class API(View):
             corp_name = json.loads(request.body)["corpName"]
             fromDate = json.loads(request.body)["fromDate"]
             toDate = json.loads(request.body)["toDate"]
-            list = chatbot.getCorpList(isDart, corp_name, date)
+            list = Chatbot.getCorpList(isDart, corp_name, date)
             return JsonResponse({"message": f"List: {list}"}, status=200)
         except:
             return HttpResponseBadRequest("Invalid Request")
@@ -50,7 +51,7 @@ class API(View):
             isDart = True
             corpName = json.loads(request.body)["corpName"]
             targetCorpName = json.loads(request.body)["targetCorpName"]
-            report = chatbot.getCorpList(isDart, corpList)
+            report = Chatbot.getCorpList(isDart, corpList)
             return JsonResponse({"message": f"Report: {report}"}, status=200)
         except:
             return HttpResponseBadRequest("Invalid Request")
