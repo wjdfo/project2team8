@@ -11,7 +11,7 @@ export const fetchList = async (corpName) => {
       console.error('Error:', error);
       return 'server went wrong';
     });
-
+    console.log(result['list']);
     return result['list'];
 };
 

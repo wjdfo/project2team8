@@ -45,7 +45,6 @@ const FrameScreen = ({navigation,route}) => {
 
   useEffect(() => {
     if(route.params.targetCorpName != undefined){
-      //fetch Compare
       handleComparePrint(route.params.searchedName, route.params.targetCorpName);
     }
   },[route.params.targetCorpName]);
