@@ -6,3 +6,5 @@ react-native-safe-area-context
 axios
 @react-native-community/hooks
 react-native-hyperlink
+react-native-dotenv
+react-native-element-dropdown

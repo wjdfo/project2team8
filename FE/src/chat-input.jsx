@@ -5,7 +5,7 @@ import { Color, FontFamily, Width, Height,} from "../GlobalStyles";
 import fetchInput from "./fetch-input";
 import { useLayout } from '@react-native-community/hooks';
 
-const ChatInput = ({inputText, setInputText, setMessages,corpName, isKeyboardShown,keyboardHeight,
+const ChatInput = ({inputText, setInputText, setMessages, corpName, isKeyboardShown,keyboardHeight,
                     setIsPlusOn, setTextInputHeight}) => {
     
     const { onLayout, ...layout } = useLayout()
@@ -19,11 +19,11 @@ const ChatInput = ({inputText, setInputText, setMessages,corpName, isKeyboardSho
         setInputText(text);
     };
     
-    const handleSubmit = () => {
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1,content:{message:inputText}}])
+    const handleSubmit = async () => {
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1,content:{message:inputText}}]);
         setInputText('');
-        const answerText = fetchInput(inputText={inputText}, corpName={corpName});
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:answerText}}])
+        const answerText = await fetchInput(inputText=inputText, corpName=corpName);
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:answerText}}]);
         
     };
     return (

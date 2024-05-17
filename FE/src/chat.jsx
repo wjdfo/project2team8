@@ -6,7 +6,7 @@ import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
 import ChatBody from "./chat-body";
 import MenuSelector from "./menu-selector";
-
+import { fetchCompare } from "./fetch-menus";
 
 const FrameScreen = ({navigation,route}) => {
   const [messages,setMessages] = useState([
@@ -21,7 +21,7 @@ const FrameScreen = ({navigation,route}) => {
       id : 1,
       user : 0,
       content : {
-        message : '링크 있는 글이에요 ~~ www.youtube.com',
+        message : '링크 있는 글이에요 \nwww.youtube.com',
       }
     }
 
@@ -39,11 +39,21 @@ const FrameScreen = ({navigation,route}) => {
       navigation.addListener('beforeRemove', (e) => {
         e.preventDefault();
       }),
+      
     []
   );
 
-
-
+  useEffect(() => {
+    if(route.params.targetCorpName != undefined){
+      //fetch Compare
+      handleComparePrint(route.params.searchedName, route.params.targetCorpName);
+    }
+  },[route.params.targetCorpName]);
+  
+  const handleComparePrint = async (corpName,targetCorpName) => {
+    const result = await fetchCompare(corpName, targetCorpName);
+    setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}]);
+  }
   const dissmissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -68,7 +78,9 @@ const FrameScreen = ({navigation,route}) => {
 
           {/*Body : MenuSelector or ChatBody*/}
           {isPlusOn?
-          <MenuSelector setIsPlusOn={setIsPlusOn}
+          <MenuSelector 
+                        navigation = {navigation}
+                        setIsPlusOn={setIsPlusOn}
                         messages={messages}
                         setMessages={setMessages}
                         corpName={route.params.searchedName}

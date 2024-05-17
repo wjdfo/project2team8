@@ -79,3 +79,5 @@ yarn-error.log
 .watchmanconfig
 jest.config.js
 metro.config.js
+
+.env

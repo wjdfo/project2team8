@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet,  
-    FlatList, TextInput,TouchableOpacity, Image, Keyboard} from "react-native";
+    FlatList, TextInput,TouchableOpacity, Image, Keyboard, Alert} from "react-native";
 import React, { useState,  useRef, useEffect } from "react";
 import { Color, Width, Height, FontFamily,} from "../GlobalStyles";
+import { fetchSearch } from "./fetch-search";
 
-const SearchWindow = ({navigation}) =>{
+const SearchWindow = ({navigation,route}) =>{
     const [searchText,setSearchText] = useState('');
     const [corpList, setCorpList] = useState([]);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -30,15 +31,29 @@ const SearchWindow = ({navigation}) =>{
         </TouchableOpacity>
     );
     
-
     const handlePressResult = (corp_name) => {
-        navigation.navigate('chatScreen',{searchedName:corp_name, keyboardHeight:keyboardHeight});
+        if (route.params === undefined) {
+            navigation.navigate('chatScreen',{searchedName:corp_name, keyboardHeight:keyboardHeight});
+        }
+        else{
+            Alert.alert(
+                corp_name,
+                '확실한가요 ?',
+                [
+                    {text : '네', onPress:()=> navigation.navigate('chatScreen',{searchedName:route.params.searchedName,targetCorpName:corp_name, keyboardHeight:keyboardHeight}),style:'default'},
+                    {text : '아니오',onPress:()=>{},style:'cancel'},
+                ],
+                {cancelable:true,
+                onDismiss: () => {},
+                },
+            );
+        }
     };
 
-    const handleSearchText =(text) =>{
+    const handleSearchText = async (text) =>{
         // CorpList 업데이트
-        setCorpList(data);
         setSearchText(text);
+        setCorpList(data);
     };
 
     const handleShowedKeyboard = Keyboard.addListener('keyboardDidShow', (e) =>{
@@ -61,7 +76,7 @@ const SearchWindow = ({navigation}) =>{
                            placeholderTextColor="#797c7b"
                            style = {styles.searchTextBox}
                            value={searchText}
-                           onChangeText={handleSearchText}
+                           onChangeText={()=>{handleSearchText(searchText);}}
                            />
 
                 <TouchableOpacity style={styles.cancelButton} onPress={()=>setSearchText('')}>
