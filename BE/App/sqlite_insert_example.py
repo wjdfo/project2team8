@@ -8,7 +8,7 @@ import pandas as pd
 from App.models import App
 
 current_dir = os.getcwd()
-file_path = current_dir + '/BE/App/노가다.xlsx'
+file_path = current_dir + '/노가다.xlsx'
 
 df = pd.read_excel(file_path)
 
