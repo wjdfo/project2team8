@@ -5,4 +5,7 @@ class Knuturn :
             self.GPT_API_KEY = f.readline()
 
         self.db_path = "./VectorDB"
+        self.qna_table = "qna"
+        self.summary_table = "sum"
         self.collection_name = "knuturn"
+        self.EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'

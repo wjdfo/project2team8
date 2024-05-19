@@ -4,13 +4,11 @@ import os
 import json
 import chromadb
 from openai import OpenAI as op
-from llama_index.core import VectorStoreIndex, Settings, SimpleDirectoryReader
+from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.chroma import ChromaVectorStore
-from llama_index.core import StorageContext, Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from llama_index.embeddings.langchain import LangchainEmbedding
 from llama_index.llms.openai import OpenAI
-from llama_index.core import Settings
 from llama_index.core.schema import TextNode
 from llama_index.core.vector_stores import MetadataFilters,ExactMatchFilter
 
@@ -31,6 +29,7 @@ class DataPipeline(Knuturn) :
         ]
 
     def report_summary(self, report_data: dict, option : int) : # param : 사업보고서 크롤링 데이터 원본
+        sum_report = {}
         # token 수 세기 위한 model encoder
         encoder = tiktoken.encoding_for_model(self.gpt_model)
 
@@ -81,12 +80,13 @@ class DataPipeline(Knuturn) :
                         test_file.write(output)
                 
                 key = f"{corp_name} {report}"
+                sum_report[report] = output
 
                 self.embeddingNsummary(output, corp_name, report)
 
-        return output
+        return sum_report
 
-    def embeddingNsummary(self, sum_data: str, corp_name, report) : # param : 요약된 데이터
+    def embeddingNsummary(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
         EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
         
         documents = list()
@@ -112,6 +112,9 @@ class DataPipeline(Knuturn) :
 
     # metadata field 가 report : 20231114002109 인 데이터를 찾아오는 예제
     def retrieve(self):
+        # DB 서버 사용할 때, 이거 쓰면 될 듯
+        # client = chromadb.HttpClient(host="localhost", port="8000")
+
         EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
 
         chroma_client = chromadb.PersistentClient(path = self.db_path)
