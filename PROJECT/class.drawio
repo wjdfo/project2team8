@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2024-05-13T10:14:12.252Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="AORPwHDebo3YJpgooJsH" version="24.4.0" type="device">
+<mxfile host="app.diagrams.net" modified="2024-05-14T12:40:19.867Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="630EbLdxDpAaxiDotfl6" version="24.4.0" type="device">
   <diagram name="페이지-1" id="WWmK2mgtXMB2TsY04g74">
-    <mxGraphModel dx="2501" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2501" dy="706" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-6" value="DATA_PIPELINE" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-40" y="220" width="360" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="lhYpRNcE0l-zWbSrkpPp-7" value="&lt;div&gt;+ gpt_model_name: String&lt;/div&gt;&lt;div&gt;+ context: String&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lhYpRNcE0l-zWbSrkpPp-6" vertex="1">
+        <mxCell id="lhYpRNcE0l-zWbSrkpPp-7" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ context: String&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lhYpRNcE0l-zWbSrkpPp-6" vertex="1">
           <mxGeometry y="26" width="360" height="44" as="geometry" />
         </mxCell>
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-38" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="lhYpRNcE0l-zWbSrkpPp-6" source="lhYpRNcE0l-zWbSrkpPp-33" edge="1">
@@ -75,7 +75,7 @@
           <mxGeometry y="60" width="380" height="40" as="geometry" />
         </mxCell>
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-31" value="&lt;b&gt;KNUTURN&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-360" y="460" width="260" height="104" as="geometry" />
+          <mxGeometry x="-360" y="460" width="260" height="130" as="geometry" />
         </mxCell>
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-32" value="+ db_path: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lhYpRNcE0l-zWbSrkpPp-31" vertex="1">
           <mxGeometry y="26" width="260" height="26" as="geometry" />
@@ -85,6 +85,9 @@
         </mxCell>
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-34" value="+ GPT_API_KEY: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lhYpRNcE0l-zWbSrkpPp-31" vertex="1">
           <mxGeometry y="78" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ExPyh0M-GsRW-WGFh2k8-3" value="+ gpt_model_name: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lhYpRNcE0l-zWbSrkpPp-31">
+          <mxGeometry y="104" width="260" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lhYpRNcE0l-zWbSrkpPp-39" value="" style="endArrow=classic;html=1;rounded=0;curved=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="lhYpRNcE0l-zWbSrkpPp-33" target="lhYpRNcE0l-zWbSrkpPp-20" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">

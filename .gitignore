@@ -15,3 +15,4 @@ BE/APP/APP/__pycache__
 BE/APP/APP/migrations/__pycache__
 .DS_Store
 .idea
+BE/testDB
