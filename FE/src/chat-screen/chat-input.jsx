@@ -1,8 +1,8 @@
 import { View, StyleSheet,Image, 
     TextInput, TouchableOpacity} from "react-native";
 import { useEffect } from "react";
-import { Color, FontFamily, Width, Height,} from "../GlobalStyles";
-import fetchInput from "./fetch-input";
+import { Color, FontFamily, Width, Height,} from "../../GlobalStyles";
+import fetchInput from "../fetch-handling/fetch-input";
 import { useLayout } from '@react-native-community/hooks';
 
 const ChatInput = ({inputText, setInputText, setMessages, corpName, isKeyboardShown,keyboardHeight,
@@ -34,7 +34,7 @@ const ChatInput = ({inputText, setInputText, setMessages, corpName, isKeyboardSh
             <Image
                 style={styles.plusIcon}
                 resizeMode="cover"
-                source={require("../assets/PlusCircle.png")}
+                source={require("../../assets/PlusCircle.png")}
             />
             </TouchableOpacity>
 
@@ -53,7 +53,7 @@ const ChatInput = ({inputText, setInputText, setMessages, corpName, isKeyboardSh
                 <Image
                     style={styles.sendIcon}
                     resizeMode="cover"
-                    source={require("../assets/SendButton.png")}
+                    source={require("../../assets/SendButton.png")}
                 />
             </TouchableOpacity>: null}
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       left: 120*Width,
       fontFamily: FontFamily.kNUTRUTH,
       fontSize : 40*Width,
-      color: "#797c7b",
+      color: Color.colorLightGray,
       textAlignVertical : "top",
       marginVertical:10*Height,
       paddingBottom:0,

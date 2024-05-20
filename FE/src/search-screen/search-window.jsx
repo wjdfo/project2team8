@@ -1,7 +1,7 @@
 import { View, StyleSheet,  
      TextInput,TouchableOpacity, Image, Keyboard, Alert} from "react-native";
 import React, { useState } from "react";
-import { Color, Width, Height, FontFamily,} from "../GlobalStyles";
+import { Color, Width, Height, FontFamily,} from "../../GlobalStyles";
 import SearchBody from "./search-body";
 
 const SearchWindow = ({navigation,route}) =>{
@@ -22,12 +22,12 @@ const SearchWindow = ({navigation,route}) =>{
                     <Image
                     style={styles.goBackIcon}
                     resizeMode="contain"
-                    source={require("../assets/GoBack.png")}
+                    source={require("../../assets/GoBack.png")}
                     />
                 </TouchableOpacity>
 
                 <TextInput placeholder={'어떤 기업을 찾을까요 ?'}
-                           placeholderTextColor="#797c7b"
+                           placeholderTextColor={Color.colorLightGray}
                            style = {styles.searchTextBox}
                            value={searchText}
                            onChangeText={(text)=>setSearchText(text)}
@@ -37,7 +37,7 @@ const SearchWindow = ({navigation,route}) =>{
                     <Image
                     style={styles.cancelIcon}
                     resizeMode="contain"
-                    source={require("../assets/Cancel.png")}
+                    source={require("../../assets/Cancel.png")}
                     />
                 </TouchableOpacity>
 
@@ -51,8 +51,7 @@ const SearchWindow = ({navigation,route}) =>{
         </View>
 
     );
-}
-;
+};
 
 const styles = StyleSheet.create({
     searchWindowContainer : {
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     searchBox : {
         width : 1080*Width,
         height : 222 * Height,
-        backgroundColor : '#4B4B4B',
+        backgroundColor : Color.colorDarkenGray,
         position : 'absolute',
         top : 0,
         left : 0,
@@ -106,4 +105,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default SearchWindow
+export default SearchWindow;

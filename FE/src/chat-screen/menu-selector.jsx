@@ -1,6 +1,6 @@
 import {View,Text,StyleSheet, TouchableOpacity, Image, Modal, TouchableWithoutFeedback,Alert} from 'react-native';
-import { Color, Width, Height, FontFamily} from "../GlobalStyles";
-import { fetchList,fetchURL, fetchSummary } from './fetch-menus';
+import { Color, Width, Height, FontFamily} from "../../GlobalStyles";
+import { fetchList,fetchURL, fetchSummary } from '../fetch-handling/fetch-menus';
 import { useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 
@@ -86,7 +86,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
             <Image
                   style={styles.icon}
                   resizeMode="contain"
-                  source={require('../assets/ListIcon.png')}
+                  source={require('../../assets/ListIcon.png')}
               />
             <Text style = {styles.menuText}>
                 기업 목록
@@ -99,7 +99,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
             <Image
                   style={styles.icon}
                   resizeMode="contain"
-                  source={require('../assets/GetUrlIcon.png')}
+                  source={require('../../assets/GetUrlIcon.png')}
               />
             <Text style = {styles.menuText}>
                 원본 보고서 확인
@@ -112,7 +112,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
             <Image
                   style={styles.icon}
                   resizeMode="contain"
-                  source={require('../assets/SummarizeIcon.png')}
+                  source={require('../../assets/SummarizeIcon.png')}
               />
             <Text style = {styles.menuText}>
                 보고서 요약
@@ -125,7 +125,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
             <Image
                   style={styles.icon}
                   resizeMode="contain"
-                  source={require('../assets/ComparisonIcon.png')}
+                  source={require('../../assets/ComparisonIcon.png')}
               />
             <Text style = {styles.menuText}>
                 보고서 비교
@@ -140,7 +140,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
                 style={styles.modalView}
                 onPressIn ={()=>setIsURLVisible(false)}>
                 <TouchableWithoutFeedback  onPress={()=>{}}>
-                    <View style = {[styles.modalMain, {backgroundColor: '#377D64',}]}>
+                    <View style = {[styles.modalMain, {backgroundColor: Color.colorNewturnSec,}]}>
                         <Text style={{color:'#FFFFFF', fontSize:55*Width, top:50*Height,fontFamily:FontFamily.kNUTRUTH}}>
                         출력 범위를 정해주세요.
                         </Text>
@@ -214,7 +214,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
                 style={styles.modalView}
                 onPressIn ={()=>setIsSummaryVisible(false)}>
                 <TouchableWithoutFeedback onPress={()=>{}}>
-                    <View style = {[styles.modalMain, {backgroundColor: '#377D64'}]}>
+                    <View style = {[styles.modalMain, {backgroundColor: Color.colorNewturnSec}]}>
                         <Text style={{color:'#FFFFFF', fontSize:55*Width, top:50*Height,fontFamily:FontFamily.kNUTRUTH}}>
                         몇 년도 보고서를 요악할까요 ?
                         </Text>
@@ -281,7 +281,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
                         <Image
                         style={styles.searchIcon}
                         resizeMode="contain"
-                        source={require("../assets/Search.png")}
+                        source={require("../../assets/Search.png")}
                         />
 
                     </TouchableOpacity>
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius : 14,
         borderTopLeftRadius : 14,
         borderTopRightRadius : 14,
-        backgroundColor: '#377D64',
+        backgroundColor: Color.colorNewturnSec,
     },
     icon : {
         width : 220 * Width,
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
     },
     //
     corpSearchBox:{
-        backgroundColor:'#4B4B4B',
+        backgroundColor:Color.colorDarkenGray,
         width : 600 * Width,
         height : 100*Height,
         top : 150 * Height,
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
         top : 100 * Height,
         width : 300*Width, 
         borderColor : Color.colorWhite,  
-        backgroundColor : '#4B4B4B',
+        backgroundColor : Color.colorDarkenGray,
         borderTopRightRadius : 10,
         borderTopLeftRadius : 10,
         borderBottomLeftRadius : 10,
@@ -390,13 +390,13 @@ const styles = StyleSheet.create({
         borderTopLeftRadius : 10,
         borderBottomLeftRadius : 10,
         borderBottomRightRadius : 10,
-        backgroundColor : '#797c7b',
-        borderColor:'#797c7b'
+        backgroundColor : Color.colorLightGray,
+        borderColor:Color.colorLightGray
     },
     summarySubmit : {width : 200*Width, height:100*Height,
         bottom:20*Height,
         position:'absolute',
-        backgroundColor:'#797c7b',
+        backgroundColor:Color.colorLightGray,
         justifyContent:'center',
         alignItems:'center',
         borderBottomRightRadius : 14,

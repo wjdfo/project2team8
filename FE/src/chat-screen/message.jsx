@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet} from "react-native";
-import { Color, Border, FontFamily, Width, Height,} from "../GlobalStyles";
+import { Color, Border, FontFamily, Width, Height,} from "../../GlobalStyles";
 import Hyperlink from 'react-native-hyperlink';
 import { Linking } from 'react-native';
 

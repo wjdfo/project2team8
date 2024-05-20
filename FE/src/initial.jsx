@@ -1,27 +1,39 @@
 import { View, StyleSheet, Text, TouchableOpacity, Image} from "react-native";
-import {Width,Color, Height,FontFamily} from '../GlobalStyles'; //width,height 받아오기
+import { Width,Color, Height,FontFamily } from '../GlobalStyles'; //width,height 받아오기
 import { setItem, getItem } from './cookie-handling/cookie';
-
+import uuid from 'react-native-uuid';
 
 const Initial = ({navigation}) => {
   const setCookie = async (user) => {
     try {
-      await setItem('@user-id', user);
+      await setItem('@uid', user);
       console.log('cookie complete');
     } catch (e) {
       console.log(e);
     }
   };
   
-  // const getCookie = async () => {
-  //   const result = await getItem('key');
-  //   return result;
-  // };
+  const getCookie = async (key) => {
+    const result = await getItem(key);
+    return result;
+  };
 
-  const handleInitialEntry = () => {
-    setCookie('user--1');
-    navigation.navigate('initial-searchScreen');
-  }
+  const handleInitialEntry = async () => {
+    try {
+      var cookie = await getCookie('@uid');
+
+      if(!cookie){
+        cookie = uuid.v4();
+        await setCookie(cookie);
+
+      }
+      console.log('cookie : ' , cookie);
+      navigation.navigate('initial-searchScreen');
+
+    } catch(e) {
+      console.error('cookie error : ', e);
+    }
+  };
 
   return (
     <View style={styles.introViewParent}>
@@ -75,7 +87,7 @@ const styles = StyleSheet.create({
     height: 2220*Height,
   },
   introCorpSearch:{
-    backgroundColor:'#4B4B4B',
+    backgroundColor:Color.colorDarkenGray,
     width : 839*Width,
     height : 178 * Height,
     top : 850*Height,

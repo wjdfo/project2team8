@@ -1,6 +1,7 @@
-import API from './cookie-handling/axiosAPI';
+import API from '../cookie-handling/axiosAPI';
 
 export const fetchSearch = async (queryCorp) => {
+    return [{ corp_name : '삼성전자' }];
     var arry = [];
     var result;
     const request = await API.post('/api/search_recommendation',{
@@ -19,6 +20,9 @@ export const fetchSearch = async (queryCorp) => {
       each_json = { corp_name : rr[key]['fields']['corp_name']};
       arry = [...arry,each_json];
     })
+
+
+
     return arry;
 
 }

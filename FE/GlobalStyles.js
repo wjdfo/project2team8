@@ -16,14 +16,18 @@ export const Width = ( // 가로 변환 작업
 
 /* fonts */
 export const FontFamily = {
-  gmarketSans: "Gmarket Sans",
-  kNUTRUTH: "KNU TRUTH",
+  gmarketSans: 'Gmarket Sans',
+  kNUTRUTH: 'KNU TRUTH',
 };
+
 /* Colors */
 export const Color = {
-  colorWhite: "#fff",
-  colorNewturn: "#18c81f",
-  colorBG: "#292f3f",
+  colorWhite: '#fff',
+  colorNewturn: '#18c81f',
+  colorNewturnSec: '#377D64',
+  colorBG: '#292f3f',
+  colorDarkenGray: '#4B4B4B',
+  colorLightGray: '#797c7b',
 };
 /* border radiuses */
 export const Border = {

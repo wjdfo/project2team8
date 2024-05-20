@@ -1,4 +1,4 @@
-import API from './cookie-handling/axiosAPI';
+import API from '../cookie-handling/axiosAPI';
 
 const fetchInput =  async (inputText,corpName) => {
     return inputText;

@@ -1,6 +1,6 @@
 import React, { useState,  useRef,  } from "react";
 import { StyleSheet,FlatList,} from "react-native";
-import { Color, Width, Height,} from "../GlobalStyles";
+import { Color, Width, Height,} from "../../GlobalStyles";
 import Message from "./message";
 
 const ChatBody =({isKeyboardShown, keyboardHeight, messages,textInputHeight, isScrollable,setIsScrollable}) =>{

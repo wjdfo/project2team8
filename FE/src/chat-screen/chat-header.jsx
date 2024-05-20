@@ -1,5 +1,5 @@
 import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
-import { Height, Width,Color, FontFamily } from '../GlobalStyles';
+import { Height, Width,Color, FontFamily } from '../../GlobalStyles';
 const ChatHeader = ({navigation,searchedName}) => {
     return (
         <View style={styles.headerPosition}>
@@ -11,7 +11,7 @@ const ChatHeader = ({navigation,searchedName}) => {
                 <Image
                 style={styles.searchIcon}
                 resizeMode="contain"
-                source={require("../assets/Search.png")}
+                source={require("../../assets/Search.png")}
                 />
 
             </TouchableOpacity>            
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
       backgroundColor: Color.colorBG,
     },
     corpSearchBox:{
-        backgroundColor:'#4B4B4B',
+        backgroundColor:Color.colorDarkenGray,
         maxWidth: "80%",
         top : 73 * Height,
         left : 53* Width,

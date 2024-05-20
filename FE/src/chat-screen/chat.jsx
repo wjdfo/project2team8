@@ -1,12 +1,12 @@
 import React, { useState,  useEffect } from "react";
 import { View, StyleSheet, Keyboard,  
   TouchableWithoutFeedback, Text, Image, TouchableOpacity} from "react-native";
-import { Color, Width, Height,FontFamily} from "../GlobalStyles";
+import { Color, Width, Height,FontFamily} from "../../GlobalStyles";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
 import ChatBody from "./chat-body";
 import MenuSelector from "./menu-selector";
-import { fetchCompare } from "./fetch-menus";
+import { fetchCompare } from "../fetch-handling/fetch-menus";
 
 const FrameScreen = ({navigation,route}) => {
   const [messages,setMessages] = useState([
@@ -102,7 +102,7 @@ const FrameScreen = ({navigation,route}) => {
               <Image
                   style={styles.minusIcon}
                   resizeMode="cover"
-                  source={require("../assets/MinusCircle.png")}
+                  source={require("../../assets/MinusCircle.png")}
               />
               </TouchableOpacity>
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     height : 120*Height,
     position: 'absolute',
     width: 974*Width,
-    backgroundColor: "#797c7b",
+    backgroundColor: Color.colorLightGray,
     borderTopLeftRadius : 20,
     borderTopRightRadius : 20,
     borderBottomLeftRadius : 20,
