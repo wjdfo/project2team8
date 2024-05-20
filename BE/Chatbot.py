@@ -72,11 +72,16 @@ class Chatbot(Knuturn) :
 
         return query_result[0].text
     
-    def getCorpReport(self, corp_name : str, isDart : bool, date : tuple = None) :
+    def getCorpReport(self, corp_name : str, isDart : bool, date : tuple) :
         # Dart
         if isDart :
+            report = {}
+            report_name = ["정기 보고서", "1분기 보고서", "반기(2분기) 보고서", "3분기 보고서"]
             report_dict = self.dart.getReportCode([corp_name])
-            report = self.dart.getReportURL(report_dict)
+            _, report_list = self.dart.getReportURL(report_dict)
+
+            for i in range(len(report_list)) :
+                report[report_name[i]] = report_list[i]
 
         # # Edgar
         else :

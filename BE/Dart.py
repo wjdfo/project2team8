@@ -14,8 +14,8 @@ class Dart :
             dart_api_key = api_key_file.readline()
         self.dart = OpenDartReader(dart_api_key)
         dart_fss.set_api_key(api_key = dart_api_key)
-        self.start_date = "20240101"
-        self.end_date = "20240301"
+        self.start_date = "20230101"
+        self.end_date = "20240101"
         
     def getCorpList(self) :
         f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
@@ -54,8 +54,8 @@ class Dart :
     def getReportURL(self, report_list: dict) : #report_list 받아서 공시보고서 url 생성
         if len(list(report_list.keys())) == 0 :
             print("There's no report list.")
-            return None
-        
+            return None, None
+        whole_report_url = []
         report_url = {}
 
         for corp_code in report_list.keys() :
@@ -63,10 +63,14 @@ class Dart :
 
             for report_num in report_list[corp_code] :
                 report_url[corp_code][report_num] = {}
+                report = self.dart.attach_files(report_num)
+                for title, url in report.items() :
+                    if url.startswith("http://dart.fss.or.kr/pdf/download/pdf") :
+                        whole_report_url.append(url)
                 for idx, row in self.dart.sub_docs(report_num).iterrows() :
                     report_url[corp_code][report_num][row['title']] = row['url']
             
-        return report_url
+        return report_url, whole_report_url
     
     '''
     모든 목차 가져오는 함수

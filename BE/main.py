@@ -4,6 +4,7 @@ Backend
 
 import Dart
 from DataPipeline import DataPipeline
+from Chatbot import Chatbot
 # import edgar_crawler
 # import edgar_extractor
 
@@ -37,16 +38,21 @@ def dart_test() :
 #     extractor = edgar_extractor.EDGAR_Extractor()
 #     extractor.doExtractFromRAWs()
 
-
+import time
 import json
 
 if __name__ == "__main__" :
-    a = DataPipeline()
+    # a = DataPipeline()
 
-    # dart_test()
+    # # dart_test()
 
-    # edgar_test()
-    with open("./text.json", "r", encoding = 'utf-8') as f:
-        report_data = json.load(f)
+    # # edgar_test()
+    # with open("./text.json", "r", encoding = 'utf-8') as f:
+    #     report_data = json.load(f)
 
-    print(a.report_summary(report_data, 1))
+    # print(a.report_summary(report_data, 1))
+    start = time.time()
+    a = Chatbot()
+    print(a.getCorpReport(corp_name="삼성전자", isDart = True, date = (2023, 2024)))
+    end =  time.time()
+    print(f"{end-start :.5f}초 소요")
