@@ -1,0 +1,17 @@
+OpenDartReader
+selenium
+dart-fss
+beautifulsoup4
+cssutils
+numpy
+lxml
+pandas
+requests
+tqdm
+django
+django-cors-headers
+djangorestframework
+langchain_community
+llama_index
+llama_index.embeddings.langchain
+llama_index.vector_stores.chroma
