@@ -11,8 +11,11 @@ BE/api_key
 BE/__pycache__
 BE/docs_cache
 BE/edgar-datasets
-BE/APP/APP/__pycache__
+BE/APP/APP/__pycache__/
 BE/APP/APP/migrations/__pycache__
 .DS_Store
 .idea
 BE/testDB
+BE/App/App/__pycache__/views.cpython-38.pyc
+BE/App/App/__pycache__/urls.cpython-38.pyc
+BE/App/App/__pycache__/recommendation.cpython-38.pyc
