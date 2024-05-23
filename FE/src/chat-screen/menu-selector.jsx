@@ -16,8 +16,11 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
 
     const handleList = async () => {
         const result = await fetchList(corpName);
-
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}]);
+        var resultArry =[];
+        result.map((i)=>{
+            resultArry = [...resultArry,i+'\n'];
+        })
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:resultArry}}]);
         setIsPlusOn(false);
     };
 

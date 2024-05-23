@@ -1,8 +1,6 @@
 import API from '../cookie-handling/axiosAPI';
 
 export const fetchList = async (corpName) => {
-    return corpName;
-
     const request = await API.post('/api/corporations',{
         corpName : corpName
     })
@@ -11,15 +9,10 @@ export const fetchList = async (corpName) => {
       console.error('Error:', error);
       return 'server went wrong';
     });
-    console.log(result['list']);
     return result['list'];
 };
 
 export const fetchURL = async (corpName,fromDate,toDate) => {
-
-
-    return { "삼성전자" : "www.naver.com", "애플" : "www.google.com"};
-
     const request = await API.post('/api/report_url',{
         corpName : corpName,
         fromDate : fromDate,
@@ -30,7 +23,6 @@ export const fetchURL = async (corpName,fromDate,toDate) => {
       console.error('Error:', error);
       return 'server went wrong';
     });
-
     return result['link'];
 };
 
