@@ -13,7 +13,7 @@ file_path = current_dir + '/BE/App/database_input.xlsx'
 df = pd.read_excel(file_path)
 
 for index, row in df.iterrows():
-    test = App(corp_name=row.iloc[1], corp_num=row.iloc[0], corp_jamo=row.iloc[2])
+    test = App(corp_num=row.iloc[0], corp_name=row.iloc[1], corp_jamo=row.iloc[2], is_dart=row.iloc[2])
     test.save()
     
 all_apps = App.objects.all()
