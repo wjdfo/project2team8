@@ -22,10 +22,10 @@ class API(View):
     def chatbot_response(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
+            isDart = json.loads(request.body)["isDart"]
             question = json.loads(request.body)["question"]
             dart = Dart()
             dart_list = dart.getCorpList()
-            isDart = dart_check(corpName, dart_list)
 
             chatbot = Chatbot()
             response = chatbot.getResponse(question, isDart)
@@ -39,10 +39,10 @@ class API(View):
     def summary(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
+            isDart = json.loads(request.body)["isDart"]
             reportNum = json.loads(request.body)["reportNum"]
             dart = Dart()
             dart_list = dart.getCorpList()
-            isDart = dart_check(corpName, dart_list)
 
             chatbot = Chatbot()
             response = chatbot.getCorpSummary(corpName, isDart, reportNum)
@@ -56,9 +56,9 @@ class API(View):
     def corporations_list(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
+            isDart = json.loads(request.body)["isDart"]
             dart = Dart()
             dart_list = dart.getCorpList()
-            isDart = dart_check(corpName, dart_list)
             
             chatbot = Chatbot()
             list = chatbot.getCorpList(isDart)
@@ -72,9 +72,9 @@ class API(View):
     def report(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
+            isDart = json.loads(request.body)["isDart"]
             dart = Dart()
             dart_list = dart.getCorpList()
-            isDart = dart_check(corpName, dart_list)
             fromDate = json.loads(request.body)["fromDate"]
             toDate = json.loads(request.body)["toDate"]
 
@@ -90,16 +90,18 @@ class API(View):
     def compare(cls, request):
         try:
             corpName = json.loads(request.body)["corpName"]
+            corpIsDart = json.loads(request.body)["corpIsDart"]
+
             targetCorpName = json.loads(request.body)["targetCorpName"]
+            targetIsDart = json.loads(request.body)["targetIsDart"]
+
             dart = Dart()
             dart_list = dart.getCorpList()
-            corp_isDart = dart_check(corpName, dart_list)
-            target_isDart = dart_check(targetCorpName, dart_list)
 
             # 같은 종류의 공시 데이터만 비교 가능
-            if (corp_isDart and target_isDart) or (not corp_isDart and not target_isDart):
+            if (corpIsDart and targetIsDart) or (not corpIsDart and not targetIsDart):
                 chatbot = Chatbot()
-                report = chatbot.Compare2Corps((corpName, targetCorpName), corp_isDart)
+                report = chatbot.Compare2Corps((corpName, targetCorpName), corpIsDart)
             else:
                 return JsonResponse({"report": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
 
