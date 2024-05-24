@@ -101,7 +101,7 @@ class API(View):
                 chatbot = Chatbot()
                 report = chatbot.Compare2Corps((corpName, targetCorpName), corp_isDart)
             else:
-                return JsonResponse({"message": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
+                return JsonResponse({"report": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
 
             return JsonResponse({"report": report}, status=200)
         except Exception as e:
