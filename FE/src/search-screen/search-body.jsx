@@ -14,19 +14,17 @@ const SearchBody = ({navigation, route, text,keyboardHeight}) => {
         search();
     },[text]);
 
-
-
-
-    const handlePressResult = (corp_name) => {
+    const handlePressResult = (corp_name,isDart) => {
         if (route.params === undefined) {
-            navigation.navigate('chatScreen',{searchedName:corp_name, keyboardHeight:keyboardHeight});
+            navigation.navigate('chatScreen',{searchedName:corp_name, sNisDart:isDart, keyboardHeight:keyboardHeight});
         }
         else{
             Alert.alert(
                 corp_name,
                 '확실한가요 ?',
                 [
-                    {text : '네', onPress:()=> navigation.navigate('chatScreen',{searchedName:route.params.searchedName,targetCorpName:corp_name, keyboardHeight:keyboardHeight}),style:'default'},
+                    {text : '네', onPress:()=> navigation.navigate('chatScreen',{searchedName:route.params.searchedName,sNisDart:route.params.sNisDart,
+                                                                            targetCorpName:corp_name,tNisDart:isDart, keyboardHeight:keyboardHeight}),style:'default'},
                     {text : '아니오',onPress:()=>{},style:'cancel'},
                 ],
                 {cancelable:true,
@@ -38,7 +36,7 @@ const SearchBody = ({navigation, route, text,keyboardHeight}) => {
 
     const renderItem = ( {item} ) => (
         <TouchableOpacity style = {styles.resultItemContainer}
-                        onPress={()=> handlePressResult(item.corp_name)}>
+                        onPress={()=> handlePressResult(item.corp_name, item.isDart)}>
             <Text style = {styles.resultItem}>
                 {item.corp_name}
             </Text>

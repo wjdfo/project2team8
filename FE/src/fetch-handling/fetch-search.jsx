@@ -16,7 +16,7 @@ export const fetchSearch = async (queryCorp) => {
     var each_json;
     
     Object.keys(rr).map((key)=>{
-      each_json = { corp_name : rr[key]['fields']['corp_name']};
+      each_json = { corp_name : rr[key]['fields']['corp_name'], isDart : rr[key]['fields']['isDart']};
       arry = [...arry,each_json];
     })
 

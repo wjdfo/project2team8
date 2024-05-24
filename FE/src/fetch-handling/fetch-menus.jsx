@@ -1,8 +1,9 @@
 import API from '../cookie-handling/axiosAPI';
 
-export const fetchList = async (corpName) => {
+export const fetchList = async (corpName, isDart) => {
     const request = await API.post('/api/corporations',{
-        corpName : corpName
+        corpName : corpName,
+        isDart : isDart
     })
     .then((response)=>{result = response.data;})
     .catch((error)=>{
@@ -12,11 +13,12 @@ export const fetchList = async (corpName) => {
     return result['list'];
 };
 
-export const fetchURL = async (corpName,fromDate,toDate) => {
+export const fetchURL = async (corpName,fromDate,toDate,isDart) => {
     const request = await API.post('/api/report_url',{
         corpName : corpName,
         fromDate : fromDate,
         toDate : toDate,
+        isDart : isDart
     })
     .then((response)=>{result = response.data;})
     .catch((error)=>{
@@ -26,12 +28,13 @@ export const fetchURL = async (corpName,fromDate,toDate) => {
     return result['link'];
 };
 
-export const fetchSummary = async (corpName,reportYear) => {
+export const fetchSummary = async (corpName,reportYear, isDart) => {
     return corpName+reportYear;
 
     const request = await API.post('/api/summary',{
         corpName : corpName,
-        reportNum : reportYear
+        reportNum : reportYear,
+        isDart : isDart
     })
     .then((response)=>{result = response.data;})
     .catch((error)=>{
@@ -43,12 +46,14 @@ export const fetchSummary = async (corpName,reportYear) => {
 
 };
 
-export const fetchCompare = async (corpName, targetCorpName ) => {
+export const fetchCompare = async (corpName,isDart, targetCorpName,targetIsDart ) => {
     return corpName + targetCorpName;
 
     const request = await API.post('/api/compare',{
         corpName : corpName,
-        targetCorpName : targetCorpName
+        corpIsDart : isDart,
+        targetCorpName : targetCorpName,
+        targetIsDart : targetIsDart
     })
     .then((response)=>{result = response.data;})
     .catch((error)=>{

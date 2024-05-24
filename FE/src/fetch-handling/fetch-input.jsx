@@ -1,12 +1,13 @@
 import API from '../cookie-handling/axiosAPI';
 
-const fetchInput =  async (inputText,corpName) => {
+const fetchInput =  async (inputText,corpName,isDart) => {
     return inputText;
 
     var result;
     const request = await API.post('/api/prompt',{
         question : inputText,
-        corpName : corpName
+        corpName : corpName,
+        isDart : isDart
     })
     .then((response)=>{result = response.data;})
     .catch((error)=>{

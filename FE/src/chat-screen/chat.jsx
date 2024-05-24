@@ -45,12 +45,12 @@ const FrameScreen = ({navigation,route}) => {
 
   useEffect(() => {
     if(route.params.targetCorpName != undefined){
-      handleComparePrint(route.params.searchedName, route.params.targetCorpName);
+      handleComparePrint(corpName=route.params.searchedName,isDart=route.params.sNisDart, targetCorpName=route.params.targetCorpName,targetIsDart=route.params.tNisDart);
     }
   },[route.params.targetCorpName]);
   
-  const handleComparePrint = async (corpName,targetCorpName) => {
-    const result = await fetchCompare(corpName, targetCorpName);
+  const handleComparePrint = async (corpName,isDart,targetCorpName,targetIsDart) => {
+    const result = await fetchCompare(corpName=corpName, isDart=isDart, targetCorpName=targetCorpName,targetIsDart=targetIsDart);
     setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}]);
   }
   const dissmissKeyboard = () => {
@@ -83,6 +83,7 @@ const FrameScreen = ({navigation,route}) => {
                         messages={messages}
                         setMessages={setMessages}
                         corpName={route.params.searchedName}
+                        isDart={route.params.sNisDart}
           />
           
           : <ChatBody
@@ -115,6 +116,7 @@ const FrameScreen = ({navigation,route}) => {
                     inputText={inputText} setInputText={setInputText} 
                     setMessages={setMessages}
                     corpName={route.params.searchedName}
+                    isDart={route.params.sNisDart}
                     isKeyboardShown={isKeyboardShown}
                     keyboardHeight={keyboardHeight}
                     setIsPlusOn={setIsPlusOn}

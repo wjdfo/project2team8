@@ -4,7 +4,7 @@ import { fetchList,fetchURL, fetchSummary } from '../fetch-handling/fetch-menus'
 import { useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 
-const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
+const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName,isDart}) =>{
     const [isCompareVisible,setIsCompareVisible] = useState(false);
     const [isSummaryVisible,setIsSummaryVisible] = useState(false);
     const [isURLVisible,setIsURLVisible] = useState(false);
@@ -15,7 +15,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
     const [summaryValue, setSummaryValue] = useState(null);
 
     const handleList = async () => {
-        const result = await fetchList(corpName);
+        const result = await fetchList(corpName,isDart);
         var resultArry =[];
         result.map((i)=>{
             resultArry = [...resultArry,i+'\n'];
@@ -40,7 +40,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
             )
         }
         else{
-            const result = await fetchURL(corpName=corpName,fromDate=fromDate,toDate=toDate);
+            const result = await fetchURL(corpName=corpName,fromDate=fromDate,toDate=toDate, isDart=isDart);
 
             Object.keys(result).map((key)=>{
                 setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:key + '\n' +result[key]}}]);
@@ -51,7 +51,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
     };
 
     const handleSummary = async (reportYear) => {
-        const result = await fetchSummary(corpName=corpName, reportYear = reportYear);
+        const result = await fetchSummary(corpName=corpName, reportYear = reportYear, isDart = isDart);
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}])
         setIsPlusOn(false);
     };
@@ -274,7 +274,7 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName}) =>{
                         onPress = {()=>{
                             setIsPlusOn(false);
                             setIsCompareVisible(false);
-                            navigation.navigate('searchScreen',{searchedName:corpName});
+                            navigation.navigate('searchScreen',{searchedName:corpName, sNisDart : isDart});
                         }}
 
                     >
