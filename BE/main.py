@@ -21,6 +21,8 @@ def dart_test(corp_list) :
     if  not corp_report_code :
         return None
     print(corp_report_code)
+    corp_report_code['삼성전자'] = corp_report_code['삼성전자'][:1]
+    print(corp_report_code)
 
     print("공시보고서 링크")
     corp_report_url, whole_report_data = a.getReportURL(corp_report_code)
@@ -71,15 +73,26 @@ if __name__ == "__main__" :
     corp_list = c.getCorpList(True)
     print(corp_list)
     print("\n\n")
-    corp_report_data = dart_test(corp_list)
-    print("data pipeline test")
+    end =  time.time()
+    print(f"챗봇 테스트 getCorpList test {end-start :.5f}초 소요")
+
+    start = time.time()
+    corp_report_data = dart_test(corp_list[:1])
     print(corp_report_data)
+    end =  time.time()
+    print(f"dart api data 하나 가져오는데 {end-start :.5f}초 소요")
+
+    print("data pipeline test")
     print("\n\n")
 
-    print("data pipeline")
+    start = time.time()
     d.report_summary(corp_report_data, True)
     print("\n\nsummary table insert complete\n\n")
-    answer = q.insertQnA(question_dict)
-    print(f"result : {answer}\n\n")
     end =  time.time()
-    print(f"{end-start :.5f}초 소요")
+    print(f"data pipeline 한 기업 보고서 요약 & 적재하는데 {end-start :.5f}초 소요")
+
+    start = time.time()
+    q.insertQnA(question_dict)
+    q.insertCheck("삼성전자", "임직원 정보")
+    end =  time.time()
+    print(f"VectorDB 접근해서 요약된 데이터 가져오오고 그 데이터 기반으로 질문 후 답변 가져오는데 {end-start :.5f}초 소요")
