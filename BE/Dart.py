@@ -40,10 +40,9 @@ class Dart :
             end_year += "1231"
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
                 report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
-                corp_code = report_list['corp_code'][0]
-                d[corp_code] = []
+                d[comp] = []
                 for report_code in report_list['rcept_no'] :
-                    d[corp_code].append(report_code)
+                    d[comp].append(report_code)
                     count += 1
                 print(f"has {count} report(s)")
             except :
