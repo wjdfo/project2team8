@@ -29,8 +29,20 @@ class Chatbot(Knuturn) :
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
         # case : dart
+        Dart = [
+            "삼성전자", "SK하이닉스", "LG에너지솔루션", "삼성바이오로직스", "현대자동차",
+            "POSCO홀딩스", "삼성SDI", "LG화학", "NAVER", "KB금융", "에코프로비엠", "현대모비스",
+            "신한지주", "포스코퓨처엠", "삼성생명", "하나금융지주", "에코프로", "메리츠금융지주",
+            "LG전자", "LG",
+            "HLB", "카카오뱅크", "한미반도체"
+        ]
+
+        Edgar = [
+            
+        ]
         if isDart :
-            return self.dart.getCorpList()
+            # return self.dart.getCorpList()
+            return Dart
         
         # case : edgar
         else :

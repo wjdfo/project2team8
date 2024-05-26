@@ -14,8 +14,6 @@ class Dart :
             dart_api_key = api_key_file.readline()
         self.dart = OpenDartReader(dart_api_key)
         dart_fss.set_api_key(api_key = dart_api_key)
-        self.start_date = "20230101"
-        self.end_date = "20240101"
         
     def getCorpList(self) :
         f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
@@ -32,14 +30,16 @@ class Dart :
 
         return stock_list['corp_name'].tolist()
 
-    def getReportCode(self, comps: list) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
+    def getReportCode(self, comps: list, start_year, end_year) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
 
         for comp in comps :
             print(comp, end = " ")
             count = 0
+            start_year += "0101"
+            end_year += "1231"
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
-                report_list = self.dart.list(comp, start = self.start_date, end = self.end_date, kind = 'A')
+                report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
                 corp_code = report_list['corp_code'][0]
                 d[corp_code] = []
                 for report_code in report_list['rcept_no'] :

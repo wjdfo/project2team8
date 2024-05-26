@@ -2,6 +2,7 @@
 Backend
 '''
 
+from QnA import QnA
 import Dart
 from DataPipeline import DataPipeline
 from Chatbot import Chatbot
@@ -51,8 +52,16 @@ if __name__ == "__main__" :
     #     report_data = json.load(f)
 
     # print(a.report_summary(report_data, 1))
+
+    question_dict = {
+        "삼성전자 어때?" :
+        {
+            "corp_name" : "삼성전자"
+        }
+    }
+
     start = time.time()
-    a = Chatbot()
-    print(a.getCorpReport(corp_name="삼성전자", isDart = True, date = (2023, 2024)))
+    a = QnA()
+    a.insertQnA(question_dict)
     end =  time.time()
     print(f"{end-start :.5f}초 소요")
