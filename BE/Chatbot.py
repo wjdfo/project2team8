@@ -2,30 +2,13 @@ from Knuturn import Knuturn
 from Dart import Dart
 from openai import OpenAI as op
 from Edgar import Edgar
-import chromadb
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from llama_index.embeddings.langchain import LangchainEmbedding
-from llama_index.core.vector_stores import MetadataFilters,MetadataFilter, FilterOperator, FilterCondition, ExactMatchFilter
-from llama_index.core import VectorStoreIndex, StorageContext
-from llama_index.vector_stores.chroma import ChromaVectorStore
+from llama_index.core.vector_stores import MetadataFilters,MetadataFilter, FilterCondition, ExactMatchFilter
 
 class Chatbot(Knuturn) :
     def __init__(self) :
-        #self.gpt_model_name = 'gpt-3.5-turbo'
-        #self.context = ""
         super().__init__()
         self.dart = Dart()
         self.edgar = Edgar()
-        # client = chromadb.PersistentClient(path = self.db_path)
-        # qna_collection = client.get_or_create_collection(name = self.qna_table, metadata={'hnsw:space': 'cosine'})
-        # summary_collection = client.get_or_create_collection(name = self.summary_table, metadata={'hnsw:space': 'cosine'})
-        # self.embed_model = LangchainEmbedding(
-        #                         HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
-        #                     )
-        # qna_vector_store = ChromaVectorStore(chroma_collection = qna_collection)
-        # summary_vector_store = ChromaVectorStore(chroma_collection = summary_collection)
-        # self.qna_index = VectorStoreIndex.from_vector_store(vector_store=qna_vector_store, embed_model=self.embed_model)
-        # self.summary_index = VectorStoreIndex.from_vector_store(vector_store=summary_vector_store, embed_model=self.embed_model)
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
         # case : dart

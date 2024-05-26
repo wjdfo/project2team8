@@ -1,16 +1,7 @@
 from Knuturn import Knuturn
 import tiktoken
-import os
-import json
-import chromadb
-from openai import OpenAI as op
 from llama_index.core import VectorStoreIndex, StorageContext
-from llama_index.vector_stores.chroma import ChromaVectorStore
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from llama_index.embeddings.langchain import LangchainEmbedding
-from llama_index.llms.openai import OpenAI
 from llama_index.core.schema import TextNode
-from llama_index.core.vector_stores import MetadataFilters,ExactMatchFilter
 
 class DataPipeline(Knuturn) :
     def __init__(self) :
@@ -78,9 +69,12 @@ class DataPipeline(Knuturn) :
 
                 self.embeddingNinsert(output, corp_name, report)
 
+                break
+
         return sum_report
 
     def embeddingNinsert(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
+        print(f"{corp_name}, {report} 요약된 데이터 ----- \n{sum_data}")
         documents = list()
 
         summary_storage_context = StorageContext.from_defaults(vector_store=self.summary_vector_store)
@@ -90,3 +84,4 @@ class DataPipeline(Knuturn) :
 
         # 임베딩된 문서를 ChromaDB에 적재
         VectorStoreIndex(nodes=documents, storage_context=summary_storage_context, embed_model=self.embed_model)
+        print(f"{corp_name}, {report} 적재 완료")

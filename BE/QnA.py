@@ -35,7 +35,7 @@ class QnA(Knuturn) :
             )
 
             retriever = self.summary_index.as_retriever(filters=filters)
-            summary_data = retriever.retrieve('0')
+            summary_data = retriever.retrieve(question)
             print(summary_data[0].text)
 
             while True :
@@ -74,3 +74,14 @@ class QnA(Knuturn) :
 
         VectorStoreIndex(nodes=question_documents, storage_context=self.question_storage_context, embed_model=self.embed_model)
         VectorStoreIndex(nodes=qna_documents, storage_context=self.qna_storage_context, embed_model=self.embed_model)
+
+    def insertCheck(self, test_corp : str, test_question : str) :
+        filters = MetadataFilters(
+            filters=[
+                    ExactMatchFilter(key="corp_name", value=test_corp)
+                ]
+        )
+
+        retriever = self.summary_index.as_retriever(filters=filters)
+        summary_data = retriever.retrieve(test_question)
+        print(summary_data[0].text)
