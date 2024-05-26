@@ -1,13 +1,6 @@
 from Knuturn import Knuturn
-from Dart import Dart
-from openai import OpenAI as op
-from Edgar import Edgar
-import chromadb
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from llama_index.embeddings.langchain import LangchainEmbedding
-from llama_index.core.vector_stores import MetadataFilters,MetadataFilter, FilterOperator, FilterCondition, ExactMatchFilter
+from llama_index.core.vector_stores import MetadataFilters, ExactMatchFilter
 from llama_index.core import VectorStoreIndex, StorageContext
-from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core.schema import TextNode
 
 class QnA(Knuturn) :

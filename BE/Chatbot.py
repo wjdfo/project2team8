@@ -40,6 +40,7 @@ class Chatbot(Knuturn) :
         Edgar = [
             
         ]
+
         if isDart :
             # return self.dart.getCorpList()
             return Dart
@@ -48,21 +49,30 @@ class Chatbot(Knuturn) :
         else :
             return self.edgar.getCorpList()
         
-    def getResponse(self, corp_name : str, question : str, isDart : bool) :
-        ############ 미구현 #############
-
+    def getResponse(self, corp_name : str, question : str) :
         # 사용자의 질문을 받아서 qna table에 query
-        index = VectorStoreIndex.from_vector_store(vector_store=self.qna_vector_store)
-
-        filters = MetadataFilters(
+        question_filters = MetadataFilters(
                 filters=[
-                        MetadataFilter(key="corp_name", value="회사명"),
-                        MetadataFilter(key="q", value = "질문 내용")
+                        MetadataFilter(key="corp_name", value=corp_name)
+                ]
+            )
+
+        question_query = self.question_index.as_retriever(filters = question_filters)
+        q = question_query.retrieve(question)
+        anticipated_question = q[0].text
+
+        qna_filters = MetadataFilters(
+                filters=[
+                        ExactMatchFilter(key="corp_name", value=corp_name),
+                        MetadataFilter(key="q", value = anticipated_question)
                 ],
                 condition=FilterCondition.AND,
             )
         
-        return
+        answer_query = self.qna_index.as_retriever(filters = qna_filters)
+        a = answer_query.retrieve('0')
+
+        return a[0].text
 
     def getCorpSummary(self, corp_name : str, report_num : str = None) :
         # summary table에 query
