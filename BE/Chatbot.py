@@ -16,16 +16,16 @@ class Chatbot(Knuturn) :
         super().__init__()
         self.dart = Dart()
         self.edgar = Edgar()
-        client = chromadb.PersistentClient(path = self.db_path)
-        qna_collection = client.get_or_create_collection(name = self.qna_table, metadata={'hnsw:space': 'cosine'})
-        summary_collection = client.get_or_create_collection(name = self.summary_table, metadata={'hnsw:space': 'cosine'})
-        self.embed_model = LangchainEmbedding(
-                                HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
-                            )
-        qna_vector_store = ChromaVectorStore(chroma_collection = qna_collection)
-        summary_vector_store = ChromaVectorStore(chroma_collection = summary_collection)
-        self.qna_index = VectorStoreIndex.from_vector_store(vector_store=qna_vector_store, embed_model=self.embed_model)
-        self.summary_index = VectorStoreIndex.from_vector_store(vector_store=summary_vector_store, embed_model=self.embed_model)
+        # client = chromadb.PersistentClient(path = self.db_path)
+        # qna_collection = client.get_or_create_collection(name = self.qna_table, metadata={'hnsw:space': 'cosine'})
+        # summary_collection = client.get_or_create_collection(name = self.summary_table, metadata={'hnsw:space': 'cosine'})
+        # self.embed_model = LangchainEmbedding(
+        #                         HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
+        #                     )
+        # qna_vector_store = ChromaVectorStore(chroma_collection = qna_collection)
+        # summary_vector_store = ChromaVectorStore(chroma_collection = summary_collection)
+        # self.qna_index = VectorStoreIndex.from_vector_store(vector_store=qna_vector_store, embed_model=self.embed_model)
+        # self.summary_index = VectorStoreIndex.from_vector_store(vector_store=summary_vector_store, embed_model=self.embed_model)
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
         # case : dart

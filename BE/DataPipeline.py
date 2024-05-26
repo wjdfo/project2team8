@@ -28,7 +28,7 @@ class DataPipeline(Knuturn) :
             {"role": "system", "content":'do not give additional illustrations.'}
         ]
 
-    def report_summary(self, report_data: dict, option : int) : # param : 사업보고서 크롤링 데이터 원본
+    def report_summary(self, report_data: dict, isDart : bool) : # param : 사업보고서 크롤링 데이터 원본
         sum_report = {}
         # token 수 세기 위한 model encoder
         encoder = tiktoken.encoding_for_model(self.gpt_model)
@@ -44,8 +44,6 @@ class DataPipeline(Knuturn) :
                 substrings.pop()
 
             return substrings
-        
-        client = op(api_key = self.GPT_API_KEY)
 
         for corp_name in report_data.keys() :
             for report in report_data[corp_name].keys() :
@@ -62,75 +60,33 @@ class DataPipeline(Knuturn) :
                     if len(tokenizing) > 10000 :
                         buffer = divide_string(buffer[0], (len(tokenizing) // 10000) + 1)
 
-                    #option parameter 이용해서 dart - edgar context 분리
-                    if option == 1 : context = self.dart_context
+                    #dart - edgar context 분리
+                    if isDart : context = self.dart_context
                     else : context = self.edgar_context
 
                     for query_text in buffer :
-                        response = client.chat.completions.create(
+                        response = self.client.chat.completions.create(
                             model = self.gpt_model,
                             messages = context + [{"role": "user", "content": f'Summarize the following text in 5 sentences :\n{query_text}'}],
                             temperature = 0, # 0 ~ 1 실수, response의 다양성
                             top_p = 0.7
                         )
                         output += response.choices[0].message.content + '\n'
-
-                    # test
-                    with open("./test_datapipeline_summary.txt", "a", encoding = "utf-8") as test_file :
-                        test_file.write(output)
                 
                 key = f"{corp_name} {report}"
                 sum_report[report] = output
 
-                self.embeddingNsummary(output, corp_name, report)
+                self.embeddingNinsert(output, corp_name, report)
 
         return sum_report
 
-    def embeddingNsummary(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
-        EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
-        
+    def embeddingNinsert(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
         documents = list()
 
-        # vector embedding 저장 위치
-        chroma_client = chromadb.PersistentClient(path = self.db_path)
+        summary_storage_context = StorageContext.from_defaults(vector_store=self.summary_vector_store)
 
-        # cosine 유사도 기반으로 저장
-        collection = chroma_client.get_or_create_collection(name = self.collection_name, metadata={'hnsw:space': 'cosine'})
-        embed_model = LangchainEmbedding(
-            HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-        )
-
-        # llamaindex에서 chromadb 다루기
-        vector_store = ChromaVectorStore(chroma_collection=collection)
-        storage_context = StorageContext.from_defaults(vector_store=vector_store)
-
-        document = TextNode(text = sum_data , metadata={'corp_name' : f'{corp_name}', 'report' : f'{report}'})
+        document = TextNode(text = sum_data , metadata={'corp_name' : f'{corp_name}', 'report_num' : f'{report}'})
         documents.append(document)
 
         # 임베딩된 문서를 ChromaDB에 적재
-        index = VectorStoreIndex(nodes=documents, storage_context=storage_context, embed_model=embed_model)
-
-    # metadata field 가 report : 20231114002109 인 데이터를 찾아오는 예제
-    def retrieve(self):
-        # DB 서버 사용할 때, 이거 쓰면 될 듯
-        # client = chromadb.HttpClient(host="localhost", port="8000")
-
-        EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
-
-        chroma_client = chromadb.PersistentClient(path = self.db_path)
-        collection = chroma_client.get_or_create_collection(name = self.collection_name, metadata={'hnsw:space': 'cosine'})
-        vector_store = ChromaVectorStore(chroma_collection=collection)
-        embed_model = LangchainEmbedding(
-            HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-        )
-        filters = MetadataFilters(
-            filters=[ExactMatchFilter(key="report", value="20231114002109")]
-        )
-
-        index = VectorStoreIndex.from_vector_store(vector_store=vector_store, embed_model=embed_model)
-        retriever = index.as_retriever(filters=filters)
-        result = retriever.retrieve('0')
-        print(result)
-        print()
-        print()
-        print(result[0].text)
+        VectorStoreIndex(nodes=documents, storage_context=summary_storage_context, embed_model=self.embed_model)
