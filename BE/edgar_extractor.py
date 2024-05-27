@@ -479,12 +479,7 @@ class EDGAR_Extractor(Edgar):
 
         # get metadata
         list_of_series = list(zip(*self.filings_metadata_df.iterrows()))[1]
-        json_filename = 'edgar_report.json'
 
-        # Create the absolute path for the JSON file
-        absolute_json_filename = os.path.join(
-            self.extracted_filings_folder,json_filename
-        )
         # Skip processing if the extracted JSON file already exists and skip flag is enabled
         if self.config["skip_extracted_filings"] and os.path.exists(absolute_json_filename):
             print(f'{json_filename} : File already exists. You can disable skip flag in config.json . . . exiting')
@@ -492,9 +487,6 @@ class EDGAR_Extractor(Edgar):
 
         for i in tqdm(list_of_series):
             _ = self.__extract_items(i)
-
-        with open(absolute_json_filename, "w", encoding='UTF-8') as filepath:
-            json.dump(self.json_instance, filepath, ensure_ascii=False,indent='\t')
 
         redundancy_check = {}
         for report in list_of_series :
@@ -504,11 +496,9 @@ class EDGAR_Extractor(Edgar):
 
             json_filename = f'{report["CIK"]}_report.json'
             
-            temp = os.path.join( self.extracted_filings_folder, "report_per_corp" )
-            if not os.path.exists(temp): os.mkdir(temp)
             # Create the absolute path for the JSON file
             absolute_json_filename = os.path.join(
-                temp ,json_filename
+                self.extracted_filings_folder,json_filename
             )
 
             # Skip processing if the extracted JSON file already exists and skip flag is enabled

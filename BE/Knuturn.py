@@ -4,6 +4,7 @@ from llama_index.embeddings.langchain import LangchainEmbedding
 from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from openai import OpenAI as op
+import os
 
 class Knuturn :
     def __init__(self) :
@@ -12,6 +13,7 @@ class Knuturn :
             self.GPT_API_KEY = f.readline()
 
         self.client = op(api_key = self.GPT_API_KEY)
+        os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
 
         # self.db_path = "./VectorDB"
         self.db_path = "./testDB"
