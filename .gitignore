@@ -19,7 +19,8 @@ chromadb-llamaindex/GPT_API_KEY.txt
 .idea
 BE/test.ipynb
 BE/text.json
-
+BE/App/BEMethods/api_key.txt
+BE/App/BEMethods/__pycache__
 ### Django ###
 *.log
 *.pot

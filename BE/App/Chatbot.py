@@ -1,56 +1,61 @@
-from Knuturn import Knuturn
-from Dart import Dart
+from BEMethods.Knuturn import Knuturn
+from BEMethods.Dart import Dart
 from openai import OpenAI as op
-from Edgar import Edgar
-import chromadb
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from llama_index.embeddings.langchain import LangchainEmbedding
-from llama_index.core.vector_stores import MetadataFilters,MetadataFilter, FilterOperator, FilterCondition, ExactMatchFilter
-from llama_index.core import VectorStoreIndex, StorageContext
-from llama_index.vector_stores.chroma import ChromaVectorStore
+from BEMethods.Edgar import Edgar
+from llama_index.core.vector_stores import MetadataFilters,MetadataFilter, FilterCondition, ExactMatchFilter
 
 class Chatbot(Knuturn) :
     def __init__(self) :
-        #self.gpt_model_name = 'gpt-3.5-turbo'
-        #self.context = ""
         super().__init__()
         self.dart = Dart()
         self.edgar = Edgar()
-        client = chromadb.PersistentClient(path = self.db_path)
-        qna_collection = client.get_or_create_collection(name = self.qna_table, metadata={'hnsw:space': 'cosine'})
-        summary_collection = client.get_or_create_collection(name = self.summary_table, metadata={'hnsw:space': 'cosine'})
-        self.embed_model = LangchainEmbedding(
-                                HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
-                            )
-        qna_vector_store = ChromaVectorStore(chroma_collection = qna_collection)
-        summary_vector_store = ChromaVectorStore(chroma_collection = summary_collection)
-        self.qna_index = VectorStoreIndex.from_vector_store(vector_store=qna_vector_store, embed_model=self.embed_model)
-        self.summary_index = VectorStoreIndex.from_vector_store(vector_store=summary_vector_store, embed_model=self.embed_model)
 
     def getCorpList(self, isDart : bool) : # true : dart / false : edgar
         # case : dart
+        Dart = [
+            "삼성전자", "SK하이닉스", "LG에너지솔루션", "삼성바이오로직스", "현대자동차",
+            "POSCO홀딩스", "삼성SDI", "LG화학", "NAVER", "KB금융", "에코프로비엠", "현대모비스",
+            "신한지주", "포스코퓨처엠", "삼성생명", "하나금융지주", "에코프로", "메리츠금융지주",
+            "LG전자", "LG",
+            "HLB", "카카오뱅크", "한미반도체"
+        ]
+
+        Edgar = [
+            
+        ]
+
         if isDart :
-            return self.dart.getCorpList()
+            # return self.dart.getCorpList()
+            return Dart
         
         # case : edgar
         else :
             return self.edgar.getCorpList()
         
-    def getResponse(self, corp_name : str, question : str, isDart : bool) :
-        ############ 미구현 #############
-
+    def getResponse(self, corp_name : str, question : str) :
         # 사용자의 질문을 받아서 qna table에 query
-        index = VectorStoreIndex.from_vector_store(vector_store=self.qna_vector_store)
-
-        filters = MetadataFilters(
+        question_filters = MetadataFilters(
                 filters=[
-                        MetadataFilter(key="corp_name", value="회사명"),
-                        MetadataFilter(key="q", value = "질문 내용")
+                        MetadataFilter(key="corp_name", value=corp_name)
+                ]
+            )
+
+        question_query = self.question_index.as_retriever(filters = question_filters)
+        q = question_query.retrieve(question)
+        anticipated_question = q[0].text
+
+        qna_filters = MetadataFilters(
+                filters=[
+                        ExactMatchFilter(key="corp_name", value=corp_name),
+                        MetadataFilter(key="q", value = anticipated_question)
                 ],
                 condition=FilterCondition.AND,
             )
         
-        return
+        answer_query = self.qna_index.as_retriever(filters = qna_filters)
+        a = answer_query.retrieve('0')
+
+        return a[0].text
 
     def getCorpSummary(self, corp_name : str, report_num : str = None) :
         # summary table에 query
