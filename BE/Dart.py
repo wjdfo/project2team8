@@ -32,11 +32,11 @@ class Dart :
 
     def getReportCode(self, comps: list, start_year, end_year) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
-
+        start_year += "0101"
+        end_year += "1231"
+        
         for comp in comps :
             print(comp, end = " ")
-            start_year += "0101"
-            end_year += "1231"
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
                 report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
                 d[comp] = []

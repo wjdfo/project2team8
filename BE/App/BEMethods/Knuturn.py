@@ -31,7 +31,12 @@ class Knuturn :
         qna_collection = client.get_or_create_collection(name = qna_table, metadata={'hnsw:space': 'cosine'})
         summary_collection = client.get_or_create_collection(name = summary_table, metadata={'hnsw:space': 'cosine'})
         question_collection = client.get_or_create_collection(name = question_table, metadata={'hnsw:space': 'cosine'})
-        self.embed_model = HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
+        
+        # self.embed_model = HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
+        self.embed_model = LangchainEmbedding(
+                                HuggingFaceEmbeddings(model_name = self.EMBEDDING_MODEL)
+                            )
+        
         self.qna_vector_store = ChromaVectorStore(chroma_collection = qna_collection)
         self.summary_vector_store = ChromaVectorStore(chroma_collection = summary_collection)
         self.question_vector_store = ChromaVectorStore(chroma_collection = question_collection)

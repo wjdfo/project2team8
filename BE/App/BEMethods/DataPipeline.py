@@ -38,7 +38,7 @@ class DataPipeline(Knuturn) :
 
             return substrings
 
-        for corp_name in tqdm(report_data.keys(),desc=f'{corp_name}') :
+        for corp_name in report_data.keys() :
             for report in report_data[corp_name].keys() :
                 output = ""
                 

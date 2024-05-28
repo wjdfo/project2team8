@@ -16,7 +16,7 @@ class Knuturn :
         os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
 
         # self.db_path = "./VectorDB"
-        self.db_path = "./testDB"
+        self.db_path = "./testDB1"
 
         qna_table = "qna_test51535135151351"
         summary_table = "sum"
