@@ -8,15 +8,20 @@ from selenium.webdriver.common.by import By
 import time
 from tqdm import tqdm
 
+import os
+
 class Dart :
     def __init__(self) :
-        with open('./api_key/dart_api_key.txt', 'r') as api_key_file :
+        dart_key_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'api_key/dart_api_key.txt')
+        with open(dart_key_path, 'r') as api_key_file :
             dart_api_key = api_key_file.readline()
         self.dart = OpenDartReader(dart_api_key)
         dart_fss.set_api_key(api_key = dart_api_key)
         
     def getCorpList(self) :
-        f = open("./ref/dart_corp_name_code_mapping.txt", 'w', encoding = 'utf-8')
+        dart_corp_mapping_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ref/dart_corp_name_code_mapping.txt')
+
+        f = open(dart_corp_mapping_path, 'w', encoding = 'utf-8')
 
         corp_list = dart_fss.api.filings.get_corp_code()
         df = pd.DataFrame(corp_list)
@@ -129,7 +134,6 @@ class Dart :
         driver = webdriver.Chrome()
 
         report_data = {}
-
         for corp_name in report_url.keys() :
             report_data[corp_name] = {}
             for report_num in report_url[corp_name] :

@@ -14,7 +14,7 @@ def dart_loader():
     
     -> JSON files
     '''
-    dart_dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/BEMethods/dart-datasets')
+    dart_dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'BEMethods/dart-datasets')
     dart = Dart()
 
     print("회사 리스트 ...")
@@ -22,12 +22,13 @@ def dart_loader():
             "POSCO홀딩스", "삼성SDI", "LG화학", "NAVER", "KB금융", "에코프로비엠", "현대모비스",
             "신한지주", "포스코퓨처엠", "삼성생명", "하나금융지주", "에코프로", "메리츠금융지주",
             "LG전자", "LG",
-            "HLB", "카카오뱅크", "한미반도체" ]
+            "HLB", "카카오뱅크", "한미반도체"
+        ]
 
 
 
     print("공시보고서 코드 ...")
-    corp_report_code = dart.getReportCode(corp_list,'2019','2023')
+    corp_report_code = dart.getReportCode(corp_list,'2023','2023')
     if not corp_report_code :
         return None
 
@@ -36,14 +37,21 @@ def dart_loader():
     if not corp_report_url:
         return None
         
-    print("사업보고서 크롤링 데이터 ...")
-    corp_report_data = dart.getEveryReportData(corp_report_url)
+    indices = []
 
+    print("사업보고서 크롤링 데이터")
+    dart_index_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'BEMethods/ref/index.txt')
+    with open(dart_index_path, "r", encoding = 'utf-8') as f :
+        lines = f.readlines()
+        for line in lines :
+            indices.append(line.strip("\n"))
+
+    corp_report_data = dart.getSelectiveReportData(corp_report_url, indices)
 
     if not os.path.isdir(dart_dataset_path):
         os.mkdir(dart_dataset_path)
 
-    for report_company in corp_list:
+    for report_company in corp_report_url.keys():
         json_filename = f'{report_company}_report.json'
         absolute_json_filename = os.path.join(
             dart_dataset_path , json_filename
@@ -109,8 +117,9 @@ def makeQuestionDict():
             "POSCO홀딩스", "삼성SDI", "LG화학", "NAVER", "KB금융", "에코프로비엠", "현대모비스",
             "신한지주", "포스코퓨처엠", "삼성생명", "하나금융지주", "에코프로", "메리츠금융지주",
             "LG전자", "LG",
-            "HLB", "카카오뱅크", "한미반도체" ]
-
+            "HLB", "카카오뱅크", "한미반도체"
+        ]
+        
     for corp_name in dart_corp_list:
         question_dict[corp_name] = question_list
 
@@ -120,12 +129,14 @@ def makeQuestionDict():
     for corp_name in edgar_corp_list:
         question_dict[corp_name] = question_list
     
-
+    return question_dict
 
 
 
 if __name__ == "__main__":
     
+    print('initiate DataMaster.py')
+
     ############################################################
     ################ CRAWL & JSONified store ###################
     ############################################################
@@ -144,7 +155,7 @@ if __name__ == "__main__":
     
     # DART
     
-    dart_dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/BEMethods/dart-datasets')
+    dart_dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'BEMethods/dart-datasets')
 
     store_summary_to_db(raw_report_store,dart_dataset_path,True)
 
@@ -154,15 +165,14 @@ if __name__ == "__main__":
     store_summary_to_db(raw_report_store,edgar_dataset_path,False)
     
     print('Summary done . . . ')
-
+    
     ############################################################
     ################ STORE in DB : estimated QnA ###############
     ############################################################
-
+    
     estimated_qna_store = QnA()
 
     question_dict = makeQuestionDict()
-
     estimated_qna_store.insertQnA(question_dict)
 
     print('Estimated QnA done . . . ')

@@ -1,7 +1,9 @@
-from Knuturn import Knuturn
+from .Knuturn import Knuturn
 import tiktoken
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.core.schema import TextNode
+
+from tqdm import tqdm
 
 class DataPipeline(Knuturn) :
     def __init__(self) :
@@ -36,7 +38,7 @@ class DataPipeline(Knuturn) :
 
             return substrings
 
-        for corp_name in report_data.keys() :
+        for corp_name in tqdm(report_data.keys(),desc=f'{corp_name}') :
             for report in report_data[corp_name].keys() :
                 output = ""
                 
@@ -64,7 +66,6 @@ class DataPipeline(Knuturn) :
                         )
                         output += response.choices[0].message.content + '\n'
                 
-                key = f"{corp_name} {report}"
                 sum_report[report] = output
 
                 self.embeddingNinsert(output, corp_name, report[:4])
