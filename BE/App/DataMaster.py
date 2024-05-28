@@ -27,7 +27,7 @@ def dart_loader():
         ]
 
     print("공시보고서 코드 ...")
-    corp_report_code = dart.getReportCode(corp_list[:1],'2023','2023')
+    corp_report_code = dart.getReportCode(corp_list,'2019','2023')
     if not corp_report_code :
         return None
 
@@ -46,11 +46,6 @@ def dart_loader():
             indices.append(line.strip("\n"))
 
     corp_report_data = dart.getSelectiveReportData(corp_report_url, indices)
-    for corp_name in corp_report_data.keys() :
-        for report in corp_report_data[corp_name].keys() :
-            for title in corp_report_data[corp_name][report].keys() :
-                print(f"★★★★★★★★★★★★★★{title}★★★★★★★★★★★★★★")
-                print(corp_report_data[corp_name][report][title])
 
     if not os.path.isdir(dart_dataset_path):
         os.mkdir(dart_dataset_path)

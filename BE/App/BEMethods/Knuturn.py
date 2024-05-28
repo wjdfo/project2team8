@@ -20,9 +20,9 @@ class Knuturn :
         # self.db_path = "./VectorDB"
         self.db_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'VectorDB')
 
-        qna_table = "qna_test11"
-        summary_table = "summary11"
-        question_table = "question_test11"
+        qna_table = "qna"
+        summary_table = "summary"
+        question_table = "question"
         # self.collection_name = "knuturn"
         # self.EMBEDDING_MODEL = 'sentence-transformers/all-mpnet-base-v2'
         self.EMBEDDING_MODEL = 'snunlp/KR-SBERT-V40K-klueNLI-augSTS'

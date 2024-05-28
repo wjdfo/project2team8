@@ -46,7 +46,7 @@ class QnA(Knuturn) :
             summary_data = retriever.retrieve('-')
             if(len(summary_data) == 0 ) : continue
 
-            print(summary_data[0].text)
+            # print(summary_data[0].text)
             encoder = tiktoken.encoding_for_model(self.gpt_model)
             print(f"summary data # of tokens : {len(encoder.encode(summary_data[0].text))}")
 
@@ -57,51 +57,39 @@ class QnA(Knuturn) :
                 question_documents.append(document)
 
 
-                context = (
-                    '주어지는 질문과 사업보고서 데이터를 보고 답변을 \n 구분자로 구분해서 10개 만들어줘',
-                    '답변할 때는 한국어로 높임말을 사용해서 알려줘'
-                )
+                # context = (
+                #     '주어지는 질문과 사업보고서 데이터를 보고 답변을 \n 구분자로 구분해서 10개 만들어줘',
+                #     '답변할 때는 한국어로 높임말을 사용해서 알려줘'
+                # )
 
 
-                while True :
-                    response = self.client.chat.completions.create(
-                                    model = self.gpt_model,
-                                    messages = [
-                                        {"role": "system", "content": "주어지는 질문과 사업보고서 데이터를 보고 답변을 \n 구분자로 구분해서 10개 만들어줘"},
-                                        {"role": "system", "content": "답변할 때는 한국어로 높임말을 사용해서 알려줘. 정보만 간단히 전달해."},
-                                        {"role": "user", "content": f"사업보고서 데이터는 {summary_data[0].text}, 질문은 {question}"}
-                                    ],
-                                    temperature = 1, # 0 ~ 2.0
-                                    top_p = 0.6
-                                )
-                    # chat_engine = self.summary_index.as_chat_engine(
-                    #     chat_mode='context',
-                    #     system_prompt = context,
-                    #     filters = filters
-                    # )
-                    # result = chat_engine.chat(question)
+                response = self.client.chat.completions.create(
+                                model = self.gpt_model,
+                                messages = [
+                                    {"role": "system", "content": "주어지는 질문과 사업보고서 데이터를 보고 답변을 만들어줘"},
+                                    {"role": "system", "content": "답변할 때는 한국어로 높임말을 사용해서 알려줘. 정보만 간단히 전달해."},
+                                    {"role": "user", "content": f"사업보고서 데이터 :  {summary_data[0].text}, 질문 : {question}"}
+                                ],
+                                temperature = 1, # 0 ~ 2.0
+                                top_p = 0.6
+                            )
+                # chat_engine = self.summary_index.as_chat_engine(
+                #     chat_mode='context',
+                #     system_prompt = context,
+                #     filters = filters
+                # )
+                # result = chat_engine.chat(question)
 
-                    result = response.choices[0].message.content
-                    result_list = result.split("\n")
-                    print()
-                    for i in range(len(result_list)) :
-                        print(f"{i+1}. {result_list[i]}")
-                    print(f"\n question : {question} \n 원하는 답변 선택 (1~10), 원하는 답변이 없으면 (1~10) 이외의 아무 숫자나 입력")
-                    print(" >> ", end = "")
-                    select = int(input())
-                    print()
+                result = response.choices[0].message.content
 
-                    if select >= 1 and select <= len(result_list) :
-                        answer = result_list[select-1]
-                        break
             
-                print(f"예상질문 : {question}, 예상답변 : {answer}, 회사이름 : {corp_name}")
+                print(f"질문 : {question} \n 예상답변 : {result} \n 회사이름 : {corp_name}")
 
                 metadata = {
                     "corp_name" : corp_name,
                     "q" : question
                 }
-                document = TextNode(text = answer, metadata = metadata)
+                document = TextNode(text = result, metadata = metadata)
                 qna_documents.append(document)
 
             # 한 회사 질문이 끝나면 DB에 Store

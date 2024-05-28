@@ -81,7 +81,6 @@ class DataPipeline(Knuturn) :
         summary_storage_context = StorageContext.from_defaults(vector_store=self.summary_vector_store)
 
         document = TextNode(text = sum_data , metadata={'corp_name' : f'{corp_name}', 'report_num' : f'{report}'})
-        print(document)
         documents.append(document)
 
         # 임베딩된 문서를 ChromaDB에 적재
