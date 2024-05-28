@@ -2,6 +2,8 @@ import { FlatList, StyleSheet, TouchableOpacity,Text,Alert } from "react-native"
 import {useState,useEffect} from 'react';
 import { Color, Width, Height, FontFamily,} from "../../GlobalStyles";
 import { fetchSearch } from "../fetch-handling/fetch-search";
+import { getSimpleName } from '../etc/corp-name-processor';
+
 const SearchBody = ({navigation, route, text,keyboardHeight}) => {
     const [corpList, setCorpList] = useState([]);
 
@@ -38,7 +40,7 @@ const SearchBody = ({navigation, route, text,keyboardHeight}) => {
         <TouchableOpacity style = {styles.resultItemContainer}
                         onPress={()=> handlePressResult(item.corp_name, item.isDart)}>
             <Text style = {styles.resultItem}>
-                {item.corp_name}
+                {getSimpleName(item.corp_name)}
             </Text>
         </TouchableOpacity>
     );

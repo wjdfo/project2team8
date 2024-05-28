@@ -1,5 +1,4 @@
 import API from '../cookie-handling/axiosAPI';
-
 export const fetchSearch = async (queryCorp) => {
     var arry = [];
     var result;
@@ -7,7 +6,7 @@ export const fetchSearch = async (queryCorp) => {
         search:queryCorp
     })
     .then((response)=>{result = response.data;})
-    .catch((error)=>{
+    .catch((error)=>{+
       console.error('Error:', error);
       return 'server went wrong';
     });
@@ -16,10 +15,9 @@ export const fetchSearch = async (queryCorp) => {
     var each_json;
     
     Object.keys(rr).map((key)=>{
-      each_json = { corp_name : rr[key]['fields']['corp_name'], isDart : rr[key]['fields']['isDart']};
+      each_json = { corp_name : rr[key]['fields']['corp_name'], isDart : rr[key]['fields']['is_dart']};
       arry = [...arry,each_json];
     })
-
 
 
     return arry;

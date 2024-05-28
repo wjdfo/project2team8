@@ -10,6 +10,7 @@ export const fetchList = async (corpName, isDart) => {
       console.error('Error:', error);
       return 'server went wrong';
     });
+    console.log(corpName,isDart);
     return result['list'];
 };
 

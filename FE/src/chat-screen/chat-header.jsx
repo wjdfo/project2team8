@@ -1,13 +1,16 @@
 import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
 import { Height, Width,Color, FontFamily } from '../../GlobalStyles';
+import { getSimpleName } from '../etc/corp-name-processor';
+
 const ChatHeader = ({navigation,searchedName}) => {
+    const simpleName = getSimpleName(searchedName);
     return (
         <View style={styles.headerPosition}>
             <View style={[styles.headerChild, styles.headerPosition]} />
             
             <TouchableOpacity style={styles.corpSearchBox}
                               onPress={()=>navigation.navigate('searchScreen')}>
-                <Text style={styles.corpName}>{searchedName}</Text>
+                <Text style={styles.corpName}>{simpleName}</Text>
                 <Image
                 style={styles.searchIcon}
                 resizeMode="contain"
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
         
     },
     corpName: {
-      fontSize: 96*Width,
+      fontSize: 80*Width,
       fontFamily: FontFamily.kNUTRUTH,
       color: Color.colorWhite,
       paddingLeft: 30*Width,

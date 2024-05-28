@@ -14,14 +14,14 @@ const FrameScreen = ({navigation,route}) => {
       id : 0,
       user : 0,
       content : {
-        message : '안녕하세요?',
+        message : '안녕하세요? 선택하신 기업에 대해서 무엇이든 물어보세요.',
       },
     },
     {
       id : 1,
       user : 0,
       content : {
-        message : '링크 있는 글이에요 \nwww.youtube.com',
+        message : '아래에 + 버튼을 터치해 다른 기능도 살펴보세요 !',
       }
     }
 
