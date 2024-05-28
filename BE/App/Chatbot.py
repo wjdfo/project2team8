@@ -20,9 +20,6 @@ class Chatbot(Knuturn) :
             "HLB", "카카오뱅크", "한미반도체"
         ]
 
-        Edgar = [
-            
-        ]
 
         if isDart :
             # return self.dart.getCorpList()
@@ -73,7 +70,7 @@ class Chatbot(Knuturn) :
         
         retriever = self.summary_index.as_retriever(filters=filters)
         query_result = retriever.retrieve('0')
-        query_result[0].text
+        if(len(query_result) == 0 ) : return 'DB에 해당 보고서가 없어요. 금방 추가해드릴게요 !'
 
         return query_result[0].text
     
@@ -82,7 +79,7 @@ class Chatbot(Knuturn) :
         if isDart :
             report = {}
             report_name = ["정기 보고서", "1분기 보고서", "반기(2분기) 보고서", "3분기 보고서"]
-            report_dict = self.dart.getReportCode([corp_name])
+            report_dict = self.dart.getReportCode([corp_name],date[0],date[1])
             _, report_list = self.dart.getReportURL(report_dict)
 
             for i in range(len(report_list)) :
@@ -90,7 +87,7 @@ class Chatbot(Knuturn) :
 
         # # Edgar
         else :
-            report = self.edgar.getReportUrl(corp_name)
+            report = self.edgar.getReportUrl(corp_name,date)
             
         return report
     
@@ -100,15 +97,15 @@ class Chatbot(Knuturn) :
 
         corp1, corp2 = corp_list[0], corp_list[1]
 
-        result[corp1] = self.getCorpSummary(corp1, report_num = None)
-        result[corp2] = self.getCorpSummary(corp1, report_num = None)
+        result[corp1] = self.getCorpSummary(corp1, '2023')
+        result[corp2] = self.getCorpSummary(corp1, '2023')
 
         client = op(api_key = self.GPT_API_KEY)
         response = client.chat.completions.create(
                         model = self.gpt_model,
                         messages = [
                             {"role": "system", "content": "너는 두 기업의 사업보고서 요약본들을 비교해서 중요한 키워드 별로 요약해주는 서비스야."},
-                            {"role": "system", "content": "요약할 때, 공통적인 키워드들을 먼저 출력하고 개별적인 키워드들은 끝 부분에서 A기업은 키워드1이 어떻고 ~ B기업은 키워드2가 어떻고~ 이런 식으로 알려줘."},
+                            {"role": "system", "content": f"요약할 때, 공통적인 키워드들을 먼저 출력하고 개별적인 키워드들은 끝 부분에서 {corp1}은 키워드1이 어떻고 ~ {corp2}은 키워드2가 어떻고~ 이런 식으로 알려줘."},
                             {"role": "system", "content": "사업보고서들은 ### 구분자로 시작해서 들어올거야. 요약할 땐 개조식으로 간단명료하게 알려줘."},
                             {"role": "user", "content": f"###{result[corp1]}, ###{result[corp2]}\n 이 두 기업의 사업보고서를 중요한 키워드들끼리 비교해서 요약한 후 알려줘"}
                         ],
@@ -118,4 +115,4 @@ class Chatbot(Knuturn) :
         
         result['chatbot'] = response.choices[0].message.content
 
-        return result
+        return result['chatbot']
