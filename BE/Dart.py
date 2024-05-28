@@ -35,16 +35,18 @@ class Dart :
 
         for comp in comps :
             print(comp, end = " ")
-            count = 0
             start_year += "0101"
             end_year += "1231"
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
                 report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
                 d[comp] = []
-                for report_code in report_list['rcept_no'] :
-                    d[comp].append(report_code)
-                    count += 1
-                print(f"has {count} report(s)")
+                d[comp].append(min(report_list['rcept_no']))
+                # for report_code in report_list['rcept_no'] :
+                #     if int(report_code) < int(min) :
+                #         min = report_code
+                    
+                #     # d[comp].append(report_code)
+                # d[comp].append(min)
             except :
                 continue
         
@@ -120,13 +122,6 @@ class Dart :
         return report_data
     
     def getSelectiveReportData(self, report_url: dict, indices: list) : # 목차 골라서 가져오는 함수
-        f = open('./ref/dart_corp_name_code_mapping.txt', 'r', encoding='utf-8')
-        mapping = dict()
-
-        for line in f.readlines() :
-            a = line.strip().split()
-            mapping[a[0]] = a[1]
-        f.close()
 
         # 크롬 드라이버와 크롬 버전이 충돌하여, 직접 크롬 드라이버의 주소를 기입할 경우에 아래의 코드 사용
         # driver = webdriver.Chrome(Service(executable_path=CHROME_DRIVER_PATH))
@@ -135,18 +130,14 @@ class Dart :
 
         report_data = {}
 
-        for corp_code in report_url.keys() :
-            corp_name = mapping[corp_code]
+        for corp_name in report_url.keys() :
             report_data[corp_name] = {}
-            
-            print(corp_name)
-
-            for report_num in report_url[corp_code] :
+            for report_num in report_url[corp_name] :
                 report_data[corp_name][report_num] = {}
 
                 print(report_num, end = " ")
 
-                for title in report_url[corp_code][report_num] :
+                for title in report_url[corp_name][report_num] :
                     extract = False # 뽑아야 할 목차인지 확인하는 conditional variable
                     
                     for index in indices :
@@ -156,7 +147,7 @@ class Dart :
 
                     if extract :
                         report_data[corp_name][report_num][title] = []
-                        url = report_url[corp_code][report_num][title]
+                        url = report_url[corp_name][report_num][title]
 
                         driver.get(url)
                         time.sleep(2)

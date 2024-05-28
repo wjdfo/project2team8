@@ -18,21 +18,33 @@ def dart_test(corp_list) :
 
     print("공시보고서 코드")
     corp_report_code = a.getReportCode(corp_list, "2023", "2023")
-    if  not corp_report_code :
+    if not corp_report_code :
         return None
-    print(corp_report_code)
-    corp_report_code['삼성전자'] = corp_report_code['삼성전자'][:1]
-    print(corp_report_code)
+    # print(corp_report_code)
+    # corp_report_code['삼성전자'] = corp_report_code['삼성전자'][:1]
+    # print(corp_report_code)
 
     print("공시보고서 링크")
     corp_report_url, whole_report_data = a.getReportURL(corp_report_code)
     if not corp_report_url:
         return None
+    print(f"주소 : {whole_report_data}")
     print(corp_report_url)
 
+    indices = []
+
     print("사업보고서 크롤링 데이터")
-    corp_report_data = a.getEveryReportData(corp_report_url)
+    with open("./ref/index.txt", "r", encoding = 'utf-8') as f :
+        lines = f.readlines()
+        for line in lines :
+            indices.append(line.strip("\n"))
+
+    print(indices)
+
+    corp_report_data = a.getSelectiveReportData(corp_report_url, indices)
     print(corp_report_data)
+    # corp_report_data = a.getEveryReportData(corp_report_url)
+    # print(corp_report_data)
 
     return corp_report_data
 
@@ -57,9 +69,21 @@ if __name__ == "__main__" :
 
     # print(a.report_summary(report_data, 1))
 
+    # '''
+    start = time.time()
     d = DataPipeline()
+    end =  time.time()
+    print(f"Datapipeline 생성자 {end-start :.5f}초 소요")
+
+    start = time.time()
     c = Chatbot()
+    end =  time.time()
+    print(f"Chatbot 생성자 {end-start :.5f}초 소요")
+
+    start = time.time()
     q = QnA()
+    end =  time.time()
+    print(f"Qna 생성자 {end-start :.5f}초 소요")
 
     question_dict = {
         "삼성전자 어때?" :
@@ -67,7 +91,9 @@ if __name__ == "__main__" :
             "corp_name" : "삼성전자"
         }
     }
+    # '''
 
+    # '''
     start = time.time()
     print("chatbot test")
     corp_list = c.getCorpList(True)
@@ -90,9 +116,10 @@ if __name__ == "__main__" :
     print("\n\nsummary table insert complete\n\n")
     end =  time.time()
     print(f"data pipeline 한 기업 보고서 요약 & 적재하는데 {end-start :.5f}초 소요")
-
+    # '''
     start = time.time()
+    print("\n\n")
     q.insertQnA(question_dict)
-    q.insertCheck("삼성전자", "임직원 정보")
+    q.insertCheck("삼성전자", "사업의 개요")
     end =  time.time()
-    print(f"VectorDB 접근해서 요약된 데이터 가져오오고 그 데이터 기반으로 질문 후 답변 가져오는데 {end-start :.5f}초 소요")
+    print(f"VectorDB 접근해서 요약된 데이터 가져오고 그 데이터 기반으로 질문 후 답변 가져오는데 {end-start :.5f}초 소요")
