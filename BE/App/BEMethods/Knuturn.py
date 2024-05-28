@@ -9,16 +9,14 @@ import os
 class Knuturn :
     def __init__(self) :
         self.gpt_model = 'gpt-3.5-turbo'
-
-        gpt_key_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'api_key/GPT_API_KEY.txt')
-        with open(gpt_key_path, 'r') as f :
+        with open('./api_key/GPT_API_KEY.txt', 'r') as f :
             self.GPT_API_KEY = f.readline()
 
         self.client = op(api_key = self.GPT_API_KEY)
         os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
 
         # self.db_path = "./VectorDB"
-        self.db_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'testDB')
+        self.db_path = "./testDB"
 
         qna_table = "qna_test51535135151351"
         summary_table = "sum"
