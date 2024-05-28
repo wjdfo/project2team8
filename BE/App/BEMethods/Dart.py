@@ -37,7 +37,6 @@ class Dart :
 
     def getReportCode(self, comps: list, start_year, end_year) : #공시보고서 코드를 회사마다 dictionary에 담아서 return
         d = {}
-
         for comp in comps :
             print(comp, end = " ")
             start_year += "0101"

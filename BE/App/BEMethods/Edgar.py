@@ -64,7 +64,7 @@ class Edgar:
             
         return result
 
-    def getReportUrl(self, company_name : str):
+    def getReportUrl(self, company_name : str, date : tuple):
         # Check if the filings metadata file exists
         if os.path.exists(self.filings_metadata_filepath):
             df = pd.read_csv(self.filings_metadata_filepath, dtype=str)
@@ -76,9 +76,11 @@ class Edgar:
         length = len(df['Company'])
         url_dict = {}
         for i in range(length):
-            url_dict[company_name] = {}
-        for i in range(length):
             if df['Company'][i] == company_name:
-                url_dict[company_name][df['Date'][i]] = df['htm_file_link'][i]
-
+                url_dict[company_name +' ' + df['Date'][i]] = {}
+        for i in range(length):
+            if df['Date'][i][:4] >= date[0] and df['Date'][i][:4] <= date[1] :
+                if df['Company'][i] == company_name:
+                    url_dict[company_name +' ' + df['Date'][i]] = df['htm_file_link'][i]
+        print(url_dict)
         return url_dict

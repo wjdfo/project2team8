@@ -8,7 +8,6 @@ import sys, os
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.append(parent_dir)
 from Chatbot import *
-from Dart import *
 
 # Dart인지 아닌지 판단
 def dart_check(corpName, dart_list):
