@@ -22,6 +22,7 @@ BE/text.json
 BE/App/BEMethods/api_key
 BE/App/BEMethods/__pycache__
 BE/App/BEMethods/docs_cache
+BE/App/BEMethods/dart-datasets
 ### Django ###
 *.log
 *.pot
