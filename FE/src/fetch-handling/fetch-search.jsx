@@ -6,7 +6,7 @@ export const fetchSearch = async (queryCorp) => {
         search:queryCorp
     })
     .then((response)=>{result = response.data;})
-    .catch((error)=>{+
+    .catch((error)=>{
       console.error('Error:', error);
       return 'server went wrong';
     });

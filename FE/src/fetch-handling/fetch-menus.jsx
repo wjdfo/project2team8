@@ -10,7 +10,6 @@ export const fetchList = async (corpName, isDart) => {
       console.error('Error:', error);
       return 'server went wrong';
     });
-    console.log(corpName,isDart);
     return result['list'];
 };
 
@@ -30,7 +29,6 @@ export const fetchURL = async (corpName,fromDate,toDate,isDart) => {
 };
 
 export const fetchSummary = async (corpName,reportYear, isDart) => {
-    return corpName+reportYear;
 
     const request = await API.post('/api/summary',{
         corpName : corpName,
@@ -48,8 +46,6 @@ export const fetchSummary = async (corpName,reportYear, isDart) => {
 };
 
 export const fetchCompare = async (corpName,isDart, targetCorpName,targetIsDart ) => {
-    return corpName + targetCorpName;
-
     const request = await API.post('/api/compare',{
         corpName : corpName,
         corpIsDart : isDart,

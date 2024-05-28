@@ -1,7 +1,6 @@
 import API from '../cookie-handling/axiosAPI';
 
 const fetchInput =  async (inputText,corpName,isDart) => {
-    return inputText;
 
     var result;
     const request = await API.post('/api/prompt',{
