@@ -24,11 +24,9 @@ class API(View):
             corpName = json.loads(request.body)["corpName"]
             isDart = json.loads(request.body)["isDart"]
             question = json.loads(request.body)["question"]
-            dart = Dart()
-            dart_list = dart.getCorpList()
-
+            
             chatbot = Chatbot()
-            response = chatbot.getResponse(question, isDart)
+            response = chatbot.getResponse(corpName, question)
 
             return JsonResponse({"response": response}, status=200)
         except Exception as e:
@@ -41,11 +39,9 @@ class API(View):
             corpName = json.loads(request.body)["corpName"]
             isDart = json.loads(request.body)["isDart"]
             reportNum = json.loads(request.body)["reportNum"]
-            dart = Dart()
-            dart_list = dart.getCorpList()
 
             chatbot = Chatbot()
-            response = chatbot.getCorpSummary(corpName, isDart, reportNum)
+            response = chatbot.getCorpSummary(corpName, reportNum)
 
             return JsonResponse({"summary": response}, status=200)
         except Exception as e:
@@ -57,8 +53,10 @@ class API(View):
         try:
             corpName = json.loads(request.body)["corpName"]
             isDart = json.loads(request.body)["isDart"]
-            dart = Dart()
-            dart_list = dart.getCorpList()
+            if isDart == '1' :
+                isDart = True
+            elif isDart == '0' :
+                isDart = False
             
             chatbot = Chatbot()
             list = chatbot.getCorpList(isDart)
@@ -73,11 +71,12 @@ class API(View):
         try:
             corpName = json.loads(request.body)["corpName"]
             isDart = json.loads(request.body)["isDart"]
-            dart = Dart()
-            dart_list = dart.getCorpList()
             fromDate = json.loads(request.body)["fromDate"]
             toDate = json.loads(request.body)["toDate"]
-
+            if isDart == '1' :
+                isDart = True
+            elif isDart == '0' :
+                isDart = False
             chatbot = Chatbot()
             link = chatbot.getCorpReport(corpName, isDart, (fromDate, toDate))
 
@@ -95,13 +94,19 @@ class API(View):
             targetCorpName = json.loads(request.body)["targetCorpName"]
             targetIsDart = json.loads(request.body)["targetIsDart"]
 
-            dart = Dart()
-            dart_list = dart.getCorpList()
+            if corpIsDart == '1' :
+                corpIsDart = True
+            elif corpIsDart == '0' :
+                corpIsDart = False
+            if targetIsDart == '1' :
+                targetIsDart = True
+            elif targetIsDart == '0' :
+                targetIsDart = False
 
             # 같은 종류의 공시 데이터만 비교 가능
             if (corpIsDart and targetIsDart) or (not corpIsDart and not targetIsDart):
                 chatbot = Chatbot()
-                report = chatbot.Compare2Corps((corpName, targetCorpName), corpIsDart)
+                report = chatbot.Compare2Corps((corpName, targetCorpName))
             else:
                 return JsonResponse({"report": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
 
