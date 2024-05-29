@@ -17,3 +17,4 @@ llama_index.embeddings.langchain
 llama_index.vector_stores.chroma
 openai
 chromadb
+sentence-transformers
