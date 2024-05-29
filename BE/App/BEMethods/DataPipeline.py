@@ -70,8 +70,6 @@ class DataPipeline(Knuturn) :
 
                 self.embeddingNinsert(output, corp_name, report[:4])
 
-                break
-
         return sum_report
 
     def embeddingNinsert(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
