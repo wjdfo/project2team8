@@ -148,7 +148,7 @@ if __name__ == "__main__":
     dart_loader()
 
     # EDGAR
-    # edgar_loader()
+    edgar_loader()
 
     print('CRAWL done . . . ')
 
