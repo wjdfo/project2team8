@@ -176,7 +176,7 @@ if __name__ == "__main__":
     estimated_qna_store = QnA()
 
     question_dict = makeQuestionDict()
-    estimated_qna_store.insertQnA(question_dict)
+    estimated_qna_store.insertQnA_GPT(question_dict)
 
     print('Estimated QnA done . . . ')
     print('Bye ! ')

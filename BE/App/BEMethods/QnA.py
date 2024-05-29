@@ -13,15 +13,14 @@ class QnA(Knuturn) :
         self.question_storage_context = StorageContext.from_defaults(vector_store=self.question_vector_store)
         self.qna_storage_context = StorageContext.from_defaults(vector_store=self.qna_vector_store)
 
-    '''
-    question_dict = {
-        "삼성전자" : [
-            '안녕',
-            '하세요',
-        ]
-    '''
-
-    def insertQnA(self, question_dict : dict) :
+    def insertQnA_GPT(self, question_dict : dict) :
+        '''
+        question_dict = {
+            "삼성전자" : [
+                '안녕',
+                '하세요',
+            ]
+        '''
         os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
         Settings.llm = OpenAI(model=self.gpt_model, temperature=1)
         question_documents = []
@@ -48,7 +47,7 @@ class QnA(Knuturn) :
 
             # print(summary_data[0].text)
             encoder = tiktoken.encoding_for_model(self.gpt_model)
-            print(f"summary data # of tokens : {len(encoder.encode(summary_data[0].text))}")
+            print(f"summary data's # of tokens : {len(encoder.encode(summary_data[0].text))}")
 
             # 각 질문에 대하여,
             for question in tqdm(question_dict[corp_name], desc = f'{corp_name} ({idx}/{len(question_dict.keys())})'):
@@ -95,3 +94,32 @@ class QnA(Knuturn) :
             # 한 회사 질문이 끝나면 DB에 Store
             VectorStoreIndex(nodes=question_documents, storage_context=self.question_storage_context, embed_model=self.embed_model)
             VectorStoreIndex(nodes=qna_documents, storage_context=self.qna_storage_context, embed_model=self.embed_model)
+
+    def insertQnA_User(self, question_dict : dict) :
+        '''
+        question_dict = {
+            "삼성전자" : {
+                '예상 질문' : "사용자 정의 답변",
+                '예상 질문' : "사용자 정의 답변",
+            }
+        '''
+        qna_documents = []
+        question_documents = []
+
+        for corp_name in question_dict.keys() :
+            qna_documents.append(TextNode(text = question_dict[corp_name][question], metadata = metadata))
+            print(f"-------------------회사명 - {corp_name}-------------------")
+
+            for question in question_dict[corp_name].keys() :
+                metadata = {
+                    "corp_name" : corp_name,
+                    "q" : question
+                }
+                
+                question_documents.append(TextNode(text = question, metadata = {"corp_name" : f"{corp_name}"}))
+                print(f"---예상 질문---\n{question}\n---답변---\n{question_dict[corp_name][question]}")
+            
+            print()
+            
+        VectorStoreIndex(nodes=question_documents, storage_context=self.question_storage_context, embed_model=self.embed_model)
+        VectorStoreIndex(nodes=qna_documents, storage_context=self.qna_storage_context, embed_model=self.embed_model)
