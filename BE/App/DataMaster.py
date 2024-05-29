@@ -28,6 +28,7 @@ def dart_loader():
 
     print("공시보고서 코드 ...")
     corp_report_code = dart.getReportCode(corp_list,'2019','2023')
+    print(corp_report_code)
     if not corp_report_code :
         return None
 
@@ -35,7 +36,9 @@ def dart_loader():
     corp_report_url, whole_corp_report_url = dart.getReportURL(corp_report_code)
     if not corp_report_url:
         return None
-        
+    
+    print(corp_report_url)
+
     indices = []
 
     print("사업보고서 크롤링 데이터")
@@ -63,10 +66,9 @@ def dart_loader():
             json.dump(d, filepath, ensure_ascii=False, indent='\t')
 
     print("기업별 보고서 링크")
-    i = 0
-    for corp in corp_report_url.keys() :
-        print(f"{corp}, {whole_corp_report_url[i]}")
-        i += 1
+    for corp in whole_corp_report_url.keys() :
+        for report in whole_corp_report_url[corp] :
+            print(f"{corp}, {report[0]}, {report[1]}")
 
 def edgar_loader():
     '''
@@ -113,7 +115,6 @@ def makeQuestionDict():
     # \n 삭제
     for i in range(len(question_list)):
         question_list[i] = question_list[i][:-1]
-    
 
     # Dart corp_list 처리
     dart_corp_list = [ "삼성전자", "SK하이닉스", "LG에너지솔루션", "삼성바이오로직스", "현대자동차",
@@ -147,7 +148,7 @@ if __name__ == "__main__":
     dart_loader()
 
     # EDGAR
-    edgar_loader()
+    # edgar_loader()
 
     print('CRAWL done . . . ')
 
@@ -162,13 +163,14 @@ if __name__ == "__main__":
 
     store_summary_to_db(raw_report_store,dart_dataset_path, True)
 
+
     # EDGAR
     
     edgar_dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'BEMethods/edgar-datasets/EXTRACTED_FILINGS')
     store_summary_to_db(raw_report_store,edgar_dataset_path,False)
-    
+
     print('Summary done . . . ')
-    
+
     ############################################################
     ################ STORE in DB : estimated QnA ###############
     ############################################################
@@ -176,6 +178,7 @@ if __name__ == "__main__":
     estimated_qna_store = QnA()
 
     question_dict = makeQuestionDict()
+
     estimated_qna_store.insertQnA_GPT(question_dict)
 
     print('Estimated QnA done . . . ')
