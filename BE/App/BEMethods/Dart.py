@@ -44,15 +44,16 @@ class Dart :
             print(comp, end = " ")
             
             try : # dart.list 함수 호출했을 때, data 없는 경우에도 exception raise하지 않고 {"status":"013","message":"조회된 데이타가 없습니다."} 출력하는 오류 있습니다.
-                report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
                 d[comp] = []
-                d[comp].append(min(report_list['rcept_no']))
-                # for report_code in report_list['rcept_no'] :
-                #     if int(report_code) < int(min) :
-                #         min = report_code
-                    
-                #     # d[comp].append(report_code)
-                # d[comp].append(min)
+                report_list = self.dart.list(comp, start = start_year, end = end_year, kind = 'A')
+                sy, ey = int(start_year[:4]), int(end_year[:4]) + 1
+                for year in range(sy, ey) : # 정기보고서만 탐지
+                    year_report = []
+                    for report_num in report_list['rcept_no'] :
+                        if report_num.startswith(f"{year}") :
+                            year_report.append(report_num)
+                    d[comp].append(min(year_report))
+
             except :
                 continue
         
@@ -62,20 +63,21 @@ class Dart :
         if len(list(report_list.keys())) == 0 :
             print("There's no report list.")
             return None, None
-        whole_report_url = []
+        whole_report_url = {}
         report_url = {}
 
-        for corp_code in report_list.keys() :
-            report_url[corp_code] = {}
+        for corp_name in report_list.keys() :
+            whole_report_url[corp_name] = []
+            report_url[corp_name] = {}
 
-            for report_num in report_list[corp_code] :
-                report_url[corp_code][report_num] = {}
+            for report_num in report_list[corp_name] :
+                report_url[corp_name][report_num] = {}
                 report = self.dart.attach_files(report_num)
                 for title, url in report.items() :
                     if url.startswith("http://dart.fss.or.kr/pdf/download/pdf") :
-                        whole_report_url.append(url)
+                        whole_report_url[corp_name].append((report_num[:4], url))
                 for idx, row in self.dart.sub_docs(report_num).iterrows() :
-                    report_url[corp_code][report_num][row['title']] = row['url']
+                    report_url[corp_name][report_num][row['title']] = row['url']
             
         return report_url, whole_report_url
     
