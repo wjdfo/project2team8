@@ -21,8 +21,11 @@ class QnA(Knuturn) :
                 '하세요',
             ]
         '''
-        os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
-        Settings.llm = OpenAI(model=self.gpt_model, temperature=1)
+
+        # llamaindex 사용할 경우
+        # os.environ['OPENAI_API_KEY'] = self.GPT_API_KEY
+        # Settings.llm = OpenAI(model=self.gpt_model, temperature=1)
+
         question_documents = []
         qna_documents = []
 
@@ -49,6 +52,10 @@ class QnA(Knuturn) :
             encoder = tiktoken.encoding_for_model(self.gpt_model)
             print(f"summary data's # of tokens : {len(encoder.encode(summary_data[0].text))}")
 
+            metadata = {
+                "corp_name" : corp_name
+            }
+
             # 각 질문에 대하여,
             for question in tqdm(question_dict[corp_name], desc = f'{corp_name} ({idx}/{len(question_dict.keys())})'):
 
@@ -67,7 +74,7 @@ class QnA(Knuturn) :
                                 messages = [
                                     {"role": "system", "content": "주어지는 질문과 사업보고서 데이터를 보고 답변을 만들어줘"},
                                     {"role": "system", "content": "답변할 때는 한국어로 높임말을 사용해서 알려줘. 정보만 간단히 전달해."},
-                                    {"role": "user", "content": f"사업보고서 데이터 :  {summary_data[0].text}, 질문 : {question}"}
+                                    {"role": "user", "content": f"회사명 : {corp_name}, 사업보고서 데이터 :  {summary_data[0].text}, 질문 : {question}"}
                                 ],
                                 temperature = 1, # 0 ~ 2.0
                                 top_p = 0.6
@@ -84,10 +91,14 @@ class QnA(Knuturn) :
             
                 print(f"질문 : {question} \n 예상답변 : {result} \n 회사이름 : {corp_name}")
 
-                metadata = {
-                    "corp_name" : corp_name,
-                    "q" : question
-                }
+                # metadata = {
+                #     "corp_name" : corp_name,
+                #     "q" : question
+                # }
+
+                metadata["q"] = question
+                print(metadata)
+
                 document = TextNode(text = result, metadata = metadata)
                 qna_documents.append(document)
 
