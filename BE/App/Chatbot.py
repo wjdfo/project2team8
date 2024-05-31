@@ -83,6 +83,8 @@ class Chatbot(Knuturn) :
             report_name = ["정기 보고서", "1분기 보고서", "반기(2분기) 보고서", "3분기 보고서"]
             report_dict = self.dart.getReportCode([corp_name],date[0],date[1])
             _, report_list = self.dart.getReportURL(report_dict)
+            for item in report_list[corp_name]:
+                report[corp_name + ' ' + item[0]] = item[1]
 
             for i in range(len(report_list)) :
                 report[report_name[i]] = report_list[i]

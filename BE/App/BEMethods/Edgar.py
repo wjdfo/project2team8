@@ -76,11 +76,11 @@ class Edgar:
         length = len(df['Company'])
         url_dict = {}
         for i in range(length):
-            if df['Company'][i] == company_name:
+            if df['Company'][i] == company_name and df['Date'][i][:4] >= date[0] and df['Date'][i][:4] <= date[1]:
                 url_dict[company_name +' ' + df['Date'][i]] = {}
         for i in range(length):
             if df['Date'][i][:4] >= date[0] and df['Date'][i][:4] <= date[1] :
                 if df['Company'][i] == company_name:
                     url_dict[company_name +' ' + df['Date'][i]] = df['htm_file_link'][i]
-        print(url_dict)
+        # print(url_dict)
         return url_dict
