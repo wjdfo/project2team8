@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet} from "react-native";
-import { Color, Border, FontFamily, Width, Height,} from "../../GlobalStyles";
+import { View, Text, StyleSheet,ActivityIndicator} from "react-native";
+import { Color, Border, FontFamily, Width, Height} from "../../GlobalStyles";
 import Hyperlink from 'react-native-hyperlink';
 import { Linking } from 'react-native';
 
@@ -31,12 +31,16 @@ export default function IndiviMessage({content, isUser}){
 
     return (
       <View style={[styles.messageContainer, isUserM("messageContainer")]}>
+		{content.message == '%LOADING%'?
+		<ActivityIndicator size='large' color='#000ff' />
+		:
 		<Hyperlink
 			linkStyle={{fintSize: 8, color: '#505050'}}
 			onPress={(url) => Linking.openURL(url)}
 		>
         	<Text style ={styles.message}>{content.message}</Text>
 		</Hyperlink>
+		}
       </View>
     );
 };

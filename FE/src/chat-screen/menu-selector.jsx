@@ -15,13 +15,14 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName,isDar
     const [summaryValue, setSummaryValue] = useState(null);
 
     const handleList = async () => {
+        setIsPlusOn(false);
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
         const result = await fetchList(corpName,isDart);
         var resultArry =[];
         result.map((i)=>{
             resultArry = [...resultArry,'- '+i+'\n'];
-        })
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:resultArry}}]);
-        setIsPlusOn(false);
+        });
+        setMessages(items => [...items.slice(0,-1), {id:items[items.length - 2].id+1,user:0,content:{message:resultArry}}]);
     };
 
     
@@ -40,20 +41,25 @@ const MenuSelector =({navigation,setIsPlusOn,messages,setMessages,corpName,isDar
             )
         }
         else{
+            setIsPlusOn(false);
+            setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
+
             const result = await fetchURL(corpName=corpName,fromDate=fromDate,toDate=toDate, isDart=isDart);
+            setMessages(items => [...items.slice(0,-1)]);
 
             Object.keys(result).map((key)=>{
                 setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:key + '\n' +result[key]}}]);
             })
-            setIsPlusOn(false);
     
         }
     };
 
     const handleSummary = async (reportYear) => {
-        const result = await fetchSummary(corpName=corpName, reportYear = reportYear, isDart = isDart);
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}])
         setIsPlusOn(false);
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
+
+        const result = await fetchSummary(corpName=corpName, reportYear = reportYear, isDart = isDart);
+        setMessages(items => [...items.slice(0,-1), {id:items[items.length - 2].id+1,user:0,content:{message:result}}])
     };
 
     const handleURLModal = () => {

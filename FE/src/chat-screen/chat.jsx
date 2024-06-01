@@ -50,8 +50,10 @@ const FrameScreen = ({navigation,route}) => {
   },[route.params.targetCorpName]);
   
   const handleComparePrint = async (corpName,isDart,targetCorpName,targetIsDart) => {
+    setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
+
     const result = await fetchCompare(corpName=corpName, isDart=isDart, targetCorpName=targetCorpName,targetIsDart=targetIsDart);
-    setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:result}}]);
+    setMessages(items => [...items.slice(0,-1), {id:items[items.length - 2].id+1,user:0,content:{message:result}}]);
   }
   const dissmissKeyboard = () => {
     Keyboard.dismiss();

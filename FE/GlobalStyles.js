@@ -16,7 +16,7 @@ export const Width = ( // 가로 변환 작업
 
 /* fonts */
 export const FontFamily = {
-  gmarketSans: 'Gmarket Sans',
+  gmarketSans: 'GmarketSans',
   kNUTRUTH: 'KNU TRUTH',
 };
 

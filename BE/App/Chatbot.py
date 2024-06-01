@@ -39,7 +39,7 @@ class Chatbot(Knuturn) :
 
         question_query = self.question_index.as_retriever(filters = question_filters)
         q = question_query.retrieve(question)
-        if q[0].score < 0.4 :
+        if q[0].score < 0.5 :
             return '제가 알고 있는 질문이 아닌 것 같아요. 더 정교하게 질문해주시거나 다른 질문을 해주세요.'
         anticipated_question = q[0].text
 

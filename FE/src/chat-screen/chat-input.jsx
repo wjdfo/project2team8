@@ -5,11 +5,11 @@ import { Color, FontFamily, Width, Height,} from "../../GlobalStyles";
 import fetchInput from "../fetch-handling/fetch-input";
 import { useLayout } from '@react-native-community/hooks';
 
-const ChatInput = ({inputText, setInputText, setMessages, corpName, isDart, isKeyboardShown,keyboardHeight,
+const ChatInput = ({inputText, setInputText, setMessages,messages, corpName, isDart, isKeyboardShown,keyboardHeight,
                     setIsPlusOn, setTextInputHeight}) => {
     
-    const { onLayout, ...layout } = useLayout()
-    
+    const { onLayout, ...layout } = useLayout();
+
     useEffect(()=>{
 
         setTextInputHeight(layout.height);   
@@ -22,8 +22,9 @@ const ChatInput = ({inputText, setInputText, setMessages, corpName, isDart, isKe
     const handleSubmit = async () => {
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1,content:{message:inputText}}]);
         setInputText('');
+        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
         const answerText = await fetchInput(inputText=inputText, corpName=corpName, isDart = isDart);
-        setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:answerText}}]);
+        setMessages(items => [...items.slice(0,-1), {id:items[items.length - 2].id+1,user:0,content:{message:answerText}}]);
         
     };
     return (

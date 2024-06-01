@@ -8,7 +8,7 @@ const ChatBody =({isKeyboardShown, keyboardHeight, messages,textInputHeight, isS
 
     const renderItem = ({item})=> (
         <Message content={item.content} isUser={item.user}/>
-      );
+    );
     
     return (
         <FlatList 

@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, TouchableOpacity, Image} from "react-native";
-import { Width,Color, Height,FontFamily } from '../GlobalStyles'; //width,height 받아오기
+import { Width,Color, Height,FontFamily } from '../GlobalStyles';
 import { setItem, getItem } from './cookie-handling/cookie';
 import uuid from 'react-native-uuid';
 
@@ -51,8 +51,10 @@ const Initial = ({navigation}) => {
 
         <Text style={styles.knuturn}>knuturn</Text>
         <View style={ {width : 500*Width,height : 500 * Height, backgroundColor:Color.colorNewturn, position:'absolute',top:0}}/>
-
       </View>
+      <Text style= {styles.warningText}>
+          ※ 투자의 책임은 투자자 본인에게 있습니다. ※
+      </Text>
     </View>
   );
 };
@@ -85,6 +87,8 @@ const styles = StyleSheet.create({
     width: 1080 * Width,
     overflow: "hidden",
     height: 2220*Height,
+    alignItems :"center"
+
   },
   introCorpSearch:{
     backgroundColor:Color.colorDarkenGray,
@@ -108,6 +112,14 @@ const styles = StyleSheet.create({
     height : 60 * Height,
     position : "absolute",
     right : 65 * Width,
+  },
+  warningText : {
+    fontFamily : FontFamily.gmarketSans,
+    fontSize : 50 * Width,
+    position : 'absolute',
+    bottom : 100*Height,
+    color : '#FA4C4C',
+    fontWeight : 'bold',
   }
 });
 
