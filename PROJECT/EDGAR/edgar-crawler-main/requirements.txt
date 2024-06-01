@@ -1,0 +1,7 @@
+beautifulsoup4
+cssutils
+numpy
+lxml
+pandas
+requests
+tqdm

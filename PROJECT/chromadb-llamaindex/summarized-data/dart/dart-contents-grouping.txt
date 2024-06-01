@@ -1,0 +1,1402 @@
+test-gpt-3.5-turbo-삼성전자-20240312000736
+1. 삼성전자 (Samsung Electronics)
+2. 종속기업 (Subsidiaries)
+3. 조직개편 (Organizational restructuring)
+4. 매출액 (Revenue)
+5. 제품 및 서비스 (Products and services)
+6. 원재료 공급처 (Suppliers of raw materials)
+7. 생산 및 생산능력 (Production and production capacity)
+8. 매출유형 (Types of revenue)
+9. 연구개발활동 (Research and development activities)
+10. 임원 및 경영진 (Executives and management)
+
+test-gpt-3.5-turbo-삼성전자-20231114002109
+1. 삼성전자 (Samsung Electronics)
+2. 종속기업 (Subsidiaries)
+3. 사업부문 (Business Divisions)
+4. 매출액 (Revenue)
+5. 제품 및 부품 (Products and Components)
+6. 주요 매출처 (Key Customers)
+7. 주요 원재료 공급처 (Key Suppliers)
+8. 생산능력 및 가동률 (Production Capacity and Utilization Rate)
+9. 계약 및 연구개발 활동 (Contracts and R&D Activities)
+10. 임원 정보 (Executive Information)
+11. 자금조달 및 자산 거래 (Fundraising and Asset Transactions)
+12. 영업거래 (Business Transactions)
+
+test-gpt-3.5-turbo-삼성전자-20230814002534
+1. 삼성전자 (Samsung Electronics)
+2. 조직개편 (Organizational restructuring)
+3. 매출액 (Revenue)
+4. 제품 및 부문별 매출 (Revenue by product and segment)
+5. 주요 매출처 (Key customers)
+6. 주요 원재료 (Key raw materials)
+7. 생산능력 및 생산실적 (Production capacity and performance)
+8. 연구개발활동 (Research and development activities)
+9. 임원 및 직원 현황 (Executive and employee status)
+10. 자금조달 및 거래 (Fundraising and transactions)
+
+test-gpt-3.5-turbo-삼성전자-20230515002335
+1. 삼성전자 (Samsung Electronics)
+2. 조직개편 (Organizational restructuring)
+3. 매출 현황 (Revenue status)
+4. 주요 제품별 매출 (Revenue by major products)
+5. 주요 지역별 매출 (Revenue by major regions)
+6. 주요 계약 및 연구개발 활동 (Major contracts and R&D activities)
+7. 활가전 전략마케팅팀 (Corporate Strategy and Marketing Team)
+8. 대주주와의 거래내용 (Transactions with major shareholders)
+9. 자금조달 및 자산 매각 (Fundraising and asset sales)
+10. 영업거래 내역 (Business transaction details)
+
+test-gpt-3.5-turbo-삼성전자-20230307000542
+1. 삼성전자 (Samsung Electronics)
+2. 조직 및 사업부문 구성
+3. 매출액 및 매출처
+4. 제품별 매출액
+5. 주요 원재료 및 가격 변동
+6. 생산능력 및 생산실적
+7. 생산설비 및 투자 현황
+8. 계약 및 연구개발 활동
+9. 미등기임원의 인적사항
+10. 자금조달 및 거래 현황
+
+test-gpt-3.5-turbo-SK하이닉스-20240319000684
+1. 기업 개요
+2. 제품 및 시장 동향
+3. 생산시설
+4. 매출액
+5. 주요 제품
+6. 메모리 시장 동향
+7. 주요 원재료
+8. 매입액 및 매입처
+9. 판매 및 수주 전략
+10. 계약 및 연구개발활동
+11. 임원 및 노동조합
+12. 대주주 거래내용
+
+test-gpt-3.5-turbo-SK하이닉스-20231114002574
+1. 기업 개요
+2. 제품 및 서비스
+3. 매출 현황
+4. 생산 및 생산설비
+5. 판매 조직 및 전략
+6. 기술 협약 및 인수
+7. 연구 및 개발
+8. 임원 업무 분류
+9. 대주주와의 거래내용
+10. 부동산 및 자산양수도
+
+test-gpt-3.5-turbo-SK하이닉스-20230814002376
+1. 기업 개요
+2. 제품 및 생산
+3. 판매 전략
+4. 주요 계약 및 연구개발
+5. 임원 및 직원 현황
+6. 노동조합 현황
+7. 대주주와의 거래내용
+8. 해외법인과의 거래내용
+9. 자산양수도 내역
+10. 영업거래 내용
+
+test-gpt-3.5-turbo-SK하이닉스-20230515001677
+1. 기업 개요
+2. 매출 현황
+3. 생산 및 생산시설
+4. 주요 제품
+5. 판매 조직 및 전략
+6. 주요 계약 활동
+7. 연구개발 활동
+8. 미등기임원 인적사항
+9. 대주주와의 거래내용
+10. 자산양수도 내역
+
+test-gpt-3.5-turbo-SK하이닉스-20230321001209
+1. 기업 개요
+2. 매출 현황
+3. 시장 환경
+4. 생산 및 생산시설
+5. 주요 원재료
+6. 투자 계획
+7. 판매 전략
+8. 계약 내용
+9. 연구개발 활동
+10. 임원 및 직원 현황
+
+test-gpt-3.5-turbo-LG에너지솔루션-20240314001110
+1. 에너지솔루션 사업의 성장
+2. 매출 및 이익 상황
+3. 제품 및 시장 분석
+4. 원재료 현황
+5. 생산능력 및 생산실적
+6. 투자 현황
+7. 매출 및 수주 상황
+8. 주요 계약 및 연구개발활동
+9. 미등기임원 정보
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG에너지솔루션-20231114001430
+1. 리튬이온전지
+2. EV 시장
+3. 에너지솔루션 산업
+4. 매출 및 영업이익
+5. 제품 카테고리
+6. 생산 및 생산설비
+7. 매출 및 수주상황
+8. 주요계약 및 연구개발활동
+9. 미등기임원들의 인적사항
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG에너지솔루션-20230814002063
+1. 리튬이온전지
+2. EV 시장
+3. 에너지솔루션 산업
+4. 매출액
+5. 주요 제품
+6. 원재료 및 생산설비
+7. 매출 및 수주상황
+8. 주요계약 및 연구개발활동
+9. 미등기임원
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG에너지솔루션-20230515002279
+1. 회사 설립 및 성장 과정
+2. 제품 라인업 및 주요 시장
+3. 매출 및 영업이익 현황
+4. 생산 및 생산설비 정보
+5. 매입액 및 주요 협력사
+6. 매출 구성 및 가격 변동
+7. 매출 및 수주 상황
+8. 연구개발 활동
+9. 임원 정보
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG에너지솔루션-20230315001342
+1. 회사 설립 및 성장 과정
+2. 제품 및 서비스
+3. 매출 및 영업이익
+4. 주요 원재료 및 생산설비
+5. 투자 계획
+6. 매출 및 수주상황
+7. 주요 계약 및 연구개발활동
+8. 전극 생산 담당 미등기임원 정보
+9. 대주주와의 거래내용
+10. 이해관계자와의 거래내용
+
+test-gpt-3.5-turbo-삼성바이오로직스-20240307000835
+1. 사업 영위 분야
+2. 매출 현황
+3. 제품 및 서비스
+4. 원재료 및 생산설비
+5. 투자 현황
+6. 수주상황
+7. 계약 및 연구개발활동
+8. 임원 및 직원 현황
+9. 대주주와의 거래내용
+10. 영업전략 및 판매활동
+
+test-gpt-3.5-turbo-삼성바이오로직스-20231114002501
+1. 사업 영위 분야
+2. 매출 현황
+3. 제품 및 서비스
+4. 원재료 및 생산설비
+5. 매출 및 수주상황
+6. 계약활동
+7. 연구개발
+8. 임원 및 직원 현황
+9. 대주주와의 거래내용
+10. 영업거래내역
+
+test-gpt-3.5-turbo-삼성바이오로직스-20230814002651
+1. 삼성바이오로직스 사업 영역
+2. 2023년 매출 현황
+3. 원재료 및 생산설비 관련 내용
+4. CDMO 부문의 투자현황
+5. 매출 및 수주상황
+6. 주요 계약활동
+7. 임원 현황
+8. 직원 현황
+9. 대주주와의 거래내용
+10. 이해관계자와의 거래내용
+
+test-gpt-3.5-turbo-삼성바이오로직스-20230515002481
+1. 삼성바이오로직스 사업 영역
+2. 삼성바이오에피스 주요 제품 및 서비스
+3. 삼성바이오로직스 원재료 및 생산설비
+4. 삼성바이오로직스 매출 및 수주상황
+5. 삼성바이오로직스 주요 판매 계약 현황
+6. 삼성바이오로직스 연구개발 조직
+7. 삼성바이오로직스 임원 및 직원 현황
+8. X회사 대주주와의 거래내용
+9. 삼성바이오에피스 지분 및 부지매입 계약
+10. 삼성바이오로직스 투자현황
+
+test-gpt-3.5-turbo-삼성바이오로직스-20230309000835
+1. 삼성바이오로직스 (Samsung Biologics)
+2. CDMO부문 (CDMO Division)
+3. 바이오의약품 개발 및 상업화 (Biopharmaceutical Development and Commercialization)
+4. 매출액 (Revenue)
+5. 바이오시밀러 (Biosimilar)
+6. 원재료 및 생산설비 (Raw Materials and Production Facilities)
+7. 수주상황 (Order Situation)
+8. 계약활동 (Contract Activities)
+9. 연구개발 (Research and Development)
+10. 임원 및 직원 현황 (Executive and Employee Status)
+
+test-gpt-3.5-turbo-현대자동차-20240314001531
+1. 현대차 (Hyundai Motor)
+2. 현대로템 (Hyundai Rotem)
+3. 현대자동차그룹 컨소시엄 (Hyundai Motor Group Consortium)
+4. 현대캐피탈 (Hyundai Capital)
+5. 현대카드 (Hyundai Card)
+6. 임원 인적사항 (Executive Personnel Information)
+7. 직원 현황 (Employee Statistics)
+8. 대주주와의 거래내용 (Transactions with Controlling Shareholders)
+9. 유가증권 거래내역 (Securities Transactions)
+10. 영업거래 및 자산거래 내역 (Business and Asset Transactions)
+
+test-gpt-3.5-turbo-현대자동차-20240314001466
+1. 현대로템 (Hyundai Rotem)
+2. 제조서비스 사업 (Manufacturing Services Business)
+3. 매출액 (Revenue)
+4. 영업이익 (Operating Profit)
+5. 수주잔고 (Order Backlog)
+6. 원재료 (Raw Materials)
+7. 생산설비 (Production Facilities)
+8. 판매전략 (Sales Strategy)
+9. 현대캐피탈 (Hyundai Capital)
+10. 대주주 거래내용 (Major Shareholder Transactions)
+
+test-gpt-3.5-turbo-현대자동차-20240313001451
+1. 현대로템 (Hyundai Rotem)
+2. 제조서비스업
+3. SMART 가치
+4. 레일솔루션
+5. 디펜스솔루션
+6. 에코플랜트
+7. 현대자동차 (Hyundai Motor)
+8. 현대자동차그룹 컨소시엄
+9. 현대캐피탈
+10. 현대카드
+
+test-gpt-3.5-turbo-현대자동차-20231114002201
+1. 현대로템 (Hyundai Rotem)
+2. SMART 가치
+3. 사업 구조
+4. 레일솔루션 (Rail Solution)
+5. 디펜스솔루션 (Defense Solution)
+6. 에코플랜트 (Eco Plant)
+7. 현대자동차 (Hyundai Motor)
+8. 현대자동차그룹 컨소시엄 (Hyundai Motor Group Consortium)
+9. 현대캐피탈 (Hyundai Capital)
+10. HMCA법인 (HMCA Corporation)
+
+test-gpt-3.5-turbo-현대자동차-20230814002457
+1. 현대로템 (Hyundai Rotem)
+2. 연결실체의 제조서비스 사업
+3. 주요 원재료 및 생산설비 현황
+4. 현대자동차 (Hyundai Motor)
+5. 현대자동차그룹 컨소시엄
+6. 현대캐피탈 (Hyundai Capital)
+7. 현대카드 (Hyundai Card)
+8. 서울대 기업의 임원 및 상무진 정보
+9. X회사의 대주주와의 거래내용
+10. 보고서 내 거래내용 및 이사회 결의 후 집행 관련
+
+test-gpt-3.5-turbo-현대자동차-20230515002403
+1. 현대로템 (Hyundai Rotem)
+2. 제조서비스 사업 (Manufacturing Services Business)
+3. 현대자동차그룹 (Hyundai Motor Group)
+4. 현대캐피탈 (Hyundai Capital)
+5. 연구개발 (Research and Development)
+6. 현대자동차그룹 컨소시엄 (Hyundai Motor Group Consortium)
+7. 여신전문금융업 (Specialized Financial Services)
+8. 인적사항 (Personnel Information)
+9. 대주주 등과의 거래내용 (Transactions with Controlling Shareholders)
+10. 영업거래 (Business Transactions)
+
+test-gpt-3.5-turbo-POSCO홀딩스-20240322000986
+1. 포스코홀딩스 지주회사 전환
+2. 포스코 연결대상 회사
+3. 포스코 사업부문
+4. 포스코 제품 및 서비스
+5. 포스코 생산실적과 가동률
+6. 포스코 전략
+7. 포스코 수주 상황
+8. 포스코 연구개발 비용
+9. 박성욱 대 조달청 청장
+10. 회사 X 대주주와의 거래내용
+
+test-gpt-3.5-turbo-POSCO홀딩스-20231114002784
+1. 포스코홀딩스 (POSCO Holdings)
+2. 연결대상 회사
+3. 주요 제품 및 서비스
+4. 원재료 및 생산설비
+5. 서비스 및 엔지니어링 부문
+6. 연구개발 활동
+7. 임원 현황
+8. X회사 (Company X)
+9. 대주주 관련 내용
+10. 이해관계자와의 거래
+
+test-gpt-3.5-turbo-POSCO홀딩스-20230814002141
+1. 포스코홀딩스 지주회사 전환 및 사업 테마 발굴
+2. 포스코홀딩스 사업부문 구분
+3. 포스코 제품 및 서비스 구분
+4. 포스코 원재료 및 생산설비
+5. 포스코 투자 계획
+6. 포스코 수주상황
+7. 스코에너지 주식회사 합병
+8. 포스코 연구개발 활동
+9. 포스코 임원 및 직원 현황
+10. X회사 대주주와의 거래내용
+
+test-gpt-3.5-turbo-POSCO홀딩스-20230515001841
+1. 포스코홀딩스 (POSCO Holdings)
+2. 연결대상 회사
+3. 주요 제품 및 서비스
+4. 매출현황
+5. 원재료 및 생산설비
+6. 2023년 1분기 주요 매출처
+7. 수주 상황
+8. 분할 및 흡수합병
+9. 연구개발활동
+10. 임원 및 직원 현황
+
+test-gpt-3.5-turbo-POSCO홀딩스-20230309000896
+1. 포스코홀딩스 (POSCO Holdings)
+2. 사업부문 구분
+3. 매출액 및 매출증가
+4. 생산실적 및 가동률
+5. 주요 제품 및 서비스
+6. 주요 가격 변동
+7. 수주활동
+8. 합병 계획
+9. 임원 및 직원 현황
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-삼성SDI-20240312000853
+1. 매출액 및 영업이익
+2. 에너지솔루션 부문
+3. 전자재료 부문
+4. 제품 및 가격
+5. 원재료 및 생산설비
+6. 매출 및 수주 상황
+7. 계약 현황
+8. 연구개발 활동
+9. 임원 및 직원 현황
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-삼성SDI-20231114002259
+1. 매출 및 영업이익
+2. 에너지솔루션 사업
+3. 전자재료 사업
+4. 주요 계약
+5. 연구개발 활동
+6. 임원 및 직원 현황
+7. 대주주와의 거래내용
+8. 생산설비 및 시설 투자
+9. 수주 상황
+10. 원재료 및 가격 변동
+
+test-gpt-3.5-turbo-삼성SDI-20230814002680
+1. 매출 및 영업이익
+2. 에너지솔루션 사업
+3. 전자재료 사업
+4. 제품 및 가격
+5. 생산설비
+6. 수주 상황
+7. 해외 합작투자
+8. 연구개발 활동
+9. 임원 및 직원 현황
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-삼성SDI-20230515002370
+1. 매출액
+2. 영업이익
+3. 에너지솔루션 사업
+4. 전자재료 사업
+5. 거래처
+6. 투자현황
+7. 합작투자계약
+8. 연구개발활동
+9. 임원 현황
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-삼성SDI-20230313000726
+1. 매출 및 영업이익 증가
+2. 에너지솔루션 사업부문
+3. 전자재료 사업부문
+4. 제품 판매 및 매출액
+5. 생산설비 및 투자현황
+6. 매출 및 수주 상황
+7. 합작투자계약 및 신규 공장 설립
+8. 연구개발활동 및 기술 협력
+9. 미등기 임원 정보
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG화학-20240315000957
+1. LG화학 매출 및 사업부문
+2. LG화학 사업부문별 전략
+3. LG화학 제품 및 서비스
+4. LG화학 원재료 및 생산설비
+5. LG화학 주요 투자
+6. LG화학 매출 및 수주상황
+7. LG화학 계약 및 연구개발활동
+8. 미등기임원 정보
+9. LG화학 대주주 관련 거래
+10. LG화학 이해관계자와의 거래
+
+test-gpt-3.5-turbo-LG화학-20231114000753
+1. 매출 및 수주상황
+2. 주요 제품 및 서비스
+3. 원재료 현황
+4. LG에너지솔루션의 매출
+5. 팜한농의 투자
+6. LG화학의 계약 및 연구개발활동
+7. LG에너지솔루션 및 팜한농의 연구개발 실적
+8. 연구개발비용
+9. 임원 및 직원 현황
+10. LG화학과 LG Polymers India Private Limited 간 거래내용
+
+test-gpt-3.5-turbo-LG화학-20230814002119
+1. LG화학 2. 매출액 3. 사업부문 4. 주요 제품 5. 원재료 6. 생산능력 7. 투자 8. 판매전략 9. 계약 및 연구개발활동 10. 미등기임원 11. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG화학-20230515002419
+1. LG화학 2. 매출액 3. 사업부문 4. 석유화학 5. 첨단소재 6. 생명과학 7. LG에너지솔루션 8. 공통 및 기타부문 9. 원재료 10. 연구개발활동
+
+test-gpt-3.5-turbo-LG화학-20230324001178
+1. LG화학 매출액
+2. LG화학 주요 사업부문
+3. LG화학 주요 제품
+4. LG화학 주요 원재료
+5. LG화학 생산능력
+6. LG화학 주요 투자
+7. LG에너지솔루션 매출
+8. 팜한농 판매전략
+9. LG화학 계약 및 연구개발활동
+10. LG화학 임원 및 직원 현황
+
+test-gpt-3.5-turbo-NAVER-20240318000844
+1. 네이버 (Naver)
+2. IT 기업
+3. 서비스 다각화
+4. 영업부문 구성
+5. 주요 제품 및 서비스
+6. 자산 항목
+7. 시설투자 (CapEx)
+8. 매출 및 수주상황
+9. Poshmark, Inc. 인수
+10. 연구개발활동
+11. 주요 리더 프로필
+12. 보수 현황
+13. NAVER J. HUB
+14. 대여금 및 채무보증
+15. 사업양도 및 영업거래
+
+test-gpt-3.5-turbo-NAVER-20231114001166
+1. 네이버 (Naver)
+2. 혁신적인 서비스
+3. 글로벌 도전
+4. 주요 사업
+5. 물적자산
+6. 매출 및 수주상황
+7. Poshmark, Inc. 인수
+8. 연구개발활동
+9. 주요 리더들
+10. 대여금 및 채무보증
+
+test-gpt-3.5-turbo-NAVER-20230811001363
+1. 네이버의 혁신적인 서비스와 글로벌 도전
+2. 네이버의 주력 사업과 다양한 사업 분야
+3. 네이버의 제품 및 서비스 구성
+4. 네이버의 자산 구성과 시설투자 현황
+5. 네이버의 매출 및 수주상황
+6. 네이버의 글로벌 커머스 시장 진출과 기술 결합
+7. 네이버의 연구개발활동과 비용
+8. 네이버의 주요 리더 정보
+9. X회사와 NAVER J. HUB 간 거래내용
+10. X회사의 자산양수도와 영업거래 내용
+
+test-gpt-3.5-turbo-NAVER-20230512001100
+1. 네이버의 주요 사업 분야
+2. 네이버의 주요 제품 및 서비스
+3. 네이버의 물적자산 구성
+4. 네이버의 매출 및 수주상황
+5. 네이버의 글로벌 커머스 시장 진출
+6. 네이버의 연구개발활동
+7. 네이버의 주요 리더 정보
+8. X회사의 NAVER J. HUB 대여금 및 채무보증
+9. NAVER J. HUB의 네이버파이낸셜 사업양도 거래
+10. 이사회의 승인을 받은 거래들
+
+test-gpt-3.5-turbo-NAVER-20230314001049
+1. 네이버의 사업 다각화
+2. 네이버의 주요 제품 및 서비스
+3. 네이버의 자산 항목
+4. 네이버의 시설투자(CapEx)
+5. 네이버의 매출 및 수주상황
+6. 네이버의 글로벌 커머스 시장 진출
+7. 네이버의 연구개발활동
+8. 네이버의 주요 리더 정보
+9. NAVER J. HUB의 대여금 및 채무보증
+10. 네이버클라우드 계열회사와의 영업거래
+
+test-gpt-3.5-turbo-KB금융-20240326001023
+1. KB금융그룹의 영업활동
+2. KB국민은행의 실적
+3. KB증권의 성과
+4. KB손해보험의 성과
+5. KB국민카드의 활동
+6. KB금융지주의 전무들 정보
+7. 대주주와의 거래내용
+8. 이해관계자와의 거래내용
+9. 자금지원 및 자본증권 인수 거래
+10. 계열사 간 자금 거래 및 자본확충 활동
+
+test-gpt-3.5-turbo-KB금융-20240326000894
+1. KB금융그룹 (KB Financial Group)
+2. 금융의 새로운 패러다임 (New Paradigm in Finance)
+3. 선도적인 영업활동 (Leading Business Activities)
+4. ESG 리더십 (ESG Leadership)
+5. KB국민은행 (KB Kookmin Bank)
+6. KB증권 (KB Securities)
+7. KB손해보험 (KB Insurance)
+8. KB국민카드 (KB Kookmin Card)
+9. 미등기임원 정보 (Unregistered Executive Information)
+10. 자산 양수 및 영업거래 (Asset Transfer and Business Transactions)
+
+test-gpt-3.5-turbo-KB금융-20231005000482
+1. KB금융그룹 (KB Financial Group)
+2. KB국민은행 (KB Kookmin Bank)
+3. KB증권 (KB Securities)
+4. KB손해보험 (KB Insurance)
+5. KB국민카드 (KB Kookmin Card)
+6. 국민대 회계정보 (Kookmin University Accounting Information)
+7. 권성기, 조남훈, 조영서, 윤진수, 육창화, 전성표, 하정, 강순배, 강남채, 하윤, 허유심, 박기은, 김주현, 오순영, 박찬용, 강민혁
+8. 대주주와의 거래내용 (Transactions with Controlling Shareholders)
+9. 신종자본증권 (New Capital Securities)
+10. 자금지원 (Financial Support)
+
+test-gpt-3.5-turbo-KB금융-20231005000478
+1. KB금융그룹 (KB Financial Group)
+2. WM (Wealth Management)
+3. CIB (Corporate and Investment Banking)
+4. 글로벌 (Global)
+5. 자본시장 (Capital Market)
+6. ESG 리더십 (ESG Leadership)
+7. KB국민은행 (KB Kookmin Bank)
+8. KB증권 (KB Securities)
+9. KB손해보험 (KB Insurance)
+10. KB국민카드 (KB Kookmin Card)
+
+test-gpt-3.5-turbo-KB금융-20231005000471
+1. KB금융그룹 (KB Financial Group)
+2. 영업활동 (Business Activities)
+3. 신성장 영역 (New Growth Areas)
+4. 계열사 (Subsidiaries)
+5. 고객 경험 (Customer Experience)
+6. ESG 리더십 (ESG Leadership)
+7. 경영진 (Management Team)
+8. 대주주와의 거래내용 (Transactions with Controlling Shareholders)
+9. 이해관계자와의 거래 (Transactions with Related Parties)
+10. 자금 지원 및 거래 활동 (Funding and Transaction Activities)
+
+test-gpt-3.5-turbo-에코프로비엠-20240318000873
+1. 제품 라인업 및 주력 제품
+2. 양극재 및 음극재
+3. 매출 및 수주 상황
+4. 생산능력 및 투자계획
+5. 연구개발활동
+6. 임원 및 직원 현황
+7. 대주주 및 특수관계자
+8. 주요 계약 및 연구개발활동
+9. 보고서 작성기준일 현재의 주요 거래 내용
+10. 양도제한조건부주식보상(RSU) 관련 정보
+
+test-gpt-3.5-turbo-에코프로비엠-20231114001615
+1. 양극재 (Cathode material)
+2. NCA (Nickel Cobalt Aluminum)
+3. NCM (Nickel Cobalt Manganese)
+4. 매출액 (Revenue)
+5. 수주상황 (Order situation)
+6. 연구개발활동 (R&D activities)
+7. 임원 및 직원 현황 (Executive and employee status)
+8. 종속기업 (Subsidiaries)
+9. 대주주 및 특수관계자 (Major shareholders and related parties)
+10. 보상 (Compensation)
+
+test-gpt-3.5-turbo-에코프로비엠-20230814002712
+1. 제품 라인업 및 주력 제품
+2. 양극재 및 핵심소재
+3. 생산 및 생산능력
+4. 매출 및 수주상황
+5. 주요 계약 및 투자
+6. 연구개발활동
+7. 임원 및 직원 현황
+8. 특수관계 회사
+9. 대주주 및 특수관계자와의 영업거래
+10. 주요 경영진에 대한 보상
+
+test-gpt-3.5-turbo-에코프로비엠-20230515001464
+1. 양극재, 음극재, 전해질, 분리막
+2. 하이니켈 NCA, NCM 양극활물질
+3. NCM811 양극활물질
+4. 매출액
+5. 생산능력 확대
+6. 원재료 (니켈, 코발트, 리튬)
+7. 매출 상황
+8. 수주 상황
+9. 연구개발활동
+10. 임원 및 직원 현황
+
+test-gpt-3.5-turbo-에코프로비엠-20230321001436
+1. 양극재, 음극재, 전해질, 분리막
+2. 하이니켈 NCA, NCM
+3. NCM811, NCM 9 ½ ½
+4. 매출액, 수주 상황
+5. 생산능력, 생산설비
+6. 주요 매출처
+7. 연구개발활동
+8. 임원 현황
+9. 직원 현황
+10. 특수관계자와의 거래
+
+test-gpt-3.5-turbo-현대모비스-20240319000626
+1. 연결회사 (Consolidated Company)
+2. 매출액 (Revenue)
+3. 모듈 및 부품제조사업 (Module and Parts Manufacturing Business)
+4. A/S용 부품사업 (After-Sales Parts Business)
+5. 생산 및 생산능력 (Production and Production Capacity)
+6. 주요 제품 (Key Products)
+7. 주요 원재료 (Key Raw Materials)
+8. 판매 및 판매전략 (Sales and Sales Strategy)
+9. 현대자동차그룹 (Hyundai Motor Group)
+10. 임원 및 직원 구성 (Executive and Employee Composition)
+
+test-gpt-3.5-turbo-현대모비스-20231114002284
+1. 연결회사 주요 사업
+2. 2023년 3분기 매출액
+3. 생산 및 생산능력
+4. 주요 원재료
+5. 매출 및 판매
+6. 현대자동차그룹의 기술 협력
+7. 연구개발 및 R&D 비용
+8. 임원 및 직원 현황
+9. 자금조달 및 채무보증
+10. 금융거래 및 거래처
+
+test-gpt-3.5-turbo-현대모비스-20230814001996
+1. 연결회사 주요 사업 내용
+2. 2023년 상반기 매출액 및 영업이익 증가
+3. 제품별 매출액 변동
+4. 주요 원재료 및 거래처
+5. 생산능력 및 투자 현황
+6. 국내 및 해외 매출 증가
+7. 판매전략 및 주요 매출처
+8. 현대자동차그룹의 기술력 강화 및 신사업 진출
+9. **회사명**의 임원 및 직원 현황
+10. X회사의 채무보증 및 자산양수도 내역
+
+test-gpt-3.5-turbo-현대모비스-20230515001771
+1. 연결회사 주요 사업 및 제품
+2. 2023년 1분기 매출액 및 매출 구성
+3. 미래 모빌리티 산업 전략
+4. 연결회사 생산 및 투자 현황
+5. 국내 및 해외 매출 증가 동향
+6. 현대자동차그룹의 연구개발 활동
+7. **기아자동차** 임원 현황
+8. X회사의 채무보증 현황
+9. 대주주 및 관련 법인과의 거래 내역
+10. 대주주 이외 이해관계자와의 거래 여부
+
+test-gpt-3.5-turbo-현대모비스-20230321001162
+1. 연결회사 (Consolidated Company)
+2. 매출액 (Revenue)
+3. 영업이익 (Operating Profit)
+4. 생산 및 생산능력 (Production and Production Capacity)
+5. 판매 및 수주상황 (Sales and Order Situation)
+6. 현대자동차그룹 (Hyundai Motor Group)
+7. 연구개발 활동 (Research and Development Activities)
+8. 임원 및 직원 현황 (Executive and Employee Status)
+9. 대주주 및 관련 법인 (Major Shareholders and Related Companies)
+10. 금융거래 및 거래금액 (Financial Transactions and Transaction Amounts)
+
+test-gpt-3.5-turbo-현대모비스-20230127000463
+1. 연결회사 주요 사업 및 제품
+2. 2022년 3분기 재무성과
+3. 미래 준비 및 투자 계획
+4. 연결회사 생산 및 생산능력
+5. 연결회사 생산설비 및 유형자산
+6. 연결회사 매출 현황
+7. 현대자동차그룹 기술 경쟁력 강화
+8. 현대자동차그룹 연구개발 부문
+9. 회사의 임원 및 직원 현황
+10. X회사의 채무보증 및 영업거래
+
+test-gpt-3.5-turbo-신한지주-20240318000635
+1. 신한금융지주 (Shinhan Financial Group)
+2. 사업부문 (Business Sectors)
+3. 재무실적 (Financial Performance)
+4. 임원 정보 (Executive Information)
+5. 주요 임원 (Key Executives)
+6. 자회사 자금지원 (Subsidiary Financial Support)
+7. 대출채권 및 금융상품 (Loan Receivables and Financial Products)
+8. 자금지원 현황 (Financial Support Status)
+9. 특수관계자 거래 (Related Party Transactions)
+10. 재무제표 주석 (Financial Statements Notes)
+
+test-gpt-3.5-turbo-신한지주-20231114001992
+1. 신한금융지주 (Shinhan Financial Group)
+2. 사업부문 (Business Sectors)
+3. 재무실적 (Financial Performance)
+4. 임원 현황 (Executive Status)
+5. 박현주 부사장 (Vice President Park Hyun-joo)
+6. Bluebutton(5Broadgate) UK Limited
+7. 신용공여 (Credit Facility)
+8. 이해관계자 거래 (Related Party Transactions)
+9. 이사회 결의 (Board Resolutions)
+10. 특수관계자 거래 (Special Related Party Transactions)
+
+test-gpt-3.5-turbo-신한지주-20230814002139
+1. **회사명** 소개
+2. 재무실적 분석
+3. 임원 현황
+4. 직원 현황
+5. 자회사 자금지원
+6. 대출채권 및 금융상품
+7. 특수관계자 거래
+8. 신한은행의 특수관계회사에 대한 신용공여
+9. 자회사에 대한 신용공여 현황
+10. 거래 내용 상세 기재
+
+test-gpt-3.5-turbo-신한지주-20230515002373
+1. 기업 개요
+2. 재무실적
+3. 미션 및 가치
+4. 임원 현황
+5. 학력 및 경력
+6. 소유주식수
+7. 대주주 관계
+8. 직원 현황
+9. 자회사 거래
+10. 이사회 결의
+
+test-gpt-3.5-turbo-신한지주-20230315001015
+1. 신한금융지주회사 (Shinhan Financial Group)
+2. 사업부문
+3. 2022년 재무결과
+4. 가치 상생
+5. 임원 정보
+6. 직원 정보
+7. 신한은행 (Shinhan Bank)
+8. 대주주 이외 거래
+9. 신한카드 (Shinhan Card)
+10. 재무제표 주석
+
+test-gpt-3.5-turbo-포스코퓨처엠-20240326000383
+1. 포스코퓨처엠 (POSCO Future M)
+2. 매출액 및 주요 제품
+3. 에너지소재부문
+4. 원재료 및 생산설비
+5. 매출처 및 수주
+6. 연구개발 활동
+7. 임원 현황
+8. 직원 현황
+9. 미등기임원 현황
+10. 대주주와의 영업거래
+
+test-gpt-3.5-turbo-포스코퓨처엠-20231114001450
+1. 포스코퓨처엠 (POSCO Future M)
+2. 이차전지 소재
+3. 매출액 구성
+4. 에너지소재 부문
+5. 중국 및 북미 시장 확장
+6. 기초소재사업, 라임화성사업, 에너지소재사업
+7. 원재료 및 생산설비
+8. 매출액 증가
+9. 판매조직 및 수주상황
+10. 연구개발 활동
+
+test-gpt-3.5-turbo-포스코퓨처엠-20230811001629
+1. 포스코퓨처엠 (Company A)
+2. 주요 제품 및 서비스
+3. 매출액 및 주요 매출처
+4. 수주상황 및 주요 수주 계약
+5. 판매전략 및 판매조직
+6. 연구 및 개발 활동
+7. 임원 현황
+8. 직원 현황
+9. 직원 급여
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-포스코퓨처엠-20230515002518
+1. 포스코퓨처엠 (POSCO Future M)
+2. 매출액
+3. 내화물
+4. 라임화성
+5. 에너지소재
+6. 이차전지
+7. 수주상황
+8. 연구개발활동
+9. 임원 현황
+10. 영업거래내용
+
+test-gpt-3.5-turbo-포스코퓨처엠-20230317000751
+1. 포스코케미칼 (POSCO Chemical)
+2. 사업 구성 및 매출액
+3. 이차전지 사업
+4. 내화물 및 라임화성부문
+5. 에너지소재부문
+6. 원재료 및 생산설비
+7. 2022년 매출액 및 주요 매출처
+8. 수주잔고 및 주요 수주건
+9. 판매전략 및 판매조직
+10. 연구개발 활동 및 비용
+11. 임원 및 직원 현황
+12. 대주주와의 영업거래
+
+test-gpt-3.5-turbo-삼성생명-20240313001502
+1. 삼성생명 (Samsung Life)
+2. 삼성카드 (Samsung Card)
+3. 삼성자산운용 (Samsung Asset Management)
+4. 북경삼성치업유한공사 (Beijing Samsung T&C Co., Ltd.)
+5. 삼성생명서비스손해사정 (Samsung Life Service Loss Adjuster)
+6. 삼성에스알에이자산운용 (Samsung SRA Asset Management)
+7. 삼성생명금융서비스 (Samsung Life Financial Services)
+8. 조직 및 인사 (Organization and Personnel)
+9. X회사의 대주주와의 거래내용 (Transactions with Major Shareholders of X Company)
+10. 특수관계인 및 이해관계자와의 거래 (Transactions with Related Parties and Other Stakeholders)
+
+test-gpt-3.5-turbo-삼성생명-20231228000767
+1. 삼성생명 (Samsung Life)
+2. 삼성카드 (Samsung Card)
+3. 삼성자산운용 (Samsung Asset Management)
+4. 태국법인 (Thai subsidiary)
+5. 삼성에스알에이자산운용 (Samsung SRA Asset Management)
+6. 상무들의 업무 경력과 학력 (Executives' work experience and education)
+7. X회사의 대주주와의 거래내용 (Transactions with major shareholders of X company)
+8. 대주주들의 신용공여 내용 (Credit provision to major shareholders)
+9. 대주주 이외의 법인과의 거래 내용 (Transactions with entities other than major shareholders)
+10. 유가증권 매수 또는 매도 내역 (Securities purchase or sale records)
+
+test-gpt-3.5-turbo-삼성생명-20230927000660
+1. 삼성생명 (Samsung Life)
+2. 삼성카드 (Samsung Card)
+3. 삼성자산운용 (Samsung Asset Management)
+4. 삼성생명서비스손해사정 (Samsung Life Service Loss Assessment)
+5. 북경삼성치업유한공사 (Beijing Samsung TCI Co., Ltd.)
+6. 삼성에스알에이자산운용 (Samsung SRA Asset Management)
+7. 삼성생명금융서비스 (Samsung Life Financial Services)
+8. 상무 (Executive)
+9. 대주주 거래내용 (Major Shareholder Transactions)
+10. 대주주와의 신용공여 (Credit Extension to Major Shareholders)
+
+test-gpt-3.5-turbo-삼성생명-20230629000651
+1. 삼성생명 (Samsung Life)
+2. 삼성카드 (Samsung Card)
+3. 삼성자산운용 (Samsung Asset Management)
+4. 북경삼성치업유한공사 (Beijing Samsung T&C)
+5. 삼성생명서비스손해사정 (Samsung Life Service Loss Assessment)
+6. 삼성에스알에이자산운용 (Samsung SRA Asset Management)
+7. 삼성생명금융서비스 (Samsung Life Financial Services)
+8. 삼성화재 (Samsung Fire & Marine)
+9. AIA생명 (AIA Life)
+10. 라이나생명 (Lina Life)
+
+test-gpt-3.5-turbo-삼성생명-20230308000737
+1. 삼성생명 (Samsung Life)
+2. 삼성카드 (Samsung Card)
+3. 삼성자산운용 (Samsung Asset Management)
+4. 북경삼성치업유한공사 (Beijing Samsung C&T Corporation)
+5. 삼성생명서비스손해사정 (Samsung Life Service Loss Assessment)
+6. 재무심사팀 (Financial Audit Team)
+7. 대체자산심사P장 (Alternative Asset Audit P Manager)
+8. 박준규 상무 (Park Jungyu Executive)
+9. 등기임원 (Registered Executive)
+10. X회사 (Company X)
+
+test-gpt-3.5-turbo-하나금융지주-20240314001628
+1. 하나금융그룹
+2. 하나은행
+3. 하나증권
+4. 하나카드
+5. 하나캐피탈
+6. 하나생명
+7. 하나손해보험
+8. 하나저축은행
+9. 하나자산신탁
+10. 임원 현황
+11. 직원 현황
+12. X회사의 대주주와의 거래내용
+
+test-gpt-3.5-turbo-하나금융지주-20231228000569
+1. 하나금융그룹 (Hana Financial Group)
+2. 하나은행 (Hana Bank)
+3. 하나증권 (Hana Securities)
+4. 하나카드 (Hana Card)
+5. 하나캐피탈 (Hana Capital)
+6. 하나생명 (Hana Life Insurance)
+7. 회사의 임원 현황
+8. 임원 세부 정보
+9. 대주주와의 거래내용
+10. 이해관계자와의 거래내용
+
+test-gpt-3.5-turbo-하나금융지주-20230927000558
+1. 하나금융그룹 (Hana Financial Group)
+2. 재무성과 (Financial Performance)
+3. 임원 현황 (Executive Status)
+4. 직원 현황 (Employee Status)
+5. 대주주와의 거래내용 (Transactions with Controlling Shareholders)
+6. 신용공여 현황 (Credit Extension Status)
+7. 종속기업 간 거래 (Transactions between Subsidiaries)
+8. 하나금융티아이 (Hana Financial T&I)
+9. 하나캐피탈 (Hana Capital)
+10. 하나대체투자자산운용 (Hana Alternative Asset Management)
+
+test-gpt-3.5-turbo-하나금융지주-20230814002241
+1. 하나금융그룹 (Hana Financial Group)
+2. 재무성과 (Financial Performance)
+3. 하나은행 (Hana Bank)
+4. 하나증권 (Hana Securities)
+5. 하나카드 (Hana Card)
+6. 하나생명 (Hana Life Insurance)
+7. 하나손해보험 (Hana Non-life Insurance)
+8. 하나저축은행 (Hana Savings Bank)
+9. 하나자산신탁 (Hana Asset Trust)
+10. 회사의 임원 현황 (Executive Status)
+
+test-gpt-3.5-turbo-하나금융지주-20230316001364
+1. 하나금융그룹 성장 현황
+2. 하나은행 당기순이익
+3. 하나증권 실적
+4. 하나카드 당기순이익
+5. 하나캐피탈 순이익
+6. 하나생명 경영 노력
+7. 하나손해보험 경쟁력 강화
+8. 하나저축은행 안정적 영업
+9. 하나자산신탁 안정적 영업
+10. 임원 현황 및 보수 현황
+
+test-gpt-3.5-turbo-에코프로-20240320001872
+1. 에코프로 (Ecopro)
+2. 에코프로비엠 (EcoproBM)
+3. 에코프로머티리얼즈 (Ecopro Materials)
+4. 에코프로이노베이션 (Ecopro Innovation)
+5. 에코프로에이피 (Ecopro AP)
+6. 에코프로씨엔지 (Ecopro C&G)
+7. 에코프로에이치엔 (Ecopro HN)
+8. 매출 및 수주상황
+9. 주요 계약 및 연구개발 활동
+10. 임원 및 직원 현황
+
+test-gpt-3.5-turbo-에코프로-20231114001704
+1. 에코프로 (Ecopro)
+2. 에코프로비엠 (Ecopro B&M)
+3. 에코프로머티리얼즈 (Ecopro Materials)
+4. 에코프로이노베이션 (Ecopro Innovation)
+5. 에코프로에이피 (Ecopro AP)
+6. 에코프로씨엔지 (Ecopro C&G)
+7. 에코프로에이치엔 (Ecopro HN)
+8. 매출 및 수주상황
+9. 주요 계약 및 연구개발 활동
+10. 임원 및 직원 현황
+11. 대주주 및 특수관계자와의 거래내용
+
+test-gpt-3.5-turbo-에코프로-20230814002722
+1. 에코프로의 사업 영역
+2. 에코프로의 제품 및 서비스
+3. 에코프로의 원재료 및 생산설비
+4. 에코프로의 매출 및 수주상황
+5. 주요 계약 및 연구개발활동
+6. 에코프로의 임원 및 직원 현황
+7. X회사의 자금 거래
+8. X회사의 특수관계자와의 자금 거래
+9. X회사의 채무 및 채권 잔액
+10. X회사의 이해관계자와의 거래
+
+test-gpt-3.5-turbo-에코프로-20230515001511
+1. 에코프로 (Ecopro)
+2. 에코프로비엠 (EcoproBM)
+3. 에코프로머티리얼즈 (Ecopro Materials)
+4. 에코프로이노베이션 (Ecopro Innovation)
+5. 에코프로에이피 (Ecopro AP)
+6. 에코프로씨엔지 (Ecopro C&G)
+7. 에코프로에이치엔 (Ecopro HN)
+8. 원재료 및 생산설비
+9. 매출 및 수주상황
+10. 임원 및 직원 현황
+11. 대주주 및 특수관계자와의 거래내용
+
+test-gpt-3.5-turbo-에코프로-20230322001113
+1. 에코프로 (Ecopro)
+2. 지주회사 (Holding Company)
+3. 자회사 (Subsidiary)
+4. 경영실적 (Business Performance)
+5. 제품 생산 (Product Manufacturing)
+6. 매출 및 수주상황 (Revenue and Order Status)
+7. 연구개발 활동 (Research and Development Activities)
+8. 임원 및 직원 현황 (Executive and Employee Status)
+9. 대주주 및 특수관계자 거래 (Major Shareholder and Related Party Transactions)
+10. 자금 거래 (Financial Transactions)
+
+test-gpt-3.5-turbo-메리츠금융지주-20240314001248
+1. 메리츠금융지주 (Meritz Financial Group)
+2. 사업부문별 영업성과 (Business Segment Performance)
+3. 자회사 소개 (Introduction of Subsidiaries)
+4. 재무현황 (Financial Status)
+5. 임원 현황 (Executive Status)
+6. 직원 현황 (Employee Status)
+7. 대주주와의 거래내용 (Transactions with Major Shareholders)
+8. 이해관계자와의 거래 (Transactions with Related Parties)
+9. 특수관계자와의 주요거래 (Significant Transactions with Related Parties)
+10. 재무제표 주석 (Financial Statements Notes)
+
+test-gpt-3.5-turbo-메리츠금융지주-20240208001135
+1. 메리츠금융지주 (Meritz Financial Holdings)
+2. 사업부문별 영업성과
+3. 메리츠화재 (Meritz Fire & Marine Insurance)
+4. 메리츠증권 (Meritz Securities)
+5. 메리츠캐피탈 (Meritz Capital)
+6. 재무건전성 지표
+7. 임원 및 직원 현황
+8. X회사 (Company X)
+9. 대주주와의 거래내용
+10. 이해관계자와의 거래
+
+test-gpt-3.5-turbo-메리츠금융지주-20240206000395
+1. 메리츠금융지주 (Meritz Financial Holdings)
+2. 2023년 2분기 사업부문 구분
+3. 메리츠화재 (Meritz Fire & Marine Insurance)
+4. 메리츠증권 (Meritz Securities)
+5. 메리츠캐피탈 (Meritz Capital)
+6. 회사의 임원 및 직원 현황
+7. X회사의 대주주와의 거래내용
+8. 대주주인 메리츠캐피탈과의 지급보증
+9. 대주주와의 자산양수도나 영업거래
+10. 특수관계자와의 주요 거래 세부내역
+
+test-gpt-3.5-turbo-메리츠금융지주-20240206000393
+1. 메리츠금융지주 (Meritz Financial Group)
+2. 2023년 1분기 영업실적 (2023 Q1 Performance)
+3. 메리츠화재 (Meritz Fire & Marine Insurance)
+4. 메리츠증권 (Meritz Securities)
+5. 메리츠캐피탈 (Meritz Capital)
+6. 재무건전성 지표 (Financial Soundness Indicators)
+7. 임원 현황 (Executive Status)
+8. 대주주와의 거래내용 (Transactions with Controlling Shareholder)
+9. 특수관계자와의 주요 거래 (Major Transactions with Related Parties)
+10. 주요 거래 세부내역 (Details of Major Transactions)
+
+test-gpt-3.5-turbo-메리츠금융지주-20230309000894
+1. 메리츠금융지주 사업부문
+2. 메리츠화재 사업 확장
+3. 메리츠증권 영업부문
+4. 메리츠캐피탈 사업 영위
+5. 회사 임원 현황
+6. 공시 제출일 임원 현황
+7. 등기임원 선임 후보자 및 해임 대상자 현황
+8. 회사 직원 현황
+9. 미등기임원 보수 현황
+10. X회사 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG전자-20240318000755
+1. 사업부문 (Business Segments)
+2. 제품 및 용역 (Products and Services)
+3. 재무위험 및 외환위험 관리 (Financial Risk and Foreign Exchange Risk Management)
+4. 환경규제 대응 (Environmental Regulations Compliance)
+5. 연구소 및 혁신 기술 (Research and Innovation Technology)
+6. 매출 및 수주상황 (Revenue and Order Status)
+7. 계약 및 연구개발활동 (Contracts and Research & Development Activities)
+8. 임원 인적사항 (Executive Information)
+9. 대주주 및 거래 내용 (Major Shareholders and Transactions)
+10. 종속기업 자금조달 (Subsidiary Financing)
+
+test-gpt-3.5-turbo-LG전자-20231114001391
+1. 연결회사 사업부문 (H&A, HE, VS, BS, LG이노텍㈜)
+2. 주요 제품 (H&A 제품, HE 제품, VS 제품, BS 제품, 이노텍 제품)
+3. 제품 가격 변동 현황
+4. 주요 원재료 및 생산설비
+5. LG전자 매출 및 수주상황
+6. 주요계약 (구글과의 글로벌 특허 크로스 라이선스 계약)
+7. 연구개발활동
+8. 임원 소개 (등기 상근 VS연구소 산하 경북대(석사) 등 25명의 임원)
+9. 자금 조달 및 채무보증
+10. 대주주와의 거래 (LG Electronics U.S.A., Inc., (주)하이프라자, LG Electronics Vietnam Hai Phong Co., Ltd)
+
+test-gpt-3.5-turbo-LG전자-20230814001489
+1. 연결회사 구성
+2. 외환위험 및 신용위험 관리
+3. 친환경 제품 개발 및 환경부담 감축
+4. 주요 제품 및 가격 변동
+5. 원재료 및 생산설비 보고
+6. 매출 및 수주상황
+7. 계약 및 연구개발활동
+8. 등기임원 인적사항 및 경력
+9. 자금조달 및 거래
+10. 대주주와의 거래금액
+
+test-gpt-3.5-turbo-LG전자-20230515001288
+1. 연결회사 구성
+2. 주요 제품 및 매출
+3. 제품 가격 변동
+4. 원재료 및 생산설비
+5. LG전자 매출 및 수주상황
+6. 주요계약 및 연구개발활동
+7. 임원 정보
+8. OLED 사업 강화 대여
+9. 종속기업 채무보증
+10. 대주주와의 거래내용
+
+test-gpt-3.5-turbo-LG전자-20230317000955
+1. 연결회사 사업부문 (H&A, HE, VS, BS, LG이노텍)
+2. 외환위험 및 신용위험 관리
+3. 특허권 현황
+4. ESG 경영 성과
+5. LG전자 주요 제품 및 서비스
+6. 매출액 변동 현황
+7. 주요 원재료 및 생산설비
+8. 매출 및 수주상황
+9. 주요계약 및 연구개발활동
+10. 임원 정보 및 경력
+11. 대주주 및 관련 당사자들과의 거래내용
+
+test-gpt-3.5-turbo-LG-20240319000703
+1. LG전자 (LG Electronics)
+2. LG화학 (LG Chem)
+3. LG유플러스 (LG Uplus)
+4. LG그룹 (LG Group)
+5. 매출 및 수주상황 (Sales and Order Situation)
+6. 생산시설 (Production Facilities)
+7. 재산 및 투자 (Assets and Investments)
+8. Total Home Solution
+9. 연구개발 (Research and Development)
+10. 임원 및 직원 현황 (Executive and Employee Status)
+
+test-gpt-3.5-turbo-LG-20231114001758
+1. LG전자
+2. LG이노텍
+3. LG화학
+4. LG유플러스
+5. 매출실적
+6. 주요 제품 및 서비스
+7. 생산능력
+8. 판매전략
+9. 수주상황
+10. 임원 현황
+
+test-gpt-3.5-turbo-LG-20230814002784
+1. LG전자 (LG Electronics)
+2. LG화학 (LG Chem)
+3. LG유플러스 (LG Uplus)
+4. 매출액 (Revenue)
+5. ESG 경영 (ESG Management)
+6. 생산능력 (Production Capacity)
+7. 주요 제품 (Main Products)
+8. 인공지능 (Artificial Intelligence)
+9. 임원 및 직원 현황 (Executive and Employee Status)
+10. 대주주와의 거래내용 (Transactions with Major Shareholders)
+
+test-gpt-3.5-turbo-LG-20230515001874
+1. LG전자 (LG Electronics)
+2. LG화학 (LG Chem)
+3. LG유플러스 (LG Uplus)
+4. LG에너지솔루션 (LG Energy Solution)
+5. LG헬로비전 (LG HelloVision)
+6. LG Holdings Japan Co.,Ltd.
+7. 하이프라자 (Hyp Plaza)
+8. 임원 현황 (Executive Status)
+9. 거래 내용 (Transaction Details)
+10. 연구개발 활동 (Research and Development Activities)
+
+test-gpt-3.5-turbo-LG-20230321001235
+1. LG이노텍 (LG Innotek)
+2. VS사업부문 (VS Business Division)
+3. LG전자 (LG Electronics)
+4. LG화학 (LG Chem)
+5. LG유플러스 (LG Uplus)
+6. LG에너지솔루션 (LG Energy Solution)
+7. LG헬로비전 (LG HelloVision)
+8. 미디어로그 (MediaLog)
+9. 임원 및 직원 현황 (Executive and Employee Status)
+10. X회사 (Company X)
+
+test-gpt-3.5-turbo-HLB-20240321001754
+1. 사업부문 구성 및 주요 제품
+2. 2023년 12월 31일 기준 주요 제품 및 서비스
+3. 원재료 매입처 및 생산 설비 관련 정보
+4. HLB ENG사업 부문과 헬스케어 사업 부문 매출액
+5. 프란시스 해리슨의 경험과 연구개발 비용
+6. HLB인베스트먼트 주식회사 설립 및 사업구조
+7. 임원 및 직원 현황 보고서
+8. ENG사업부 분할 및 사외이사 사임
+9. 회사 X의 대주주와의 거래내용
+10. 대여금 및 채무보증 내역
+
+test-gpt-3.5-turbo-HLB-20231114002800
+1. 사업부문 : 헬스케어, 바이오, 선박
+2. 제품 : Covid-19 관련 제품, 신약 Rivoceranib, 체외진단 의료기기, GRP/GRE PIPE, 구명정, DAVIT
+3. 생산 및 매출 : 매출 감소, FDA 승인, R&D, 경쟁력 강화
+4. 주요 매출 : 체외진단 의료기기, GRP/GRE PIPE
+5. 생산설비 : 생산능력, 생산실적, 평균가동률
+6. 판매 및 수주 : 영업구매본부, 수주현황, 주요 매출처
+7. 연구 : XLerk, Eph 패밀리, B 세포, 임상 연구
+8. 투자 : 벤처캐피탈, 투자재원, 수익실현
+9. 임원 현황 : 주요 임원, 연간 급여, 직원 현황
+10. 거래 : 대여거래, 대여금, 채무보증, 자산양수
+
+test-gpt-3.5-turbo-HLB-20230811002523
+1. 사업부문 구성 및 주요 제품
+2. 헬스케어 부문의 매출 감소와 Covid-19 제품
+3. 바이오 부문의 FDA 승인과 Rivoceranib
+4. 선박 부문의 매출 증가와 자율운항 선박
+5. 주요 제품 및 매출액
+6. 주요 원재료 매입처 및 매입금액
+7. 생산 설비 관련 정보
+8. 바이오 의료기기사업 부문과 HLB ENG사업 부문의 매출
+9. Leadiant Biosciences와 Sigma Tau Pharmaceuticals의 정보
+10. HLB인베스트먼트 주식회사의 벤처캐피탈 사업구조
+
+test-gpt-3.5-turbo-HLB-20230515002471
+1. 사업부문 구성 및 주요 제품
+2. 선박사업 현황 및 전망
+3. 헬스케어 사업 현황 및 전략
+4. 체외진단 의료기기 및 구명정 제품
+5. 생산 및 설비 관련 정보
+6. HLB ENG사업 및 바이오 의료기기사업 매출 현황
+7. 연구개발 및 특허 현황
+8. 벤처캐피탈 사업 모델
+9. 임원 및 직원 현황
+10. 대여 및 신용공여 거래 현황
+
+test-gpt-3.5-turbo-HLB-20230322000990
+1. 사업부문 구성: 선박, 바이오, 헬스케어
+2. 제품 및 서비스: 체외진단 의료기기, 구명정, GRP/GRE PIPE
+3. 주요 제품 용도: 검체 채취용, 검체 수송용 배지, 의약외품
+4. 주요 매입처: 주식회사 에프씨, 에프바이오, 일신화이바, 케이에스지, 에이치엘비테라퓨틱스
+5. 생산 설비 정보: 의료용품, 선박, 파이프 사업부문의 생산능력, 생산실적, 평균가동률
+6. HLB ENG 매출 및 수주상황: 2022년 12월 31일 기준
+7. Leadiant Biosciences 임상운영 및 생산 부문 업적
+8. 에이치엘비인베스트먼트 주식회사: 벤처캐피탈 설립 정보
+9. 에이치엘비㈜ 임원 및 직원 현황: 2022년 12월 31일 기준
+10. X회사 대여거래 및 대주주 관련 정보: 대여금 내역, 자산양수, 채무보증내역
+
+test-gpt-3.5-turbo-카카오뱅크-20240320001487
+1. 국내 금융산업
+2. 인터넷전문은행
+3. 회사 설립 및 업무 개요
+4. 임원 및 직원 현황
+5. 미등기임원 선임 현황
+6. 타회사 임원 겸직 현황
+7. 직원 등 현황
+8. 미등기임원 보수 현황
+9. 대주주와의 거래내용
+10. 관련 내용 부연 설명 및 안내
+
+test-gpt-3.5-turbo-카카오뱅크-20231115000274
+1. 국내 금융산업
+2. 인터넷전문은행
+3. 은행업 본인가
+4. 모바일 앱
+5. 플랫폼 비즈니스
+6. 임원 및 직원 현황
+7. 대주주와의 거래내용
+8. 신용공여
+9. 자산양수
+10. 영업거래
+
+test-gpt-3.5-turbo-카카오뱅크-20230814001541
+1. 국내 금융산업
+2. 인터넷전문은행
+3. **카카오**
+4. **AJ네트웍스**
+5. **산지**
+6. **크레도**
+7. **X회사**
+8. 임원 및 직원 현황
+9. 대주주와의 거래내용
+10. 특수관계자 거래
+
+test-gpt-3.5-turbo-카카오뱅크-20230515002388
+1. 국내 금융산업
+2. 인터넷전문은행
+3. 은행업 본인가
+4. 모바일 앱
+5. 뱅킹 비즈니스
+6. 플랫폼 비즈니스
+7. 임원 및 직원 현황
+8. 대주주와의 거래내용
+9. 자산양수도
+10. 이해관계자와의 거래
+
+test-gpt-3.5-turbo-카카오뱅크-20230321001298
+1. 한국의 금융산업
+2. 인터넷전문은행
+3. 회사의 은행업
+4. 카카오의 임원 현황
+5. X회사의 대주주와의 거래내용
+6. 임원 후보자 및 해임 대상자 현황
+7. 회사의 영업 구분
+8. 회사의 파트너사 협력
+9. 회사의 임원 연간급여
+10. 대주주 이외의 이해관계자와의 거래
+
+test-gpt-3.5-turbo-한미반도체-20240314001257
+1. 한미반도체 설립 및 제품
+2. 'micro SAW&VISION PLACEMENT' 장비
+3. 'DUAL TC BONDER' 개발
+4. EMI Shield 장비
+5. 매출 및 수주상황
+6. 연구소 설립 및 연구개발
+7. 임원 및 직원 현황
+8. 대주주 곽동신 자기주식 부여
+9. 임원 후보자 김민현, 신영태
+10. 임원 연간 급여 및 후보자 선임 계획
+
+test-gpt-3.5-turbo-한미반도체-20231114002269
+1. 한미반도체 (HanaMicron)
+2. 기업 개요
+3. 제품 소개
+4. 매출액
+5. 생산 및 가동 현황
+6. 매출 및 수주상황
+7. 계약 및 연구개발 활동
+8. 임원 현황
+9. 직원 현황
+10. 대주주 및 관련 당사자와의 거래
+
+test-gpt-3.5-turbo-한미반도체-20230814001921
+1. 한미반도체 (HANMI Semiconductor)
+2. Vision Placement
+3. micro SAW
+4. DUAL TC Bonder
+5. Flip Chip Bonder
+6. EMI Shield
+7. 매출액 및 수주상황
+8. 주요 계약 및 연구개발 활동
+9. 임원 및 직원 현황
+10. 대주주나 관련 당사자와의 거래내용
+
+test-gpt-3.5-turbo-한미반도체-20230512000911
+1. 한미반도체 (Hanhwa Advanced Materials)
+2. Vision Placement
+3. micro SAW
+4. TSV TC Bonder
+5. Flip Chip Bonder
+6. EMI Shield
+7. 매출 및 수주상황
+8. 연구 및 제품 개발
+9. 임원 현황
+10. 직원 현황
+
+test-gpt-3.5-turbo-한미반도체-20230316001554
+1. 한미반도체 (Hanhwa Advanced Materials)
+2. 기업 개요 및 비전
+3. 제품 및 서비스
+4. 매출 현황
+5. 생산 및 생산설비
+6. 매출 및 수주상황
+7. 연구 및 개발
+8. 임원 및 직원 현황
+9. 대주주나 관련 당사자와의 거래 내용
+10. 기타 사항
+

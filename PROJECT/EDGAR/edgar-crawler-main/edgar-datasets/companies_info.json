@@ -1,0 +1,23 @@
+{
+    "1018724": {
+        "Company Name": "AMAZON COM INC",
+        "SIC": "5961",
+        "State location": "WA",
+        "State of Inc": "DE",
+        "Fiscal Year End": "1231"
+    },
+    "1045810": {
+        "Company Name": "NVIDIA CORP",
+        "SIC": "3674",
+        "State location": "CA",
+        "State of Inc": "DE",
+        "Fiscal Year End": "0126"
+    },
+    "320193": {
+        "Company Name": "Apple Inc.",
+        "SIC": "3571",
+        "State location": "CA",
+        "State of Inc": "CA",
+        "Fiscal Year End": "0928"
+    }
+}
