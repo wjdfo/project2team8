@@ -4,13 +4,9 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-# COPY /requirements.txt .
-
 RUN pip install -r requirements.txt
 
-# COPY /manage.py .
-
-#RUN python DataMaster.py
+RUN apt-get update && apt-get install -y wget unzip
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
