@@ -1,5 +1,5 @@
 import { View, StyleSheet,Image, 
-    TextInput, TouchableOpacity} from "react-native";
+    TextInput, TouchableOpacity,Keyboard} from "react-native";
 import { useEffect } from "react";
 import { Color, FontFamily, Width, Height,} from "../../GlobalStyles";
 import fetchInput from "../fetch-handling/fetch-input";
@@ -22,6 +22,7 @@ const ChatInput = ({inputText, setInputText, setMessages,messages, corpName, isD
     const handleSubmit = async () => {
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:1,content:{message:inputText}}]);
         setInputText('');
+        Keyboard.dismiss();
         setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
         const answerText = await fetchInput(inputText=inputText, corpName=corpName, isDart = isDart);
         setMessages(items => [...items.slice(0,-1), {id:items[items.length - 2].id+1,user:0,content:{message:answerText}}]);
@@ -29,7 +30,7 @@ const ChatInput = ({inputText, setInputText, setMessages,messages, corpName, isD
     };
     return (
         <View style={[styles.chatWindow,
-                    {bottom:isKeyboardShown?50*Height+keyboardHeight:50*Height}
+                    {bottom:isKeyboardShown?keyboardHeight+48 :48}
         ]}>
             <TouchableOpacity style={styles.plusButton} onPress={()=>setIsPlusOn(true)}>
             <Image
@@ -59,7 +60,6 @@ const ChatInput = ({inputText, setInputText, setMessages,messages, corpName, isD
             </TouchableOpacity>: null}
 
       </View>
-
 
 
     );
@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
       textAlignVertical : "top",
       marginVertical:10*Height,
       paddingBottom:0,
-  
     },
     sendButton:{
         height: 90*Height,
