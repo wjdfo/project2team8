@@ -9,3 +9,4 @@ react-native-hyperlink
 react-native-dotenv
 react-native-element-dropdown
 react-native-uuid
+react-native-safe-area-context

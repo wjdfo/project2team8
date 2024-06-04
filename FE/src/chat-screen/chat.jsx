@@ -7,7 +7,6 @@ import ChatInput from "./chat-input";
 import ChatBody from "./chat-body";
 import MenuSelector from "./menu-selector";
 import { fetchCompare } from "../fetch-handling/fetch-menus";
-
 const FrameScreen = ({navigation,route}) => {
   const [messages,setMessages] = useState([
     {
@@ -70,10 +69,10 @@ const FrameScreen = ({navigation,route}) => {
 
   return (
       //
-      <TouchableWithoutFeedback
-      style={{ height: "100%" }}
-      onPress={() => dissmissKeyboard()}
-      > 
+      // <TouchableWithoutFeedback
+      // style={{ height: "100%",flex:1,backgroundColor:'#ffffff'}}
+      // onPress={() => dissmissKeyboard()}
+      // > 
         <View style={styles.chatViewContainer}>
           
 
@@ -130,7 +129,7 @@ const FrameScreen = ({navigation,route}) => {
           {/*Header*/}
           <ChatHeader navigation={navigation} searchedName={route.params.searchedName}/>
         </View>
-      </TouchableWithoutFeedback>
+        // </TouchableWithoutFeedback>
   );  
 };
 
@@ -141,7 +140,7 @@ const styles = StyleSheet.create({
     top: 0,
     position: "absolute",
     height: 2100*Height,
-    backgroundColor : Color.colorBG
+    backgroundColor : Color.colorBG,
   },
   chatViewParent: {
     backgroundColor: Color.colorWhite,
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
 
   bottomWindow: {
     left: 53*Width,
-    bottom:50*Height,
+    bottom:48,
     height : 120*Height,
     position: 'absolute',
     width: 974*Width,
@@ -162,6 +161,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius : 20,
     borderBottomRightRadius : 20,
     justifyContent:'center',
+
 },
   bottomWindowText : {
     width : 650*Width,
