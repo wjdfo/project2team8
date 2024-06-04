@@ -15,6 +15,8 @@ def dart_check(corpName, dart_list):
         return True
     return False
 
+chatbot = Chatbot()
+
 class API(View):
     # ChatBot 답변
     @classmethod
@@ -24,7 +26,6 @@ class API(View):
             isDart = json.loads(request.body)["isDart"]
             question = json.loads(request.body)["question"]
             
-            chatbot = Chatbot()
             response = chatbot.getResponse(corpName, question)
 
             return JsonResponse({"response": response}, status=200)
@@ -39,7 +40,6 @@ class API(View):
             isDart = json.loads(request.body)["isDart"]
             reportNum = json.loads(request.body)["reportNum"]
 
-            chatbot = Chatbot()
             response = chatbot.getCorpSummary(corpName, reportNum)
 
             return JsonResponse({"summary": response}, status=200)
@@ -57,7 +57,6 @@ class API(View):
             elif isDart == '0' :
                 isDart = False
             
-            chatbot = Chatbot()
             list = chatbot.getCorpList(isDart)
 
             return JsonResponse({"list": list}, status=200)
@@ -76,7 +75,6 @@ class API(View):
                 isDart = True
             elif isDart == '0' :
                 isDart = False
-            chatbot = Chatbot()
             link = chatbot.getCorpReport(corpName, isDart, (fromDate, toDate))
 
             return JsonResponse({"link": link}, status=200)
@@ -104,7 +102,6 @@ class API(View):
 
             # 같은 종류의 공시 데이터만 비교 가능
             if (corpIsDart and targetIsDart) or (not corpIsDart and not targetIsDart):
-                chatbot = Chatbot()
                 report = chatbot.Compare2Corps((corpName, targetCorpName))
             else:
                 return JsonResponse({"report": "서로 다른 종류의 공시 데이터는 비교가 불가합니다."})
