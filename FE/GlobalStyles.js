@@ -10,8 +10,17 @@ export const Height = ( // 높이 변환 작업
   Dimensions.get('screen').height * ( 1/ basicDimensions.height)
 );
 
+const getWidth = () => {
+  var width = Dimensions.get('screen').width;
+  if (Dimensions.get('screen').height <  width ){
+    width = Dimensions.get('screen').height * 9/16;
+  }
+  return width * ( 1/ basicDimensions.width)
+}
+
+
 export const Width = ( // 가로 변환 작업
-  Dimensions.get('screen').width * ( 1/ basicDimensions.width)
+  getWidth()
 );
 
 /* fonts */

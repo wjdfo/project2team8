@@ -1,9 +1,24 @@
-import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, Image, Text, StyleSheet,BackHandler,Alert} from 'react-native';
 import { Height, Width,Color, FontFamily } from '../../GlobalStyles';
 import { getSimpleName } from '../etc/corp-name-processor';
 
 const ChatHeader = ({navigation,searchedName}) => {
     const simpleName = getSimpleName(searchedName);
+
+    const exitPressed =() => {
+      Alert.alert('', '앱을 종료하시겠어요?',[
+        {
+          text :'취소',
+          onPress: () =>null,
+          style : 'cancel'
+        },
+        {
+          text : '확인',
+          onPress : () => BackHandler.exitApp()
+        }
+      ]);
+    };
+
     return (
         <View style={styles.headerPosition}>
             <View style={[styles.headerChild, styles.headerPosition]} />
@@ -19,6 +34,15 @@ const ChatHeader = ({navigation,searchedName}) => {
 
             </TouchableOpacity>            
 
+            <TouchableOpacity style={styles.closeButton}
+                              onPress={exitPressed}>
+            <Image
+                style={styles.closeIcon}
+                resizeMode="contain"
+                source={require("../../assets/CloseProgram.png")}
+                />
+
+            </TouchableOpacity>
         </View>
     );
 
@@ -75,6 +99,17 @@ const styles = StyleSheet.create({
         marginRight : 40*Width,
         marginLeft : 15*Width,
     },
+    closeButton: {
+      top : 90 * Height,
+      right : 53* Width,
+
+      position :'absolute',
+    },
+    closeIcon: {
+      position:'relative',
+      width : 120 * Width,
+      height : 120 * Height,
+    }
             
 })
 

@@ -349,10 +349,9 @@ const styles = StyleSheet.create({
         width : '100%',
         height : '100%',
         backgroundColor:'rgba(0,0,0,0.8)',
-        
+        alignItems:'center'
     },
     modalMain : {
-        left : 190 * Width,
         top : 400 * Height,
         width : 700*Width,
         height : 500 *Height,

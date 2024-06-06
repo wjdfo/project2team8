@@ -36,6 +36,8 @@ const Initial = ({navigation}) => {
   };
 
   return (
+    <View style={{width:'100%', height:'100%', backgroundColor:'#000000' ,alignItems:'center'}}>
+
     <View style={styles.introViewParent}>
       <View style={styles.introViewPosition}>
         <TouchableOpacity title = 'go to next page' onPress={handleInitialEntry}
@@ -55,6 +57,7 @@ const Initial = ({navigation}) => {
       <Text style= {styles.warningText}>
           ※ 투자의 책임은 투자자 본인에게 있습니다. ※
       </Text>
+    </View>
     </View>
   );
 };
@@ -88,7 +91,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     height: 2220*Height,
     alignItems :"center"
-
   },
   introCorpSearch:{
     backgroundColor:Color.colorDarkenGray,

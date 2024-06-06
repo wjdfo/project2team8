@@ -1,6 +1,7 @@
 import React, { useState,  useEffect } from "react";
 import { View, StyleSheet, Keyboard,  
-  TouchableWithoutFeedback, Text, Image, TouchableOpacity} from "react-native";
+  TouchableWithoutFeedback, Text, Image, TouchableOpacity,
+  BackHandler,Alert } from "react-native";
 import { Color, Width, Height,FontFamily} from "../../GlobalStyles";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
@@ -48,6 +49,31 @@ const FrameScreen = ({navigation,route}) => {
     }
   },[route.params.targetCorpName]);
   
+  useEffect(()=> {
+    const exitPressed =() => {
+      if(navigation.isFocused()){
+      Alert.alert('', '앱을 종료하시겠어요?',[
+        {
+          text :'취소',
+          onPress: () =>null,
+          style : 'cancel'
+        },
+        {
+          text : '확인',
+          onPress : () => BackHandler.exitApp()
+        }
+      ]);
+      return true;
+    }};
+
+    const backHandle = BackHandler.addEventListener('hardwareBackPress', exitPressed);
+
+    return () => {
+      backHandle.remove();
+    }
+
+  },[]);
+  
   const handleComparePrint = async (corpName,isDart,targetCorpName,targetIsDart) => {
     setMessages(items => [...items, {id:items[items.length - 1].id+1,user:0,content:{message:'%LOADING%'}}]);
 
@@ -67,12 +93,12 @@ const FrameScreen = ({navigation,route}) => {
     setIsKeyboardShown(false);  
   });
 
+
+
+
   return (
-      //
-      // <TouchableWithoutFeedback
-      // style={{ height: "100%",flex:1,backgroundColor:'#ffffff'}}
-      // onPress={() => dissmissKeyboard()}
-      // > 
+    <View style={{width:'100%', height:'100%', backgroundColor:'#000000' ,alignItems:'center'}}>
+
         <View style={styles.chatViewContainer}>
           
 
@@ -129,7 +155,7 @@ const FrameScreen = ({navigation,route}) => {
           {/*Header*/}
           <ChatHeader navigation={navigation} searchedName={route.params.searchedName}/>
         </View>
-        // </TouchableWithoutFeedback>
+    </View>
   );  
 };
 
@@ -138,7 +164,6 @@ const styles = StyleSheet.create({
     width: 1080*Width,
     left: 0,
     top: 0,
-    position: "absolute",
     height: 2100*Height,
     backgroundColor : Color.colorBG,
   },

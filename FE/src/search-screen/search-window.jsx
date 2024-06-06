@@ -16,6 +16,7 @@ const SearchWindow = ({navigation,route}) =>{
     
 
     return (
+        <View style={{width:'100%', height:'100%', backgroundColor:'#000000' ,alignItems:'center'}}>
         <View style={styles.searchWindowContainer}>
             <View style={styles.searchBox}>
                 <TouchableOpacity style={styles.goBackButton} onPress={()=>navigation.goBack()}>
@@ -49,7 +50,7 @@ const SearchWindow = ({navigation,route}) =>{
                         />
 
         </View>
-
+        </View>
     );
 };
 
@@ -58,10 +59,8 @@ const styles = StyleSheet.create({
         width: 1080*Width,
         left: 0,
         top: 0,
-        position: "absolute",
         height: 2100*Height,
         backgroundColor : Color.colorBG
-  
     },
     searchBox : {
         width : 1080*Width,
