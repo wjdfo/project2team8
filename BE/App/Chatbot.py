@@ -58,15 +58,12 @@ class Chatbot(Knuturn) :
 
     def getCorpSummary(self, corp_name : str, report_num : str = None) :
         # summary table에 query
-        filter = [MetadataFilter(key = "corp_name", value = corp_name)]
-        
-        if not report_num : # 사업보고서 있는 경우에만 추가해주기 없으면 회사명으로만 query
-            filter.append(
-                MetadataFilter(key="report_num", value = report_num)
-            )
 
         filters = MetadataFilters(
-                filters= filter,
+                filters = [
+                    ExactMatchFilter(key = "corp_name", value = corp_name),
+                    ExactMatchFilter(key= "report_num", value = report_num)
+                ],
                 condition=FilterCondition.AND, # and 연산자 사용
             )
         
@@ -80,7 +77,6 @@ class Chatbot(Knuturn) :
         # Dart
         if isDart :
             report = {}
-            report_name = ["정기 보고서", "1분기 보고서", "반기(2분기) 보고서", "3분기 보고서"]
             report_dict = self.dart.getReportCode([corp_name],date[0],date[1])
             _, report_list = self.dart.getReportURL(report_dict)
             for item in report_list[corp_name]:
@@ -94,11 +90,12 @@ class Chatbot(Knuturn) :
     def Compare2Corps(self, corp_list : tuple) :
         # summary table에 두 회사 query 후 (요약본 2개 + LLM 이용 요약본끼리 비교) 출력
         result = {}
+        date = '2023'
 
         corp1, corp2 = corp_list[0], corp_list[1]
 
-        result[corp1] = self.getCorpSummary(corp1, '2023')
-        result[corp2] = self.getCorpSummary(corp1, '2023')
+        result[corp1] = self.getCorpSummary(corp1, date)
+        result[corp2] = self.getCorpSummary(corp1, date)
 
         client = op(api_key = self.GPT_API_KEY)
         response = client.chat.completions.create(

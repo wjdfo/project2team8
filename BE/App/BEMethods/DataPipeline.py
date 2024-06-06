@@ -3,8 +3,6 @@ import tiktoken
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.core.schema import TextNode
 
-from tqdm import tqdm
-
 class DataPipeline(Knuturn) :
     def __init__(self) :
         super().__init__()
@@ -73,7 +71,7 @@ class DataPipeline(Knuturn) :
         return sum_report
 
     def embeddingNinsert(self, sum_data: str, corp_name : str, report : str) : # param : 요약된 데이터, 회사명, 보고서명
-        print(f"{corp_name}, {report} 요약된 데이터 ----- \n{sum_data}")
+        # print(f"{corp_name}, {report} 요약된 데이터 ----- \n{sum_data}")
         documents = list()
 
         summary_storage_context = StorageContext.from_defaults(vector_store=self.summary_vector_store)
@@ -83,6 +81,6 @@ class DataPipeline(Knuturn) :
 
         # 임베딩된 문서를 ChromaDB에 적재
         VectorStoreIndex(nodes=documents, storage_context=summary_storage_context, embed_model=self.embed_model)
-        print(f"{corp_name}, {report} 적재 완료")
+        # print(f"{corp_name}, {report} 적재 완료")
 
     
